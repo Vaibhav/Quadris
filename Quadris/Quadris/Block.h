@@ -15,7 +15,6 @@ public:
 	Block(Block&&);
 	Block& operator=(const Block&);
 	Block& operator=(Block&&);
-
 	~Block();
 
 	void rotateClockWise();
