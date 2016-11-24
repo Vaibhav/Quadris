@@ -27,9 +27,6 @@
     <ClInclude Include="Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Observor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Subject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -55,6 +52,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BlockGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockGeneratorLevel0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockGeneratorLevel1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockGeneratorLevel2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockGeneratorLevel3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockGeneratorLevel4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

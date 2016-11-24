@@ -1,3 +1,6 @@
+#ifndef BLOCKPARSER_H
+#define BLOCKPARSER_H
+
 #include <fstream>
 #include <string>
 #include <vector>
@@ -15,3 +18,5 @@ private:
 
 
 };
+
+#endif

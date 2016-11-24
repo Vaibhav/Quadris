@@ -1,3 +1,6 @@
+#ifndef COMMANDINTERPRETER_H
+#define COMMANDINTERPRETER_H
+
 #include <iostream>
 
 
@@ -18,3 +21,5 @@ private:
 
 
 };
+
+#endif
