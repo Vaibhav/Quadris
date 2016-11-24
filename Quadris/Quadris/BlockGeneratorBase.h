@@ -13,7 +13,7 @@ public:
 
 private:
 	bool checkBaseBlocksExist(std::vector<Block>); //Check if the 6 default blocks exist in the parsed blocks
-	std::vector< Block >
+	std::vector< Block > lol;
 	
 
 

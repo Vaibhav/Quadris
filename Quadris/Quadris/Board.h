@@ -28,7 +28,7 @@ private:
 	const int width;
 	const int length;
 
-	bool canRotateLeft
+	bool canRotateLeft;
 
 
 };

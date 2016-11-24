@@ -20,7 +20,7 @@ private:
 	int highScore; 
 	int currentScore;
 
-	void Move(); //Uses commandIn to take in a command and then execute the correct Board Function 
+	void move(); //Uses commandIn to take in a command and then execute the correct Board Function 
 	void readInHighScore(); 
 
 

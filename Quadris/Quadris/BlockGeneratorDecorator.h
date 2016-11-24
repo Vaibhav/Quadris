@@ -3,7 +3,7 @@
 
 #include "BlockGenerator.h"
 
-class BlockGeneratorDecorator : BlockGenerator {
+class BlockGeneratorDecorator : public BlockGenerator {
 public:
 
 	BlockGeneratorDecorator(BlockGenerator *  component) : component{component} {}
@@ -61,7 +61,8 @@ Lecture 9: November 10, 2016 9-4
 39 cout << p1 - > desc () << p1 - > price () ;
 40
 41 delete p1;
-42 }
+42 }
+
 
 
 */
