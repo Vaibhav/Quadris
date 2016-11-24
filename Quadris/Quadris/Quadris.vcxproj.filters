@@ -42,9 +42,6 @@
     <ClInclude Include="BlockParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlockLevel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TextDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -52,6 +49,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Subscriptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

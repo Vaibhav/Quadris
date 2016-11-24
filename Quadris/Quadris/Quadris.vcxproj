@@ -112,7 +112,7 @@
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockFactory.h" />
-    <ClInclude Include="BlockLevel.h" />
+    <ClInclude Include="BlockGenerator.h" />
     <ClInclude Include="BlockParser.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Cell.h" />
@@ -122,6 +122,7 @@
     <ClInclude Include="GraphicsDisplay.h" />
     <ClInclude Include="Observor.h" />
     <ClInclude Include="Subject.h" />
+    <ClInclude Include="Subscriptions.h" />
     <ClInclude Include="TextDisplay.h" />
   </ItemGroup>
   <ItemGroup>
