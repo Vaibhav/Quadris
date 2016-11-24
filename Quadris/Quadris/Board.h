@@ -1,7 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "Observor.h"
+#include "Observer.h"
 #include "Block.h"
 #include "Cell.h"
 #include "Display.h"

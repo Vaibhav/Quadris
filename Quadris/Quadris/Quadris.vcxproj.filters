@@ -57,19 +57,19 @@
     <ClInclude Include="Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlockGeneratorLevel0.h">
+    <ClInclude Include="Sourc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlockGeneratorLevel1.h">
+    <ClInclude Include="BlockGeneratorDecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlockGeneratorLevel2.h">
+    <ClInclude Include="GeneratorProbabilityDecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlockGeneratorLevel3.h">
+    <ClInclude Include="BlockGeneratorBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlockGeneratorLevel4.h">
+    <ClInclude Include="GeneratorCentreBlockDecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
