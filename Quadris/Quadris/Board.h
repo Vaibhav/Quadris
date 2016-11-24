@@ -4,11 +4,12 @@
 #include "Observer.h"
 #include "Block.h"
 #include "Cell.h"
+//#include "CellInfo.h"
 #include "Display.h"
 #include "BlockFactory.h"
 #include <vector>
 
-class Board : public Observer {
+class Board { // The board does not need to be an observer
 public:
 	void currentBlockLeft();
 	void currentBlockRight();
@@ -19,10 +20,12 @@ public:
 
 	void clearBoard();
 	
+	Board(Display *display);
+	//void notify(Subject &whoNotified);
 
 private:
-	std::vector< std::vector< Cell > > Cells;
-	std::vector< Block > Blocks;
+	std::vector< std::vector< Cell > > cells;
+	std::vector< Block > blocks;
 	Block nextBlock;
 	Block currentBlock;
 
@@ -39,4 +42,6 @@ private:
 	
 };
 
+
 #endif
+

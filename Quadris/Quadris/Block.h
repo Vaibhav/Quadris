@@ -3,6 +3,7 @@
 
 #include "Block.h"
 #include "Subject.h"
+#include "Cell.h"
 #include <string>
 
 
@@ -30,6 +31,6 @@ private:
 	vector<Cell> Cells;
 	
 
-}
+};
 
 #endif
