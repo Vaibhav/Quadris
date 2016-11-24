@@ -113,6 +113,11 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockFactory.h" />
     <ClInclude Include="BlockGenerator.h" />
+    <ClInclude Include="BlockGeneratorLevel0.h" />
+    <ClInclude Include="BlockGeneratorLevel1.h" />
+    <ClInclude Include="BlockGeneratorLevel2.h" />
+    <ClInclude Include="BlockGeneratorLevel3.h" />
+    <ClInclude Include="BlockGeneratorLevel4.h" />
     <ClInclude Include="BlockParser.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Cell.h" />
@@ -120,7 +125,7 @@
     <ClInclude Include="Display.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicsDisplay.h" />
-    <ClInclude Include="Observor.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="Subscriptions.h" />
     <ClInclude Include="TextDisplay.h" />

@@ -3,14 +3,12 @@
 
 
 class BlockGenerator {
-	
+public:
 	virtual Block generateBlock() = 0;
-	int setLevel(int newLevel);
-
 
 private:
-	BlockParser blockParser; 
-	int level;
+	BlockParser blockParser;
+	
 
 
 
