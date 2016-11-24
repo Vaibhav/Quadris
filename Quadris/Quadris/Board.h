@@ -1,21 +1,36 @@
+#ifndef BOARD_H
+#define BOARD_H
+
 #include "Observor.h"
 #include "Block.h"
-#include "CellInfo.h"
+#include "Cell.h"
 #include "Display.h"
-
+#include "BlockFactory.h"
 #include <vector>
 
 class Board : public Observer {
 public:
-	Board
+	void currentBlockLeft();
+	void currentBlockRight();
+	void currentBlockDown();
+	void currentBlockUp();
 
-
-
-
-
+	void clearBoard();
+	
 
 private:
-	std::vector< std::vector<CellInfo> > Cells;
-	std::vector< Block > Blocks; 
-	Display * display;  //Add Graphic display and text display 
+	std::vector< std::vector< Cell > > Cells;
+	std::vector< Block > Blocks;
+	Block nextBlock;
+	Block currentBlock;
+	Display * display;  //Add Graphic display and text display
+	BlockFactory blockFactory;
+	const int width;
+	const int length;
+
+	bool canRotateLeft
+
+
 };
+
+#endif
