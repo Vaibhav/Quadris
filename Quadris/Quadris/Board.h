@@ -29,6 +29,10 @@ private:
 	const int length;
 
 	bool canRotateLeft;
+	bool canRotateRight;
+	bool canMoveLeft;
+	bool canMoveRight;
+	
 
 
 };
