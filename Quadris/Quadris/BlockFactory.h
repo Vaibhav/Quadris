@@ -12,7 +12,6 @@ public:
 private:
 	BlockGenerator * generator; 
 	int level;
-
 };
 
 #endif

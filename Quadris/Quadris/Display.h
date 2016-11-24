@@ -1,7 +1,7 @@
-#include "Observor.h"
+#include "Observer.h"
 
 
-class Display : Observer {
+class Display : public Observer {
 public:
 	void ~Display();
 	
