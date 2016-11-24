@@ -1,17 +1,18 @@
+#ifndef BLOCKGENERATOR_H
+#define BLOCKGENERATOR_H
 
 #include "BlockParser.h"
 
 
 class BlockGenerator {
-	
+public: 
 	virtual Block generateBlock() = 0;
-	int setLevel(int newLevel);
-
 
 private:
 	BlockParser blockParser; 
-	int level;
 
 
 
 };
+
+#endif
