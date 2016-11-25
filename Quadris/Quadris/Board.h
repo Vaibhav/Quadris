@@ -2,6 +2,7 @@
 #define BOARD_H
 
 #include "Observer.h"
+#include "Subject.h"
 #include "Block.h"
 #include "Cell.h"
 //#include "CellInfo.h"
@@ -10,7 +11,11 @@
 #include <vector>
 class Block;
 
+<<<<<<< Updated upstream
 class Board { // The board does not need to be an observer
+=======
+class Board : public Observer, public Subject {
+>>>>>>> Stashed changes
 public:
 	void currentBlockLeft();
 	void currentBlockRight();

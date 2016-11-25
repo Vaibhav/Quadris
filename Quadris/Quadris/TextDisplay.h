@@ -3,9 +3,9 @@
 
 
 class TextDisplay : public Display {
+public:
 
 
-
-
+private:
 
 };

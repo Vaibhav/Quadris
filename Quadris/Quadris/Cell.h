@@ -5,7 +5,12 @@
 
 class Block;
 
+<<<<<<< Updated upstream
 struct Cell {
+=======
+class Cell {
+public:
+>>>>>>> Stashed changes
 	Block * blockPtr;
 	char displayCharacter;
 	int row;
