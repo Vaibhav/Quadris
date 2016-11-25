@@ -8,6 +8,7 @@
 #include "Display.h"
 #include "BlockFactory.h"
 #include <vector>
+class Block;
 
 class Board { // The board does not need to be an observer
 public:
@@ -22,6 +23,7 @@ public:
 	
 	Board(Display *display);
 	//void notify(Subject &whoNotified);
+	Block generateBlock(); // maybe make a smart pointer
 
 private:
 	std::vector< std::vector< Cell > > cells;

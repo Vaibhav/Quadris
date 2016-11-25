@@ -3,6 +3,8 @@
 #include "BlockGenerator.h"
 #include "BlockParser.h"
 
+//#include "Level.h"
+#include "Block.h"
 
 class BlockFactory {
 

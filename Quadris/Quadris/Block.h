@@ -6,8 +6,9 @@
 #include "Cell.h"
 #include <string>
 
+class Info;
 
-class Block : public Subject{
+class Block: public Subject {
 
 public:	
 	Block();
@@ -27,10 +28,12 @@ public:
 private:
 	int size;
 	int level;
+	int width;
+	int height;
 	std:string color;
 	vector<Cell> Cells;
+	Cell lowerLeft
 	
-
 };
 
 #endif

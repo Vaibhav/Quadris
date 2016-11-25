@@ -1,1 +1,1 @@
-Block.o: Block.cc Block.h Subject.h Observor.h Info.h Cell.h
+Block.o: Block.cc Block.h Subject.h Observer.h Info.h Cell.h

@@ -1,18 +1,15 @@
 #ifndef CELL_H
 #define CELL_H
 
-#include "Subject.h"
+//#include "Subject.h"
 
 class Block;
 
-class Cell {
-public:
+struct Cell {
 	Block * blockPtr;
 	char displayCharacter;
 	int row;
 	int col;
-public:
-	void updateChar(char c); // will notify Board
 };
 
 #endif

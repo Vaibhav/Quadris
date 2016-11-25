@@ -1,1 +1,1 @@
-Cell.o: Cell.cc Cell.h Subject.h Observor.h Info.h
+Cell.o: Cell.cc Cell.h
