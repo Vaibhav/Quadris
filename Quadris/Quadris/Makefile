@@ -1,7 +1,7 @@
 CXX = g++-5
 CXXFLAGS = -std=c++14 -Wall -MMD
 EXEC = quadris
-OBJECTS = main.o Board.o Block.o BlockFactory.o Cell.o Game.o CommandInterpreter.o Observer.o Subject.o Display.o 
+OBJECTS = main.o Board.o Block.o BlockFactory.o Game.o CommandInterpreter.o Observer.o Subject.o Display.o 
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

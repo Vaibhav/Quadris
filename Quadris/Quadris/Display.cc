@@ -1,4 +1,6 @@
 #include "Display.h"
+#include "Cell.h"
+#include "Subject.h"
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -17,7 +19,8 @@ Display::~Display(){
 }
 
 void Display::notify(Subject &whoNotified) {
-	
+	Cell info = whoNotified.getInfo();
+	theBoard[info.row][info.col] = info.displayCharacter;
 }
 
 ostream &operator<<(std::ostream &out, const Display&d) {

@@ -35,7 +35,7 @@ void Block::moveRight() {
 	lowerLeft.col -= 1;
 }
 
-Info Block::getInfo() const {
+Cell Block::getInfo() const {
 
 }
 

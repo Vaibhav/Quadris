@@ -10,7 +10,7 @@
 #include <vector>
 
 class Block;
-class Info;
+//class Info;
 
 class Board : public Observer, public Subject {
 public:
@@ -27,7 +27,7 @@ public:
 	//void notify(Subject &whoNotified);
 	Block generateBlock(); // maybe make a smart pointer
 
-	Info getInfo() const; // Board is a subject...
+	Cell getInfo() const; // Board is a subject...
 	void notify(Subject &whoNotified); // ... and an observer
 
 	friend std::ostream &operator<<(std::ostream &out, const Board&b);

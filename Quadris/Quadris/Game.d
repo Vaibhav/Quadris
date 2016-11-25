@@ -1,3 +1,3 @@
-Game.o: Game.cc Game.h Board.h Observer.h Subject.h Info.h Block.h Cell.h \
+Game.o: Game.cc Game.h Board.h Observer.h Subject.h Cell.h Block.h \
  Display.h BlockFactory.h BlockGenerator.h BlockParser.h \
  CommandInterpreter.h

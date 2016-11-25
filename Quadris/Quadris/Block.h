@@ -26,7 +26,7 @@ public:
 	void moveLeft();
 	void moveRight();
 
-	Info getInfo() const;
+	Cell getInfo() const;
 
 private:
 	int size;

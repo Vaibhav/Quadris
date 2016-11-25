@@ -1,5 +1,5 @@
 #include "Board.h"
-#include "Info.h"
+#include "Cell.h"
 
 #include <iostream>
 using namespace std;
@@ -7,7 +7,7 @@ using namespace std;
 Board::Board(int width, int height): 
 	display{Display(width, height)}, width{width}, height{height} {}
 
-Info Board::getInfo() const {
+Cell Board::getInfo() const {
 	
 }
 

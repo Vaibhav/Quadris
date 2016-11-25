@@ -1,1 +1,1 @@
-Subject.o: Subject.cc Subject.h Observer.h Info.h
+Subject.o: Subject.cc Subject.h Observer.h Cell.h
