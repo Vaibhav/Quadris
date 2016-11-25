@@ -16,8 +16,6 @@ public:
 	void detach(Observer *);
 	virtual Info getInfo() const = 0;
 
-	Subject();
-
 	virtual ~Subject() = 0;
 
 };

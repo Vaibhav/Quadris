@@ -2,6 +2,7 @@
 #define BLOCKGENERATOR_H
 
 #include "BlockParser.h"
+#include "Block.h"
 #include <vector>
 
 class BlockGenerator {

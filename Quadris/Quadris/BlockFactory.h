@@ -13,7 +13,7 @@ public:
 	int setLevel(int newLevel);
 	
 private:
-	BlockGenerator generator;
+	BlockGenerator *generator; // BlockGenerator is abstract, so need ptr
 	int level; 
 
 };

@@ -1,5 +1,7 @@
 #include "CommandInterpreter.h"
 
+#include <iostream>
+
 using namespace std;
 
 /*
@@ -41,9 +43,12 @@ disappear from the displays.
 
 */
 
+CommandInterpreter::CommandInterpreter(const istream &in): in{in} {}
+
 std::string CommandInterpreter::nextInput()
 {
 	string input;
+	cin >> input; // change to in
 	
-	return std::string();
+	return input;
 }

@@ -21,14 +21,14 @@ void Block::rotateCounterClockWise() {
 
 }
 
-void Block::left() {
+void Block::moveLeft() {
 	for (int i=0; i < Cells.size(); i++) {
 		Cells[i].col -= 1;
 	}
 	lowerLeft.col -= 1;
 }
 
-void Block::right() {
+void Block::moveRight() {
 	for (int i = 0; i < Cells.size(); i++) {
 		Cells[i].col += 1;
 	}
@@ -38,3 +38,7 @@ void Block::right() {
 Info Block::getInfo() const {
 
 }
+
+Block::~Block() {}
+
+Block::Block() {}

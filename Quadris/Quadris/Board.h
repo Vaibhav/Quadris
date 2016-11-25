@@ -10,6 +10,7 @@
 #include <vector>
 
 class Block;
+class Info;
 
 class Board : public Observer, public Subject {
 public:
@@ -22,9 +23,14 @@ public:
 
 	void clearBoard();
 	
-	Board(Display *display);
+	Board(int width=11, int height = 15);
 	//void notify(Subject &whoNotified);
 	Block generateBlock(); // maybe make a smart pointer
+
+	Info getInfo() const; // Board is a subject...
+	void notify(Subject &whoNotified); // ... and an observer
+
+	friend std::ostream &operator<<(std::ostream &out, const Board&b);
 
 private:
 	std::vector< std::vector< Cell > > cells;
@@ -32,11 +38,11 @@ private:
 	Block nextBlock;
 	Block currentBlock;
 
-	Display * display;  //Add Graphic display and text display
+	Display display;  //Add Graphic display and text display
 	BlockFactory blockFactory;
 
 	const int width;
-	const int length;
+	const int height;
 
 	bool canRotateLeft;
 	bool canRotateRight;

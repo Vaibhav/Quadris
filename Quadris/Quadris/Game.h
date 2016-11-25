@@ -14,8 +14,11 @@ public:
 	Board createBoard();
 	void play();
 
+	void notify(Subject &whoNotified);
+
 private:
-	Board game;
+	//Display *d;
+	Board b;
 	CommandInterpreter commandIn; 
 	int highScore; 
 	int currentScore;

@@ -1,7 +1,9 @@
+#ifndef COMMAND_INTERPRETER_H
 #define COMMAND_INTERPRETER_H
 
 #include <iostream>
 #include <map>
+#include <vector>
 
 //Handles input and exception safety for that input
 
@@ -11,11 +13,11 @@
 class CommandInterpreter {
 public:
 
-	std::vector< std::string > nextInput();
-	CommandInterpreter(std::istream);
+	std::string nextInput();
+	CommandInterpreter(const std::istream &);
 
 private:
-	std::istream& in; 
+	const std::istream& in; 
 	//The command dictionary maps a user command as a key and 
 	//the programCommand (or an array of program commands) as a value
 	std::map<std::string, std::vector<std::string> > commandDictionary; 
