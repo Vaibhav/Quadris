@@ -9,7 +9,7 @@
 class Block : public Subject{
 
 public:	
-	
+	Block();
 	Block(vector<Cell>);
 	Block(const Block&);
 	Block(Block&&);

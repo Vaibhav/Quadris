@@ -8,12 +8,8 @@ public:
 
 	BlockGeneratorDecorator(BlockGenerator *  component) : component{component} {}
 
-	virtual Block generateBlock() = 0;
-
 private:
 	BlockGenerator * component;
-
-
 };
 
 #endif

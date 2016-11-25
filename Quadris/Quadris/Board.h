@@ -14,6 +14,8 @@ public:
 	void currentBlockRight();
 	void currentBlockDown();
 	void currentBlockUp();
+	void currentBlockRotateClockwise();
+	void currentBlockRotateCounterClockwise();
 
 	void clearBoard();
 	
@@ -23,8 +25,10 @@ private:
 	std::vector< Block > Blocks;
 	Block nextBlock;
 	Block currentBlock;
+
 	Display * display;  //Add Graphic display and text display
 	BlockFactory blockFactory;
+
 	const int width;
 	const int length;
 
@@ -33,8 +37,6 @@ private:
 	bool canMoveLeft;
 	bool canMoveRight;
 	
-
-
 };
 
 #endif

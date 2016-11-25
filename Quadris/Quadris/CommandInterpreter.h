@@ -18,8 +18,6 @@ public:
 
 private:
 	std::istream& in; 
-
-
 };
 
 #endif
