@@ -1,10 +1,4 @@
-<<<<<<< Updated upstream
-#ifndef COMMANDINTERPRETER_H
-#define COMMANDINTERPRETER_H
-=======
-#ifndef COMMAND_INTERPRETER_H
 #define COMMAND_INTERPRETER_H
->>>>>>> Stashed changes
 
 #include <iostream>
 #include <map>
