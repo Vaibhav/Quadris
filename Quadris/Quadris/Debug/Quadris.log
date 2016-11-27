@@ -1,4 +1,4 @@
-﻿  Board.cc
+﻿  main.cpp
 BlockGenerator.obj : error LNK2019: unresolved external symbol "public: class std::vector<class Block,class std::allocator<class Block> > __thiscall BlockParser::parseBlocks(void)" (?parseBlocks@BlockParser@@QAE?AV?$vector@VBlock@@V?$allocator@VBlock@@@std@@@std@@XZ) referenced in function "protected: class std::vector<class Block,class std::allocator<class Block> > __thiscall BlockGenerator::getParsedBlocks(void)" (?getParsedBlocks@BlockGenerator@@IAE?AV?$vector@VBlock@@V?$allocator@VBlock@@@std@@@std@@XZ)
 Game.obj : error LNK2019: unresolved external symbol "public: void __thiscall Board::currentBlockDown(int)" (?currentBlockDown@Board@@QAEXH@Z) referenced in function "public: void __thiscall Game::play(void)" (?play@Game@@QAEXXZ)
 Game.obj : error LNK2019: unresolved external symbol "public: void __thiscall Board::currentBlockRotateClockwise(int)" (?currentBlockRotateClockwise@Board@@QAEXH@Z) referenced in function "public: void __thiscall Game::play(void)" (?play@Game@@QAEXXZ)

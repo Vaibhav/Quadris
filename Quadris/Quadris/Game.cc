@@ -20,7 +20,7 @@ void Game::play() {
 		for (int i = 0; i != numOfCommands; ++i) {
 			if (commands[i].first == "L") {
 				//First argument is multiplier, which is by default 1
-				b.currentBlockLeft(stoi(commands[i].second[0]));
+				b.currentBlockLeft(stoi(commands[i].second[0])); 
 			} else if (commands[i].first == "R") {
 				b.currentBlockRight(stoi(commands[i].second[0]));
 			} else if (commands[i].first == "L") {
@@ -31,9 +31,12 @@ void Game::play() {
 				b.currentBlockRotateClockwise(stoi(commands[i].second[0]));
 			} else if (commands[i].first == "CCW") {
 				b.currentBlockRotateCounterClockwise(stoi(commands[i].second[0]));
-			} 
+			} else if (commands[i].first == "LU") {
+				b.currentBlockRotateCounterClockwise(stoi(commands[i].second[0]));
+			} else if (commands[i].first == "LD") {
+				b.currentBlockRotateCounterClockwise(stoi(commands[i].second[0]));
+			}
 		}
-
 
 		cout << b;
 		move();

@@ -18,9 +18,6 @@ public:
 	std::vector < std::pair < std::string, std::vector<std::string> > > nextInput();
 	CommandInterpreter(std::istream &, std::ostream &);
 
-	
-
-
 private:
 	std::istream& in; 
 	std::ostream& errorStream;

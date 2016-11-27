@@ -68,6 +68,21 @@ void CommandInterpreter::initializeMap()
 	this->commandDictionary["levelup"] = vector< pair<string, vector<string> > >{ PairArg };
 	PairArg.first = "LD";
 	this->commandDictionary["leveldown"] = vector< pair<string, vector<string> > >{ PairArg };
+	
+	//Adding a macro command, probably want a macro command builder helper function to make this easier
+	pair<string, vector<string>> FirstCommand;
+	FirstCommand.first = "L";
+	FirstCommand.second = vector<string>{ "2" };
+	pair<string, vector<string>> SecondCommand;
+	SecondCommand.first = "D";
+	SecondCommand.second = vector<string>{ "1" };
+	pair<string, vector<string>> ThirdCommand;
+	ThirdCommand.first = "R";
+	ThirdCommand.second = vector<string>{ "4" };
+	vector< pair<string, vector<string>>> Commands{ FirstCommand, SecondCommand, ThirdCommand };
+	//The command is called macro1
+	this->commandDictionary["macro1"] = Commands;
+
 
 	PairArg.first = "DROP";
 	PairArg.second = vector<string>{ "noArg" };

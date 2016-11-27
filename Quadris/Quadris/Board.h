@@ -35,7 +35,7 @@ public:
 	friend std::ostream &operator<<(std::ostream &out, const Board&b);
 
 	void clearRow(int row);
-	vector<int> checkIfRowComplete();
+	std::vector<int> checkIfRowsComplete();
 
 
 private:

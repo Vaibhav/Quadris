@@ -28,7 +28,7 @@ public:
 	void moveLeft(int n);
 	void moveRight(int n);
 
-	void switchCurrentBlock(string blockName);
+	void switchCurrentBlock(std::string blockName);
 
 	void clearRow(int row);
 	Cell getInfo() const;
