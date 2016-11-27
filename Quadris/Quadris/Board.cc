@@ -22,6 +22,19 @@ void Board::currentBlockRight(int n) {
 	currentBlock.moveRight(n);
 }
 
+void Board::currentBlockDown(int n) {
+	currentBlock.moveDown(n);
+}
+
+void Board::currentBlockRotateClockwise(int n) {
+	currentBlock.rotateClockWise(n);
+}
+
+void Board::currentBlockRotateCounterClockwise(int n) {
+	currentBlock.rotateCounterClockWise(n);
+}
+
+
 Block Board::generateBlock() {
 	return blockFactory.generateBlock();
 }

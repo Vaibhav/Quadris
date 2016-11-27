@@ -29,7 +29,7 @@ private:
 	std::map<std::string, std::vector < std::pair < std::string, std::vector<std::string> > > > commandDictionary;
 	void initializeMap(); 
 	std::vector < std::pair < std::string, std::vector<std::string> > > findProgramCommands(std::string);
-	std::string CommandInterpreter::parseMultiplier(std::string input, std::string& multiplier);
+	std::string parseMultiplier(std::string input, std::string& multiplier);
 	bool partialMatch(std::string partial, std::string full);
 
 };

@@ -44,6 +44,14 @@ void Block::moveRight(int n) {
 	lowerLeft.col -= n;
 }
 
+
+void Block::moveDown(int n) {
+	for (int i = 0; i < cells.size(); i++) {
+		cells[i].row -= n;
+	}
+	lowerLeft.row -= n;
+}
+
 Cell Block::getInfo() const {
 	return Cell(); //TODO
 }

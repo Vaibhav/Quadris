@@ -39,10 +39,10 @@ void Game::play() {
 		}
 
 		cout << b;
-		move();
+		//move();
 	}
 }
-
+/*
 void Game::move() {
 	string cmd = "left"; //hardcoded
 	if (cmd == "left") {
@@ -51,7 +51,7 @@ void Game::move() {
 		b.currentBlockRight(1);
 	}
 }
-
+*/
 void Game::notify(Subject &whoNotified) {
 
 }
