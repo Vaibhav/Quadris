@@ -1,1 +1,2 @@
-Display.o: Display.cc Display.h Observer.h Cell.h Subject.h
+Display.o: Display.cc Display.h Observer.h subscriptions.h Cell.h \
+ Subject.h

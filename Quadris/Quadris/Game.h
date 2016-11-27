@@ -5,6 +5,7 @@
 #include "Board.h"
 #include "CommandInterpreter.h"
 #include "Observer.h"
+#include "subscriptions.h"
 #include <string>
 
 
@@ -18,6 +19,7 @@ public:
 
 	void play();
 	void notify(Subject &whoNotified);
+	SubscriptionType subType() const;
 
 
 private:

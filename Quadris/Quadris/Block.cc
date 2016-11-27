@@ -1,4 +1,5 @@
 #include "Block.h"
+#include "subscriptions.h"
 #include <string>
 #include <vector>
 using namespace std;
@@ -10,7 +11,7 @@ Block::Block(char dispChar, string colour, int level):
 	for (int i=0; i < 4; i++, r++) { 
 		cells.push_back(Cell{this, dispChar, r, c});
 	}
-	notifyObservers();
+	notifyObservers(SubscriptionType::blockChange);
 }
 
 Block::Block() {} // default ctor

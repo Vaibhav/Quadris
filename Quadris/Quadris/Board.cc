@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "Cell.h"
+#include "subscriptions.h"
 
 #include <iostream>
 using namespace std;
@@ -12,6 +13,10 @@ Cell Board::getInfo() const {
 
 void Board::notify(Subject &whoNotified) {
 
+}
+
+SubscriptionType Board::subType() const {
+	return SubscriptionType::deadBlock;
 }
 
 void Board::currentBlockLeft(int n) {

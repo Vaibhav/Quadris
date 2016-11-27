@@ -7,6 +7,7 @@
 #include "Cell.h"
 #include "Display.h"
 #include "BlockFactory.h"
+#include "subscriptions.h"
 #include <vector>
 
 class Block;
@@ -30,6 +31,7 @@ public:
 
 	Cell getInfo() const; // Board is a subject...
 	void notify(Subject &whoNotified); // ... and an observer
+	SubscriptionType subType() const;
 
 	friend std::ostream &operator<<(std::ostream &out, const Board&b);
 

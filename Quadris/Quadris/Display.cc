@@ -1,6 +1,7 @@
 #include "Display.h"
 #include "Cell.h"
 #include "Subject.h"
+#include "subscriptions.h"
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -21,6 +22,10 @@ Display::~Display(){
 void Display::notify(Subject &whoNotified) {
 	Cell info = whoNotified.getInfo();
 	theBoard[info.row][info.col] = info.displayCharacter;
+}
+
+SubscriptionType Display::subType() const {
+  return SubscriptionType::blockChange;
 }
 
 ostream &operator<<(std::ostream &out, const Display&d) {

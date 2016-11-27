@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "CommandInterpreter.h"
+#include "subscriptions.h"
 #include <iostream>
 #include <string>
 
@@ -84,5 +85,9 @@ void Game::move() {
 */
 void Game::notify(Subject &whoNotified) {
 
+}
+
+SubscriptionType Game::subType() const {
+	return SubscriptionType::deadBlock; // Used to update score
 }
 

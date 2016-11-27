@@ -3,6 +3,7 @@
 
 #include "Observer.h"
 #include "Cell.h"
+#include "subscriptions.h"
 #include <vector>
 #include <utility>
 
@@ -11,7 +12,7 @@ class Subject {
 	std::vector< Observer * > observers; //Change to smart pointer
 	
 public:
-	void notifyObservers();
+	void notifyObservers(SubscriptionType t);
 	void attach(Observer *);
 	void detach(Observer *);
 	virtual Cell getInfo() const = 0;
