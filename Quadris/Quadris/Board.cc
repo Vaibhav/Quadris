@@ -23,6 +23,10 @@ void Board::currentBlockRight() {
 	currentBlock.moveRight();
 }
 
+Block Board::generateBlock() {
+	return blockFactory.generateBlock();
+}
+
 ostream &operator<<(std::ostream &out, const Board&b) {
 	cout << b.display;
 }

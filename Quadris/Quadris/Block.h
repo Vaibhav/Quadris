@@ -12,12 +12,13 @@ class Info;
 class Block: public Subject {
 
 public:	
+	Block(char dispChar, std::string colour, int level);
+	//Block(std::vector<Cell>);
+	//Block(const Block&);
+	//Block(Block&&);
+	//Block& operator=(const Block&);
+	//Block& operator=(Block&&);
 	Block();
-	Block(std::vector<Cell>);
-	Block(const Block&);
-	Block(Block&&);
-	Block& operator=(const Block&);
-	Block& operator=(Block&&);
 	~Block();
 
 	void rotateClockWise();
@@ -33,8 +34,8 @@ private:
 	int level;
 	int width;
 	int height;
-	std::string color;
-	std::vector<Cell> Cells;
+	std::string colour;
+	std::vector<Cell> cells;
 	Cell lowerLeft;
 	
 };

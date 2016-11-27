@@ -12,6 +12,7 @@ Board Game::createBoard() {
 }
 
 void Game::play() {
+	b.generateBlock();
 	while (true) {
 		cout << b;
 		move();
