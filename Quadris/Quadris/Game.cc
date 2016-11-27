@@ -2,10 +2,18 @@
 #include "CommandInterpreter.h"
 #include <iostream>
 #include <string>
+
 using namespace std;
 
-Game::Game(bool test, int seed, std::string scriptFile, int startLevel): 
-	commandIn{CommandInterpreter{cin, cerr}}, b{createBoard()} {}
+Game::Game(int maxLevel, bool test, int seed, std::string scriptFile, int startLevel): 
+	commandIn { CommandInterpreter{cin, cerr} }, b{createBoard()} {
+		this->maxLevel = maxLevel;
+		this->currentLevel = startLevel;
+		this->b.setLevel(currentLevel);
+		this->randSeed = seed;
+		this->testMode = test;
+		this->scriptFile = scriptFile;
+	}
 
 Board Game::createBoard() {
 	return Board{};
@@ -13,8 +21,12 @@ Board Game::createBoard() {
 
 void Game::play() {
 	while (true) {
-
-		vector < pair<string, vector<string>> > commands = commandIn.nextInput();
+		vector < pair<string, vector< string > > > commands;
+		try{
+		 commands = commandIn.nextInput();
+		} catch(out_of_range e){
+			cerr << e.what() << endl;
+		}
 		int numOfCommands = commands.size();
 		//Supports Macrocommands, multiple commands which each can have multiple arguments
 		for (int i = 0; i != numOfCommands; ++i) {
@@ -32,16 +44,34 @@ void Game::play() {
 			} else if (commands[i].first == "CCW") {
 				b.currentBlockRotateCounterClockwise(stoi(commands[i].second[0]));
 			} else if (commands[i].first == "LU") {
-				b.currentBlockRotateCounterClockwise(stoi(commands[i].second[0]));
+				increaseLevel(stoi(commands[i].second[0]));
 			} else if (commands[i].first == "LD") {
-				b.currentBlockRotateCounterClockwise(stoi(commands[i].second[0]));
+				decreaseLevel(stoi(commands[i].second[0]));
 			}
 		}
-
 		cout << b;
 		//move();
 	}
 }
+
+void Game::increaseLevel(int n){
+	if((currentLevel + n) >= maxLevel){
+		currentLevel = maxLevel;
+	} else{
+		currentLevel += n;
+	}
+	b.setLevel(currentLevel);
+}
+
+void Game::decreaseLevel(int n){
+	if((currentLevel - n) <= 0){
+		currentLevel = 0;
+	} else{
+		currentLevel -=n;
+	}
+	b.setLevel(currentLevel);
+}
+
 /*
 void Game::move() {
 	string cmd = "left"; //hardcoded
@@ -55,5 +85,4 @@ void Game::move() {
 void Game::notify(Subject &whoNotified) {
 
 }
-
 

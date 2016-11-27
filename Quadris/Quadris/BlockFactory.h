@@ -10,12 +10,9 @@ class BlockFactory {
 
 public:
 	Block generateBlock(int level = 0);
-	int setLevel(int newLevel);
 	
 private:
 	BlockGenerator *generator; // BlockGenerator is abstract, so need ptr
-	int level; 
-
 };
 
 #endif

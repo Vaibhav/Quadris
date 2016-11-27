@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-Board::Board(int width, int height): width{width}, height{height} {}
+Board::Board(int width, int height): width{width}, height{height}, blockFactory{BlockFactory()} {}
 
 Cell Board::getInfo() const {
 	return Cell();//TODO
@@ -34,6 +34,9 @@ void Board::currentBlockRotateCounterClockwise(int n) {
 	currentBlock.rotateCounterClockWise(n);
 }
 
+void Board::setLevel(int n){
+	currentLevel = n;
+}
 
 Block Board::generateBlock() {
 	return blockFactory.generateBlock();

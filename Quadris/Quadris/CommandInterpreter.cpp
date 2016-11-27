@@ -21,9 +21,10 @@ std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter
 	}
 	catch (std::out_of_range e) {
 		//TODO:: What to do when input is invalid?
-		errorStream << e.what();
+	//	errorStream << e.what();
 		//WHAT SHOULD WE RETURN WHEN ERROR?
 		//return std::vector<std::pair<std::string, std::vector<std::string>>>();
+//		throw e;
 		throw e;
 	}
 

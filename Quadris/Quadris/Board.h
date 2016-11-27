@@ -19,14 +19,13 @@ public:
 	void currentBlockDown(int n);
 	void currentBlockRotateClockwise(int n);
 	void currentBlockRotateCounterClockwise(int n);
-	
 	void currentBlockDrop();
 
 	void clearBoard();
 	void restart();
 
 	Board(int width=11, int height = 15);
-	//void notify(Subject &whoNotified);
+
 	Block generateBlock(); // maybe make a smart pointer
 
 	Cell getInfo() const; // Board is a subject...
@@ -37,6 +36,7 @@ public:
 	void clearRow(int row);
 	std::vector<int> checkIfRowsComplete();
 
+	void setLevel(int n);
 
 private:
 	std::vector< std::vector< Cell > > cells;
@@ -44,8 +44,8 @@ private:
 	Block nextBlock;
 	Block currentBlock;
 
-	//Display display;  //Add Graphic display and text display
 	BlockFactory blockFactory;
+	int currentLevel;
 
 	const int width;
 	const int height;
