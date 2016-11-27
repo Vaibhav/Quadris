@@ -57,9 +57,6 @@
     <ClInclude Include="Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sourc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BlockGeneratorDecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>

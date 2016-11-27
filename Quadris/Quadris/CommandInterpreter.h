@@ -13,14 +13,26 @@
 class CommandInterpreter {
 public:
 
-	std::string nextInput();
-	CommandInterpreter(const std::istream &);
+	//A list of commands
+	//Each command is pair composed of a commandCode and a list of the commandCode's arguments
+	std::vector < std::pair < std::string, std::vector<std::string> > > nextInput();
+	CommandInterpreter(std::istream &, std::ostream &);
+
+	
+
 
 private:
-	const std::istream& in; 
+	std::istream& in; 
+	std::ostream& errorStream;
+
 	//The command dictionary maps a user command as a key and 
 	//the programCommand (or an array of program commands) as a value
-	std::map<std::string, std::vector<std::string> > commandDictionary; 
+	//The program command consists of the command itself and an array 
+	//of arguments for the program command if it needs it. 
+	std::map<std::string, std::vector < std::pair < std::string, std::vector<std::string> > > > commandDictionary;
+	void initializeMap(); 
+	std::vector < std::pair < std::string, std::vector<std::string> > > findProgramCommand(std::string);
+
 };
 
 #endif

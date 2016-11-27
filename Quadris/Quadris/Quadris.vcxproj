@@ -128,7 +128,6 @@
     <ClInclude Include="GraphicsDisplay.h" />
     <ClInclude Include="HeavyBlockDecorator.h" />
     <ClInclude Include="Observer.h" />
-    <ClInclude Include="Sourc.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="Subscriptions.h" />
     <ClInclude Include="TextDisplay.h" />

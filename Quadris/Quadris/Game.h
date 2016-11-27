@@ -11,13 +11,13 @@
 class Game : public Observer {
 public:
 	Game(bool test = false, int seed = 0, std::string scriptFile = "sequence.txt", int startLevel = 0);
-	Board createBoard();
-	void play();
 
+	void play();
 	void notify(Subject &whoNotified);
 
+
 private:
-	//Display *d;
+	Display * display;
 	Board b;
 	CommandInterpreter commandIn; 
 	int highScore; 
@@ -25,6 +25,11 @@ private:
 
 	void move(); //Uses commandIn to take in a command and then execute the correct Board Function 
 	void readInHighScore(); 
+	void saveHighScore();
+	void updateHighScore();
+	void updateScore();
+	Board createBoard();
+	Board resetBoard();
 
 };
 

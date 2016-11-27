@@ -20,9 +20,11 @@ public:
 	void currentBlockUp();
 	void currentBlockRotateClockwise();
 	void currentBlockRotateCounterClockwise();
+	void currentBlockDrop();
 
 	void clearBoard();
-	
+	void restart();
+
 	Board(int width=11, int height = 15);
 	//void notify(Subject &whoNotified);
 	Block generateBlock(); // maybe make a smart pointer
@@ -38,16 +40,19 @@ private:
 	Block nextBlock;
 	Block currentBlock;
 
-	Display display;  //Add Graphic display and text display
+	//Display display;  //Add Graphic display and text display
 	BlockFactory blockFactory;
 
 	const int width;
 	const int height;
 
-	bool canRotateLeft;
-	bool canRotateRight;
-	bool canMoveLeft;
-	bool canMoveRight;
+	bool canRotateLeft() const;
+	bool canRotateRight() const;
+	bool canMoveLeft() const;
+	bool canMoveRight() const;
+	bool canMoveDown() const;
+
+	void getNextBlock();
 	
 };
 
