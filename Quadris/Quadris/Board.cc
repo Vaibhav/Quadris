@@ -4,23 +4,22 @@
 #include <iostream>
 using namespace std;
 
-Board::Board(int width, int height): 
-	display{Display(width, height)}, width{width}, height{height} {}
+Board::Board(int width, int height): width{width}, height{height} {}
 
 Cell Board::getInfo() const {
-	
+	return Cell();//TODO
 }
 
 void Board::notify(Subject &whoNotified) {
 
 }
 
-void Board::currentBlockLeft() {
-	currentBlock.moveLeft();
+void Board::currentBlockLeft(int n) {
+	currentBlock.moveLeft(n);
 }
 
-void Board::currentBlockRight() {
-	currentBlock.moveRight();
+void Board::currentBlockRight(int n) {
+	currentBlock.moveRight(n);
 }
 
 Block Board::generateBlock() {
@@ -28,5 +27,7 @@ Block Board::generateBlock() {
 }
 
 ostream &operator<<(std::ostream &out, const Board&b) {
-	cout << b.display;
+	//cout << b.display; //display is no longer a method of board
+	//use observer if you want it to display so bad
+	return cout;
 }

@@ -2,6 +2,6 @@
 #include "Block.h"
 
 Block BlockFactory::generateBlock(int level) {
-
+	return Block();
 }
 

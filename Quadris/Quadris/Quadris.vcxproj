@@ -133,12 +133,21 @@
     <ClInclude Include="TextDisplay.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Block.d" />
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Block.cc" />
+    <ClCompile Include="BlockFactory.cc" />
     <ClCompile Include="BlockGenerator.cpp" />
+    <ClCompile Include="Board.cc" />
     <ClCompile Include="CommandInterpreter.cpp" />
+    <ClCompile Include="Display.cc" />
+    <ClCompile Include="Game.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Observer.cc" />
+    <ClCompile Include="Subject.cc" />
+    <ClCompile Include="untitled.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

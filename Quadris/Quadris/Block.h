@@ -21,11 +21,13 @@ public:
 	Block();
 	~Block();
 
-	void rotateClockWise();
-	void rotateCounterClockWise();
-	void moveDown();
-	void moveLeft();
-	void moveRight();
+	//As a single turn in the game, the block moves n times
+	void rotateClockWise(int n);
+	void rotateCounterClockWise(int n);
+	void moveDown(int n);
+	void moveLeft(int n);
+	void moveRight(int n);
+
 
 	Cell getInfo() const;
 

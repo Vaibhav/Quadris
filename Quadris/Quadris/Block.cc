@@ -15,7 +15,7 @@ Block::Block(char dispChar, string colour, int level):
 
 Block::Block() {} // default ctor
 
-void Block::rotateClockWise() {
+void Block::rotateClockWise(int n) {
 	int leftRow = lowerLeft.row;
 	int leftCol = lowerLeft.col;
 	for (int i = 0; i < cells.size(); i++) {
@@ -26,26 +26,26 @@ void Block::rotateClockWise() {
 	}
 }
 
-void Block::rotateCounterClockWise() {
+void Block::rotateCounterClockWise(int n) {
 
 }
 
-void Block::moveLeft() {
+void Block::moveLeft(int n) {
 	for (int i=0; i < cells.size(); i++) {
-		cells[i].col -= 1;
+		cells[i].col -= n;
 	}
-	lowerLeft.col -= 1;
+	lowerLeft.col -= n;
 }
 
-void Block::moveRight() {
+void Block::moveRight(int n) {
 	for (int i = 0; i < cells.size(); i++) {
-		cells[i].col += 1;
+		cells[i].col += n;
 	}
-	lowerLeft.col -= 1;
+	lowerLeft.col -= n;
 }
 
 Cell Block::getInfo() const {
-
+	return Cell(); //TODO
 }
 
 Block::~Block() {}

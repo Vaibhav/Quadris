@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Block.d" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,6 +91,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommandInterpreter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockFactory.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="untitled.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

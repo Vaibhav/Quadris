@@ -1,13 +1,6 @@
-﻿  CommandInterpreter.cpp
-  Generating Code...
-c:\users\harman\desktop\finalproject\quadris\quadris\commandinterpreter.cpp(86): warning C4715: 'CommandInterpreter::nextInput': not all control paths return a value
-  Compiling...
-  main.cpp
-  Generating Code...
+﻿  Board.cc
 BlockGenerator.obj : error LNK2019: unresolved external symbol "public: class std::vector<class Block,class std::allocator<class Block> > __thiscall BlockParser::parseBlocks(void)" (?parseBlocks@BlockParser@@QAE?AV?$vector@VBlock@@V?$allocator@VBlock@@@std@@@std@@XZ) referenced in function "protected: class std::vector<class Block,class std::allocator<class Block> > __thiscall BlockGenerator::getParsedBlocks(void)" (?getParsedBlocks@BlockGenerator@@IAE?AV?$vector@VBlock@@V?$allocator@VBlock@@@std@@@std@@XZ)
-main.obj : error LNK2019: unresolved external symbol "public: virtual __thiscall Observer::~Observer(void)" (??1Observer@@UAE@XZ) referenced in function "public: virtual __thiscall Board::~Board(void)" (??1Board@@UAE@XZ)
-main.obj : error LNK2019: unresolved external symbol "public: virtual __thiscall Subject::~Subject(void)" (??1Subject@@UAE@XZ) referenced in function "public: virtual __thiscall Board::~Board(void)" (??1Board@@UAE@XZ)
-main.obj : error LNK2019: unresolved external symbol "public: virtual __thiscall Block::~Block(void)" (??1Block@@UAE@XZ) referenced in function "public: virtual __thiscall Board::~Board(void)" (??1Board@@UAE@XZ)
-main.obj : error LNK2019: unresolved external symbol "public: __thiscall Game::Game(bool,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int)" (??0Game@@QAE@_NHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z) referenced in function _main
-main.obj : error LNK2019: unresolved external symbol "public: void __thiscall Game::play(void)" (?play@Game@@QAEXXZ) referenced in function _main
-C:\Users\Harman\Desktop\FinalProject\Quadris\Debug\Quadris.exe : fatal error LNK1120: 6 unresolved externals
+Game.obj : error LNK2019: unresolved external symbol "public: void __thiscall Board::currentBlockDown(int)" (?currentBlockDown@Board@@QAEXH@Z) referenced in function "public: void __thiscall Game::play(void)" (?play@Game@@QAEXXZ)
+Game.obj : error LNK2019: unresolved external symbol "public: void __thiscall Board::currentBlockRotateClockwise(int)" (?currentBlockRotateClockwise@Board@@QAEXH@Z) referenced in function "public: void __thiscall Game::play(void)" (?play@Game@@QAEXXZ)
+Game.obj : error LNK2019: unresolved external symbol "public: void __thiscall Board::currentBlockRotateCounterClockwise(int)" (?currentBlockRotateCounterClockwise@Board@@QAEXH@Z) referenced in function "public: void __thiscall Game::play(void)" (?play@Game@@QAEXXZ)
+C:\Users\Harman\Desktop\FinalProject\Quadris\Debug\Quadris.exe : fatal error LNK1120: 4 unresolved externals

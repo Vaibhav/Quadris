@@ -31,7 +31,9 @@ private:
 	//of arguments for the program command if it needs it. 
 	std::map<std::string, std::vector < std::pair < std::string, std::vector<std::string> > > > commandDictionary;
 	void initializeMap(); 
-	std::vector < std::pair < std::string, std::vector<std::string> > > findProgramCommand(std::string);
+	std::vector < std::pair < std::string, std::vector<std::string> > > findProgramCommands(std::string);
+	std::string CommandInterpreter::parseMultiplier(std::string input, std::string& multiplier);
+	bool partialMatch(std::string partial, std::string full);
 
 };
 

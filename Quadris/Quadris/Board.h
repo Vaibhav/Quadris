@@ -14,12 +14,12 @@ class Block;
 
 class Board : public Observer, public Subject {
 public:
-	void currentBlockLeft();
-	void currentBlockRight();
-	void currentBlockDown();
-	void currentBlockUp();
-	void currentBlockRotateClockwise();
-	void currentBlockRotateCounterClockwise();
+	void currentBlockLeft(int n);
+	void currentBlockRight(int n);
+	void currentBlockDown(int n);
+	void currentBlockRotateClockwise(int n);
+	void currentBlockRotateCounterClockwise(int n);
+	
 	void currentBlockDrop();
 
 	void clearBoard();
@@ -51,7 +51,6 @@ private:
 	bool canMoveLeft() const;
 	bool canMoveRight() const;
 	bool canMoveDown() const;
-
 	void getNextBlock();
 	
 };

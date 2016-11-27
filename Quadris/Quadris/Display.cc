@@ -30,6 +30,7 @@ ostream &operator<<(std::ostream &out, const Display&d) {
     }
     endl(cout);
   }
+  return cout;
 }
 
 
