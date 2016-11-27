@@ -28,11 +28,14 @@ public:
 	void moveLeft(int n);
 	void moveRight(int n);
 
+	void switchCurrentBlock(string blockName);
 
+	void clearRow(int row);
 	Cell getInfo() const;
 
 private:
 	int size;
+	int name;
 	int level;
 	int width;
 	int height;

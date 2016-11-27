@@ -34,6 +34,10 @@ public:
 
 	friend std::ostream &operator<<(std::ostream &out, const Board&b);
 
+	void clearRow(int row);
+	vector<int> checkIfRowComplete();
+
+
 private:
 	std::vector< std::vector< Cell > > cells;
 	std::vector< Block > blocks;
@@ -52,6 +56,7 @@ private:
 	bool canMoveRight() const;
 	bool canMoveDown() const;
 	void getNextBlock();
+	void updateScore() const;
 	
 };
 
