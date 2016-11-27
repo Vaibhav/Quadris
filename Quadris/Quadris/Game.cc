@@ -50,7 +50,7 @@ void Game::play() {
 				decreaseLevel(stoi(commands[i].second[0]));
 			}
 		}
-		cout << b;
+		cout << display;
 		//move();
 	}
 }

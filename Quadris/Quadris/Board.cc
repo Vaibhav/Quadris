@@ -46,9 +46,3 @@ void Board::setLevel(int n){
 Block Board::generateBlock() {
 	return blockFactory.generateBlock();
 }
-
-ostream &operator<<(std::ostream &out, const Board&b) {
-	//cout << b.display; //display is no longer a method of board
-	//use observer if you want it to display so bad
-	return cout;
-}

@@ -23,7 +23,7 @@ public:
 
 
 private:
-	Display * display;
+	Display display;
 	Board b;
 	CommandInterpreter commandIn; 
 	int highScore; 

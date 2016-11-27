@@ -33,8 +33,6 @@ public:
 	void notify(Subject &whoNotified); // ... and an observer
 	SubscriptionType subType() const;
 
-	friend std::ostream &operator<<(std::ostream &out, const Board&b);
-
 	void clearRow(int row);
 	std::vector<int> checkIfRowsComplete();
 
