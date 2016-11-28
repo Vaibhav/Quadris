@@ -5,17 +5,17 @@
 #include <string>
 #include <vector>
 
-#include "Block.h"
+class Block;
 
 class BlockParser {
 public:
 	BlockParser();
+	~BlockParser();
 	std::vector< Block > parseBlocks();
 
 private:
-	std::string fileLocation; 
+	std::string fileName = "blocks.txt";  
 	std::ifstream inputFileStream; 
-
 
 };
 
