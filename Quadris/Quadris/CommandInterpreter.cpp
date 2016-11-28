@@ -17,6 +17,7 @@ std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter
 	command = parseMultiplier(command, multiplierPrefix);
 	vector<pair<string, vector<string>>> programCommands;
 	try {
+		//errorStream << command;
 		programCommands = findProgramCommands(command);
 	}
 	catch (std::out_of_range e) {
@@ -44,7 +45,9 @@ std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter
 		return programCommands;
 }
 
-CommandInterpreter::CommandInterpreter(istream &in, ostream& err) : in{ in }, errorStream{ err } {}
+CommandInterpreter::CommandInterpreter(istream &in, ostream& err) : in{ in }, errorStream{ err } {
+	initializeMap();
+}
 
 //Initialize the Map
 //ToDo: Initialize Map from file using filestream
@@ -130,6 +133,8 @@ CommandInterpreter::findProgramCommands(string userInput)
 	int counter = 0;
 	for (std::map<string, std::vector < std::pair < std::string, std::vector<std::string> > > >::const_iterator
 		it = commandDictionary.begin(); it != commandDictionary.end(); ++it) {
+		//	errorStream << userInput;
+		//	errorStream << it->first;
 		if (partialMatch(userInput, it->first)) {
 			++counter;
 			key = it->first;
