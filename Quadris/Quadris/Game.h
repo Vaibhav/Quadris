@@ -15,7 +15,8 @@ public:
 		 bool text = false, 
 		 int seed = 0, 
 		 std::string scriptFile = "sequence.txt", 
-		 int startLevel = 0);
+		 int startLevel = 0,
+		 std::string filename = "score.txt");
 
 	void play();
 	void notify(Subject &whoNotified);
@@ -42,7 +43,7 @@ private:
 	void readInHighScore();
 	void updateHighScore();
 
-	void updateScore();
+	void updateScore(int rowsCleared, std::vector<int> lvls);
 	Board createBoard();
 	Board resetBoard();
 

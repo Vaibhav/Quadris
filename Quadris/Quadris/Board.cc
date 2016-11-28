@@ -31,6 +31,18 @@ void Board::currentBlockDown(int n) {
 	currentBlock.moveDown(n);
 }
 
+void Board::currentBlockDrop() {
+	
+}
+
+void Board::showHint(){
+
+}
+
+void Board::restart(){
+	
+}
+
 void Board::currentBlockRotateClockwise(int n) {
 	currentBlock.rotateClockWise(n);
 }
@@ -46,6 +58,20 @@ void Board::setLevel(int n){
 void Board::setCurrentBlock(string blockName){
 	currentBlock = blockFactory.generateBlock(blockName);
 }
+
+	void Board::noRandomBlock(std::string file){
+		blockFactory.noRandomBlock(file);
+	}
+	void Board::restoreRandom(){
+		blockFactory.restoreRandom();
+	}
+	void Board::setSeed(int seed){
+		blockFactory.setSeed(seed);
+	}
+	void Board::setSequence(std::string sequenceFile){
+		blockFactory.setSequenceFile(sequenceFile);
+	}
+
 
 Block Board::generateBlock() {
 	return blockFactory.generateBlock(this->currentLevel);

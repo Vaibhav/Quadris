@@ -4,8 +4,15 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <fstream>
 using namespace std;
 
+
+std::vector < std::pair < std::string, std::vector<std::string> > > CommandInterpreter::sequenceCommand(std::string file){
+
+	ifstream fin{file};
+	return std::vector < std::pair < std::string, std::vector<std::string> > >{};
+}
 
 std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter::nextInput()
 {
@@ -16,6 +23,7 @@ std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter
 	ss >> command;
 	string multiplierPrefix;
 	command = parseMultiplier(command, multiplierPrefix);
+
 	vector<pair<string, vector<string>>> programCommands;
 	try {
 		programCommands = findProgramCommands(command);
@@ -41,10 +49,14 @@ std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter
 		programCommands[0].second = arguments;
 		}
 		
+	//Special Commands
+	if(command == "sequence"){
+		return sequenceCommand(programCommands[0].second[0]);
+	}
 		return programCommands;
 }
 
-CommandInterpreter::CommandInterpreter(istream &in, ostream& err) : in{ in }, errorStream{ err } {
+CommandInterpreter::CommandInterpreter(istream &in) : in{ in } {
 	initializeMap();
 }
 
@@ -135,7 +147,7 @@ void CommandInterpreter::initializeMap()
 	///Multiplier Compatible Commands Initialization///////////
 	multiplierCompatibleCommands = vector<string>{ 
 		"left", "right", "down", "counterclockwise", "clockwise", "levelup", "leveldown"
-	}
+	};
 
 }
 

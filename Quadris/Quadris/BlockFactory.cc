@@ -10,3 +10,21 @@ Block BlockFactory::generateBlock(int level) {
 Block BlockFactory::generateBlock(string blockName) {
 	return Block();
 }
+
+	void BlockFactory::setSeed(int n){
+		seed = n;
+	}
+	
+	void BlockFactory::setSequenceFile(std::string sequenceFile){
+		this->sequenceFile = sequenceFile;
+	}
+
+	void BlockFactory::noRandomBlock(std::string file){
+		this->noRandom = true;
+		this->noRandomBlockFile = file;
+	}
+
+	void BlockFactory::restoreRandom(){
+		this->noRandom = false;
+		this->noRandomBlockFile = "";
+	}

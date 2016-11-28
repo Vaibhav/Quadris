@@ -4,23 +4,23 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <math.h>
 #include <vector>
 
 using namespace std;
 
-Game::Game(int maxLevel, bool test, int seed, std::string scriptFile, int startLevel, string filename = "score.txt"): 
-	commandIn { CommandInterpreter{cin, cerr} }, b{ createBoard() } {
-	
+Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string filename): 
+	commandIn { CommandInterpreter{cin} }, b{ createBoard() } {
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
 		this->b.setLevel(currentLevel);
 		this->randSeed = seed;
-		this->testMode = test;
+		this->textMode = text;
 		this->scriptFile = scriptFile;
 		this->filename = filename;
 		this->currentScore = 0;
-		this->highscore = 0;
+		this->highScore = 0;
 		
 		readInHighScore();
 	}
@@ -83,12 +83,12 @@ void Game::play() {
 			} else if(commands[i].first == "HINT"){
 				b.showHint();
 			} else if(commands[i].first == "RANDOM"){
-				b.showHint();
+				b.restoreRandom();
 			} else if(commands[i].first == "NORANDOM"){
-				b.showHint();
-			} else if(commands[i].first == "SEQUENCE"){
-				b.showHint();
-			} 
+				b.noRandomBlock(commands[i].second[0]);
+			} else {
+				cout << "programCode is not used" << endl;
+			}
 
 
 
@@ -161,14 +161,14 @@ bool file_exists (const string &fname) {
 
 
 // Reads in highscore 
-void readInHighScore(){
+void Game::readInHighScore(){
 
 	// if file doesnt exists, make the file.
 	if (!( file_exists(this->filename) )) {
 		fstream file;
 		file.open(this->filename, fstream::out);
 		file.close();
-		this->highscore = 0;
+		this->highScore = 0;
 		return;
 	}
 
@@ -184,21 +184,22 @@ void readInHighScore(){
 	hs = hs.substr(0, hs.size() - 5);
 	// convert string to int and save highscore
 	int hScore;
-	istringstream(hs) >> hScore;
-	this->highscore = hScore;
+	stringstream ss { hs };
+	ss >> hScore;
+	this->highScore = hScore;
 
 }
 
 
 
-void updateHighScore(){
+void Game::updateHighScore(){
 
-	this->highscore = this->currentScore;
+	this->highScore = this->currentScore;
 	ofstream file;
 	file.open(this->filename); 
 
 	//convert high score to string
-	string hs = to_string(this->highscore);
+	string hs = to_string(this->highScore);
 	
 	//encrypt the highscore
 	hs = hs + "kysvk";
@@ -225,9 +226,9 @@ level 3, you get 1 point.)
 
 */
 
-void updateScore(int rowsCleared, vector<int> lvls) {
+void Game::updateScore(int rowsCleared, vector<int> lvls) {
 
-	int levelNow = this->currentLevels;
+	int levelNow = this->currentLevel;
 	int curScore = this->currentScore;
 	int score;
 
@@ -248,7 +249,7 @@ void updateScore(int rowsCleared, vector<int> lvls) {
 	score += curScore;
 	this->currentScore = score;
 
-	if (this->currentScore > this->highscore) {
+	if (this->currentScore > this->highScore) {
 		updateHighScore();
 	}
 

@@ -13,6 +13,11 @@ class Block: public Subject {
 
 public:	
 	Block(char dispChar, std::string colour, int level);
+	Block(char dispChar, 
+	 	  std::string colour, 
+		  std::string name,
+		  std::vector < std::pair < int, int > > coords
+		  );
 	//Block(std::vector<Cell>);
 	//Block(const Block&);
 	//Block(Block&&);
@@ -27,6 +32,7 @@ public:
 	void moveDown(int n);
 	void moveLeft(int n);
 	void moveRight(int n);
+	void setLevel(int n);
 
 	void switchCurrentBlock(std::string blockName);
 
@@ -35,7 +41,7 @@ public:
 
 private:
 	int size;
-	int name;
+	std::string name;
 	int level;
 	int width;
 	int height;

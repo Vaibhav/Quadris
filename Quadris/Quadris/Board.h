@@ -45,6 +45,7 @@ public:
 	//Hint should be displayed on text by ??? 
 	//and in Graphic Display by a block box
 	void showHint();
+	
 	void noRandomBlock(std::string file);
 	void restoreRandom();
 	void setSeed(int seed);

@@ -14,6 +14,19 @@ Block::Block(char dispChar, string colour, int level):
 	notifyObservers(SubscriptionType::blockChange);
 }
 
+Block::Block(char dispChar, 
+	 	  std::string colour, 
+		  std::string name,
+		  std::vector < std::pair < int, int > > coords
+		  ): colour(colour), name(name) {
+
+	for (int i=0; i < 4; ++i) { 
+		cells.push_back(Cell{this, dispChar, coords[i].first, coords[i].second});
+	}
+
+	notifyObservers(SubscriptionType::blockChange);
+}
+
 Block::Block() {} // default ctor
 
 void Block::rotateClockWise(int n) {
@@ -55,6 +68,10 @@ void Block::moveDown(int n) {
 
 Cell Block::getInfo() const {
 	return Cell(); //TODO
+}
+
+void Block::setLevel(int n){
+	level = n;
 }
 
 Block::~Block() {}

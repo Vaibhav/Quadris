@@ -14,14 +14,16 @@ public:
 
 	void setSeed(int n);
 	void setSequenceFile(std::string sequenceFile);
-	
+	void noRandomBlock(std::string file);
+	void restoreRandom();
+
 private:
 	BlockGenerator *generator; // BlockGenerator is abstract, so need ptr
 	
 	std::string sequenceFile;
 	int seed;
-	std::string noRandomFile;
-	bool enableRandom;
+	std::string noRandomBlockFile;
+	bool noRandom;
 	
 };
 
