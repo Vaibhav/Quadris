@@ -28,6 +28,7 @@ private:
 	CommandInterpreter commandIn; 
 	int highScore; 
 	int currentScore;
+	std::string filename;
 	
 	int maxLevel;
 	int currentLevel;
@@ -37,9 +38,9 @@ private:
 
 
 	void move(); //Uses commandIn to take in a command and then execute the correct Board Function 
-	void readInHighScore(); 
-	void saveHighScore();
+	void readInHighScore() noexcept;
 	void updateHighScore();
+
 	void updateScore();
 	Board createBoard();
 	Board resetBoard();

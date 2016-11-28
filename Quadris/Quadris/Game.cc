@@ -15,7 +15,9 @@ Game::Game(int maxLevel, bool test, int seed, std::string scriptFile, int startL
 		this->randSeed = seed;
 		this->testMode = test;
 		this->scriptFile = scriptFile;
-		this->filename = filename; 
+		this->filename = filename;
+		// No throw guarantee
+		readInHighScore();
 	}
 
 Board Game::createBoard() {
@@ -129,30 +131,37 @@ SubscriptionType Game::subType() const {
 }
 
 
-string decrypt_encrypt(string s){
+// Encryption function
+// Uses XOR encryption to encrypt the highscore before it is saved to text file
+// Prevents the user from cheating
+string decrypt_encrypt(string str) {
+    
+    char key[6] = {'M', 'V', 'H', 'W', 'K', 'S'};
+    string s = str;
+    int si = str.size();
 
-	string encrypted = s;
-	char key[3] = {'M', 'V', 'H'};
-
-	for (int i = 0; i < s.size(); i++) {
-		encrypted[i] = s[i] ^ key[i % (sizeof(key) / sizeof(char))];
-	}
-
-	return s; 
-
+    for (int i = 0; i < si; i++) {
+    	s[i] = str[i] ^ key[i % (sizeof(key) / sizeof(char))];
+    }
+    
+    return s;
 }
 
+// Reads in highscore 
 void readInHighScore(){
 
+	// if file doesnt exists, throw an exception
+
+
 	string temp;
-	ifstream file{this->filename};
+	ifstream file{this->highscore};
 
 	// make file contents a string
 	getline(file, temp);
 	
 	// decrypt string
 	string hs = decrypt_encrypt(temp);
-
+	hs = hs.substr(0, hs.size() - 5);
 	// convert string to int and save highscore
 	int hScore;
 	istringstream(hs) >> hScore;
@@ -160,27 +169,31 @@ void readInHighScore(){
 
 }
 
+
+
 void updateHighScore(){
 
+	this->highscore = this->score;
 	ofstream file;
 	file.open(this->filename); 
 
 	//convert high score to string
 	string hs = to_string(this->highscore);
-
+	
 	//encrypt the highscore
+	hs = hs + "kysvk";
 	string toWrite = decrypt_encrypt(hs);
 
 	//write to file 
 	file << toWrite;
-
 	file.close();
 
 }
 
-void updateScore(){
+void updateScore(int rows, vector<int> lvls) {
 
+	if (this->score > this->highscore) {
+		updateHighScore();
+	}
 
 }
-
-
