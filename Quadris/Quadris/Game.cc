@@ -94,57 +94,51 @@ SubscriptionType Game::subType() const {
 }
 
 
-string decrypt_encrypt(string s){
+string decrypt_encrypt(string str) {
+    
+    char key[6] = {'M', 'V', 'H', 'W', 'K', 'S'}; //Any chars will work, in an array of any size
+    string s = str;
+    int si = str.size();
 
-	string encrypted = s;
-	char key[3] = {'M', 'V', 'H'};
-
-	for (int i = 0; i < s.size(); i++) {
-		encrypted[i] = s[i] ^ key[i % (sizeof(key) / sizeof(char))];
-	}
-
-	return s; 
-
+    for (int i = 0; i < si; i++)
+        s[i] = str[i] ^ key[i % (sizeof(key) / sizeof(char))];
+    
+    cout << s << endl;
+    return s;
 }
 
 void readInHighScore(){
 
 	string temp;
-	ifstream file{this->filename};
+	ifstream file{"score.txt"};
 
 	// make file contents a string
 	getline(file, temp);
 	
 	// decrypt string
 	string hs = decrypt_encrypt(temp);
-
+	hs = hs.substr(0, hs.size() - 5);
 	// convert string to int and save highscore
-	int hScore;
-	istringstream(hs) >> hScore;
-	this->highscore = hScore;
-
+	int numb;
+	istringstream(hs) >> numb;
+	cout << "keeping: " << numb << endl;
 }
 
 void updateHighScore(){
 
 	ofstream file;
-	file.open(this->filename); 
+	file.open("score.txt"); 
 
 	//convert high score to string
-	string hs = to_string(this->highscore);
-
+	string hs = to_string(42);
+	hs = hs + "kysvk";
 	//encrypt the highscore
 	string toWrite = decrypt_encrypt(hs);
 
 	//write to file 
 	file << toWrite;
-
+	cout << "writing " << toWrite << endl;
 	file.close();
-
-}
-
-void updateScore(){
-
 
 }
 
