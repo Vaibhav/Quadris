@@ -26,6 +26,7 @@ private:
 	Display display;
 	Board b;
 	CommandInterpreter commandIn; 
+	
 	int highScore; 
 	int currentScore;
 	std::string filename;
@@ -38,7 +39,7 @@ private:
 
 
 	void move(); //Uses commandIn to take in a command and then execute the correct Board Function 
-	void readInHighScore() noexcept;
+	void readInHighScore();
 	void updateHighScore();
 
 	void updateScore();

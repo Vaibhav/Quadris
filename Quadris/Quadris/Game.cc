@@ -16,7 +16,9 @@ Game::Game(int maxLevel, bool test, int seed, std::string scriptFile, int startL
 		this->testMode = test;
 		this->scriptFile = scriptFile;
 		this->filename = filename;
-		// No throw guarantee
+		this->currentScore = 0;
+		this->highscore = 0;
+		
 		readInHighScore();
 	}
 
@@ -147,17 +149,32 @@ string decrypt_encrypt(string str) {
     return s;
 }
 
+
+// checks if file exists
+bool file_exists (const string &fname) {
+    ifstream file(fname.c_str());
+    return file.good();
+}
+
+
 // Reads in highscore 
 void readInHighScore(){
 
-	// if file doesnt exists, throw an exception
-
+	// if file doesnt exists, make the file.
+	if (!( file_exists(this->filename) )) {
+		fstream file;
+		file.open(this->filename,fstream::out);
+		file.close();
+		this->highscore = 0;
+		return;
+	}
 
 	string temp;
-	ifstream file{this->highscore};
+	ifstream file{this->filename};
 
 	// make file contents a string
 	getline(file, temp);
+	file.close();
 	
 	// decrypt string
 	string hs = decrypt_encrypt(temp);
@@ -173,7 +190,7 @@ void readInHighScore(){
 
 void updateHighScore(){
 
-	this->highscore = this->score;
+	this->highscore = this->currentScore;
 	ofstream file;
 	file.open(this->filename); 
 
@@ -192,7 +209,7 @@ void updateHighScore(){
 
 void updateScore(int rows, vector<int> lvls) {
 
-	if (this->score > this->highscore) {
+	if (this->currentScore > this->highscore) {
 		updateHighScore();
 	}
 
