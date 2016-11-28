@@ -16,6 +16,7 @@ public:
 	//A list of commands
 	//Each command is pair composed of a commandCode and a list of the commandCode's arguments
 	std::vector < std::pair < std::string, std::vector<std::string> > > nextInput();
+	std::vector < std::pair < std::string, std::vector<std::string> > > nextInput(std::istream& in);
 	CommandInterpreter(std::istream &);
 
 private:

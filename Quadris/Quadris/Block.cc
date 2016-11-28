@@ -15,6 +15,7 @@ Block::Block(char dispChar, string colour, int level):
 	notifyObservers(SubscriptionType::blockChange);
 }
 
+//This is for the block parser
 Block::Block(char dispChar, 
 	 	  std::string colour, 
 		  std::string name,

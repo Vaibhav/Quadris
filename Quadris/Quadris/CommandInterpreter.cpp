@@ -4,17 +4,29 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <iterator>
 #include <fstream>
 using namespace std;
 
 
 std::vector < std::pair < std::string, std::vector<std::string> > > CommandInterpreter::sequenceCommand(std::string file){
-
+	std::vector < std::pair < std::string, std::vector<std::string> > > commands;
 	ifstream fin{file};
-	return std::vector < std::pair < std::string, std::vector<std::string> > >{};
+	while(fin){
+		std::vector < std::pair < std::string, std::vector<std::string> > > temp = nextInput(fin);
+		std::vector < std::pair < std::string, std::vector<std::string> > > conc;
+		conc.insert(commands.begin(), commands.end(), conc.end());
+		conc.insert(temp.begin(), temp.end(), conc.end());
+		commands = conc;
+	}
+	return commands;
 }
 
-std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter::nextInput()
+std::vector < std::pair < std::string, std::vector<std::string> > > CommandInterpreter::nextInput(){
+	return nextInput(this->in);
+}
+
+std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter::nextInput(istream& in)
 {
 	string input = "";
 	getline(in, input);
@@ -33,7 +45,10 @@ std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter
 	}
 
 		vector<string> arguments;
-		if(isCommandMultiplierCompatible(command) && multiplierPrefix != "") {
+
+		//cout << isCommandMultiplierCompatible(command);
+		if( isCommandMultiplierCompatible(programCommands[0].first) 
+			&& multiplierPrefix != "") {
 			arguments.emplace_back(multiplierPrefix);
 		}
 
@@ -41,17 +56,20 @@ std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter
 		while (true) {
 			if (!(ss >> arg)) break;
 			arguments.emplace_back(arg);
+		//	cout << arg;
 		}
 
 		//ARGUMENTS ARE NOT APPLICABLE WITH MACRO COMMANDS
 		if(programCommands.size() == 1){
 		//Update one command with arguments
 		programCommands[0].second = arguments;
-		}
+		//cout<< programCommands[0].second[0];
+		 }	
 		
-	//Special Commands
-	if(command == "sequence"){
-		return sequenceCommand(programCommands[0].second[0]);
+	//Special Single Commands
+	if(programCommands.size() == 1 &&
+	   programCommands[0].first == "SEQUENCE"){
+	   return sequenceCommand(programCommands[0].second[0]);
 	}
 		return programCommands;
 }
@@ -146,7 +164,7 @@ void CommandInterpreter::initializeMap()
 	////////////////////////////////////////////////////////////
 	///Multiplier Compatible Commands Initialization///////////
 	multiplierCompatibleCommands = vector<string>{ 
-		"left", "right", "down", "counterclockwise", "clockwise", "levelup", "leveldown"
+		"L", "R", "D", "CCW", "CW", "LU", "LD"
 	};
 
 }

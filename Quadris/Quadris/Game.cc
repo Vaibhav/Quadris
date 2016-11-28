@@ -63,28 +63,43 @@ void Game::play() {
 				cerr << "LD" << stoi(commands[i].second[0]);
 				decreaseLevel(stoi(commands[i].second[0]));
 			} else if(commands[i].first == "BLOCK-I"){
+				cerr << "BLOCK-I" << commands[i].second[0];
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-J"){
+				cerr << "BLOCK-J" << commands[i].second[0];
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-L"){
+				cerr << "BLOCK-L" << commands[i].second[0];
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-O"){
+				cerr << "BLOCK-O" << commands[i].second[0];
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-S"){
+				cerr << "BLOCK-S" << commands[i].second[0];
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-Z"){
+				cerr << "BLOCK-Z" << commands[i].second[0];
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-T"){
+			 	cerr << "BLOCK-T" << commands[i].second[0];		
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "DROP"){
+				cerr << "DROP" << commands[i].second[0];			
 				b.currentBlockDrop();
 			} else if(commands[i].first == "RESTART"){
+				cerr << "RESTART" << commands[i].second[0];				
 				b.restart();
 			} else if(commands[i].first == "HINT"){
+				cerr << "HINT" << commands[i].second[0];				
 				b.showHint();
 			} else if(commands[i].first == "RANDOM"){
+				cerr << "RANDOM";
+				for(int j = 0; j!= commands[i].second.size(); ++j){
+					cerr <<  commands[i].second[j];
+				}
 				b.restoreRandom();
 			} else if(commands[i].first == "NORANDOM"){
+				cerr << "NORANDOM" << commands[i].second[0];				
 				b.noRandomBlock(commands[i].second[0]);
 			} else {
 				cout << "programCode is not used" << endl;
