@@ -1,5 +1,6 @@
 #include "Block.h"
 #include "subscriptions.h"
+#include "info.h"
 #include <string>
 #include <vector>
 using namespace std;
@@ -66,8 +67,8 @@ void Block::moveDown(int n) {
 	lowerLeft.row -= n;
 }
 
-Cell Block::getInfo() const {
-	return Cell(); //TODO
+Info Block::getInfo() const {
+	return Info{cells, -1}; // Array of cells so display know what to update
 }
 
 void Block::setLevel(int n){

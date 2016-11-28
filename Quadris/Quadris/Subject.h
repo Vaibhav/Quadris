@@ -4,6 +4,7 @@
 #include "Observer.h"
 #include "Cell.h"
 #include "subscriptions.h"
+#include "info.h"
 #include <vector>
 #include <utility>
 
@@ -15,7 +16,7 @@ public:
 	void notifyObservers(SubscriptionType t);
 	void attach(Observer *);
 	void detach(Observer *);
-	virtual Cell getInfo() const = 0;
+	virtual Info getInfo() const = 0;
 
 	virtual ~Subject() = 0;
 

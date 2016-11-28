@@ -9,7 +9,8 @@
 class BlockFactory {
 
 public:
-	Block generateBlock(int level = 0);
+	// We need this to be virtual so that it calls the correct function
+	virtual Block generateBlock(int level = 0);
 	Block generateBlock(std::string blockName);
 
 	void setSeed(int n);

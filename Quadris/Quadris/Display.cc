@@ -2,6 +2,7 @@
 #include "Cell.h"
 #include "Subject.h"
 #include "subscriptions.h"
+#include "info.h"
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -20,8 +21,12 @@ Display::~Display(){
 }
 
 void Display::notify(Subject &whoNotified) {
-	Cell info = whoNotified.getInfo();
-	theBoard[info.row][info.col] = info.displayCharacter;
+	Info info = whoNotified.getInfo();
+  vector <Cell> cells = info.cells;
+  int j = cells.size();
+  for (int i=0; i < j; i++) {
+	 theBoard[cells[i].row][cells[i].col] = cells[i].displayCharacter;
+  }
 }
 
 SubscriptionType Display::subType() const {

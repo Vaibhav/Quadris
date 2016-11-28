@@ -4,6 +4,7 @@
 #include "Block.h"
 #include "Subject.h"
 #include "Cell.h"
+#include "info.h"
 #include <string>
 #include <vector>
 
@@ -37,7 +38,7 @@ public:
 	void switchCurrentBlock(std::string blockName);
 
 	void clearRow(int row);
-	Cell getInfo() const;
+	Info getInfo() const;
 
 private:
 	int size;

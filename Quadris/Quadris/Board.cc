@@ -1,14 +1,17 @@
 #include "Board.h"
 #include "Cell.h"
 #include "subscriptions.h"
+#include "info.h"
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 Board::Board(int width, int height): width{width}, height{height}, blockFactory{BlockFactory()} {}
 
-Cell Board::getInfo() const {
-	return Cell();//TODO
+Info Board::getInfo() const {
+	// calculate score here
+	return Info{cells[0], 0}; // Hack for now, fix later
 }
 
 void Board::notify(Subject &whoNotified) {

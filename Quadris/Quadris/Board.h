@@ -8,6 +8,7 @@
 #include "Display.h"
 #include "BlockFactory.h"
 #include "subscriptions.h"
+#include "info.h"
 #include <vector>
 
 class Block;
@@ -29,7 +30,7 @@ public:
 
 	Block generateBlock(); // maybe make a smart pointer
 
-	Cell getInfo() const; // Board is a subject...
+	Info getInfo() const; // Board is a subject...
 	void notify(Subject &whoNotified); // ... and an observer
 	SubscriptionType subType() const;
 
