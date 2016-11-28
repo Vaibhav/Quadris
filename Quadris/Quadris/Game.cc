@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <math.h>
+#include <vector>
 
 using namespace std;
 
@@ -163,7 +165,7 @@ void readInHighScore(){
 	// if file doesnt exists, make the file.
 	if (!( file_exists(this->filename) )) {
 		fstream file;
-		file.open(this->filename,fstream::out);
+		file.open(this->filename, fstream::out);
 		file.close();
 		this->highscore = 0;
 		return;
@@ -207,7 +209,46 @@ void updateHighScore(){
 
 }
 
-void updateScore(int rows, vector<int> lvls) {
+
+
+/*
+
+The game is scored as follows: when a line (or multiple lines) is cleared, you score points equal to
+(your current level, plus number of lines) squared. 
+(For example, clearing a line in level 2 is worth 9 points.)
+
+In addition, when a block is completely removed from the screen (i.e., when all of its cells
+have disappeared) you score points equal to the level you were in when the block was generated,
+plus one, squared. (For example if you got an O-block while on level 0, and cleared the O-block in
+level 3, you get 1 point.)
+
+*/
+
+void updateScore(int rowsCleared, vector<int> lvls) {
+
+	int levelNow = this->currentLevels;
+	int curScore = this->currentScore;
+	int score;
+
+	score = pow((levelNow + rowsCleared), 2);
+
+	// if the vector is empty (no full blocks were cleared)
+	if (lvls.empty()) {
+		score += curScore;
+		this->currentScore = score;
+		return;
+	}
+
+
+	while (!lvls.empty()) {
+
+		score += pow((lvls.back() + 1), 2);
+	 	lvls.pop_back();
+
+	}
+
+	score += curScore;
+	this->currentScore = score;
 
 	if (this->currentScore > this->highscore) {
 		updateHighScore();
