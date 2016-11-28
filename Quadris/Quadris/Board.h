@@ -37,7 +37,19 @@ public:
 	std::vector<int> checkIfRowsComplete();
 
 	void setLevel(int n);
+	
+	//Sets the current block to the one specified
+	//name can be either be  
+	void setCurrentBlock(std::string name);
 
+	//Hint should be displayed on text by ??? 
+	//and in Graphic Display by a block box
+	void showHint();
+	void noRandomBlock(std::string file);
+	void restoreRandom();
+	void setSeed(int seed);
+	void setSequence(std::string sequenceFile);
+	
 private:
 	std::vector< std::vector< Cell > > cells;
 	std::vector< Block > blocks;

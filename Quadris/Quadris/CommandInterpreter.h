@@ -26,12 +26,16 @@ private:
 	//the programCommand (or an array of program commands) as a value
 	//The program command consists of the command itself and an array 
 	//of arguments for the program command if it needs it. 
+	//TODO: Use typedef for this long type name to make code more readable
 	std::map<std::string, std::vector < std::pair < std::string, std::vector<std::string> > > > commandDictionary;
+	std::vector<std::string> multiplierCompatibleCommands; 
+	
 	void initializeMap(); 
 	std::vector < std::pair < std::string, std::vector<std::string> > > findProgramCommands(std::string);
 	std::string parseMultiplier(std::string input, std::string& multiplier);
+	bool isCommandMultiplierCompatible(std::string);
 	bool partialMatch(std::string partial, std::string full);
-
+	
 };
 
 #endif

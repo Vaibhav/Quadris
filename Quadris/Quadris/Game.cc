@@ -56,20 +56,36 @@ void Game::play() {
 				cerr << "LD" << stoi(commands[i].second[0]);
 				decreaseLevel(stoi(commands[i].second[0]));
 			} else if(commands[i].first == "BLOCK-I"){
-				
+				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-J"){
-				
+				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-L"){
-				
+				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-O"){
-				
+				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-S"){
-				
+				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-Z"){
-				
+				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-T"){
-				
-			}
+				b.setCurrentBlock(commands[i].first);
+			} else if(commands[i].first == "DROP"){
+				b.currentBlockDrop();
+			} else if(commands[i].first == "RESTART"){
+				b.restart();
+			} else if(commands[i].first == "HINT"){
+				b.showHint();
+			} else if(commands[i].first == "RANDOM"){
+				b.showHint();
+			} else if(commands[i].first == "NORANDOM"){
+				b.showHint();
+			} else if(commands[i].first == "SEQUENCE"){
+				b.showHint();
+			} 
+
+
+
+			
 		}
 		cout << display;
 		//move();

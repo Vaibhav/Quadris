@@ -6,6 +6,7 @@
 #include <algorithm>
 using namespace std;
 
+
 std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter::nextInput()
 {
 	string input = "";
@@ -17,20 +18,14 @@ std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter
 	command = parseMultiplier(command, multiplierPrefix);
 	vector<pair<string, vector<string>>> programCommands;
 	try {
-		//errorStream << command;
 		programCommands = findProgramCommands(command);
 	}
 	catch (std::out_of_range e) {
-		//TODO:: What to do when input is invalid?
-	//	errorStream << e.what();
-		//WHAT SHOULD WE RETURN WHEN ERROR?
-		//return std::vector<std::pair<std::string, std::vector<std::string>>>();
-//		throw e;
 		throw e;
 	}
 
 		vector<string> arguments;
-		if (multiplierPrefix != "") {
+		if(isCommandMultiplierCompatible(command) && multiplierPrefix != "") {
 			arguments.emplace_back(multiplierPrefix);
 		}
 
@@ -39,14 +34,24 @@ std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter
 			if (!(ss >> arg)) break;
 			arguments.emplace_back(arg);
 		}
-		//Only update first command with arguments
+
+		//ARGUMENTS ARE NOT APPLICABLE WITH MACRO COMMANDS
+		if(programCommands.size() == 1){
+		//Update one command with arguments
 		programCommands[0].second = arguments;
+		}
 		
 		return programCommands;
 }
 
 CommandInterpreter::CommandInterpreter(istream &in, ostream& err) : in{ in }, errorStream{ err } {
 	initializeMap();
+}
+
+bool CommandInterpreter::isCommandMultiplierCompatible(std::string commandName){
+	return find(multiplierCompatibleCommands.begin(), 
+				multiplierCompatibleCommands.end(), 
+			    commandName) != multiplierCompatibleCommands.end();
 }
 
 //Initialize the Map
@@ -73,7 +78,8 @@ void CommandInterpreter::initializeMap()
 	PairArg.first = "LD";
 	this->commandDictionary["leveldown"] = vector< pair<string, vector<string> > >{ PairArg };
 	
-	//Adding a macro command, probably want a macro command builder helper function to make this easier
+	//Adding a macro command, probably want a macro command 
+	//builder helper function to make this easier
 	pair<string, vector<string>> FirstCommand;
 	FirstCommand.first = "L";
 	FirstCommand.second = vector<string>{ "2" };
@@ -109,7 +115,7 @@ void CommandInterpreter::initializeMap()
 	
 	//TODO: This should be done dynamically depending on the blocks 
 	//available to the program
-	PairArg.second = moveOneUnitArg;
+	PairArg.second = vector<string>{"noArg"};
 	PairArg.first = "BLOCK-I";
 	this->commandDictionary["I"] = vector< pair<string, vector<string> > >{ PairArg };
 	PairArg.first = "BLOCK-J";
@@ -124,6 +130,13 @@ void CommandInterpreter::initializeMap()
 	this->commandDictionary["Z"] = vector< pair<string, vector<string> > >{ PairArg };
 	PairArg.first = "BLOCK-T";
 	this->commandDictionary["T"] = vector< pair<string, vector<string> > >{ PairArg };
+
+	////////////////////////////////////////////////////////////
+	///Multiplier Compatible Commands Initialization///////////
+	multiplierCompatibleCommands = vector<string>{ 
+		"left", "right", "down", "counterclockwise", "clockwise", "levelup", "leveldown"
+	}
+
 }
 
 std::vector < std::pair < std::string, std::vector<std::string> > > 

@@ -43,6 +43,12 @@ void Board::setLevel(int n){
 	currentLevel = n;
 }
 
-Block Board::generateBlock() {
-	return blockFactory.generateBlock();
+void Board::setCurrentBlock(string blockName){
+	currentBlock = blockFactory.generateBlock(blockName);
 }
+
+Block Board::generateBlock() {
+	return blockFactory.generateBlock(this->currentLevel);
+}
+
+

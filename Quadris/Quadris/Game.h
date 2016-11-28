@@ -12,7 +12,7 @@
 class Game : public Observer {
 public:
 	Game(int maxLevel = 4,
-		 bool test = false, 
+		 bool text = false, 
 		 int seed = 0, 
 		 std::string scriptFile = "sequence.txt", 
 		 int startLevel = 0);
@@ -31,7 +31,7 @@ private:
 	
 	int maxLevel;
 	int currentLevel;
-	bool testMode;
+	bool textMode; //Runs Text Only
 	int randSeed;
 	std::string scriptFile;
 
