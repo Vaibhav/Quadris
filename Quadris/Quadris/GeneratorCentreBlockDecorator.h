@@ -4,7 +4,7 @@
 #include "BlockGeneratorDecorator.h"
 #include "Observer.h"
 
-class GeneratorCentreBlockDecorator : BlockGeneratorDecorator, Observer {
+class GeneratorCentreBlockDecorator : public BlockGeneratorDecorator, Observer {
 
 
 
