@@ -10,7 +10,8 @@
 using namespace std;
 
 Game::Game(int maxLevel, bool test, int seed, std::string scriptFile, int startLevel, string filename = "score.txt"): 
-	commandIn { CommandInterpreter{cin, cerr} }, b{createBoard()} {
+	commandIn { CommandInterpreter{cin, cerr} }, b{ createBoard() } {
+	
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
 		this->b.setLevel(currentLevel);
@@ -239,12 +240,9 @@ void updateScore(int rowsCleared, vector<int> lvls) {
 		return;
 	}
 
-
 	while (!lvls.empty()) {
-
 		score += pow((lvls.back() + 1), 2);
 	 	lvls.pop_back();
-
 	}
 
 	score += curScore;
