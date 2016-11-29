@@ -89,7 +89,7 @@ std::vector<Block> BlockParser::parseBlocks() {
 	vector<string> listOfFiles;
 	vector<Block> blocks;
 
-	while (getline(this->inputFileStream, temp, ' ')) {
+	while (getline(inputFileStream, temp, ' ')) {
 		temp += ".txt";
 		listOfFiles.emplace_back(temp);
 	}
