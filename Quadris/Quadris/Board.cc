@@ -7,7 +7,10 @@
 #include <vector>
 using namespace std;
 
-Board::Board(int width, int height): width{width}, height{height}, blockFactory{BlockFactory()} {}
+Board::Board(int width, int height): width{width}, height{height}, 
+	blockFactory{BlockFactory()}, currentLevel{0} {
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+}
 
 Info Board::getInfo() const {
 	// calculate score here
@@ -76,7 +79,7 @@ void Board::setCurrentBlock(string blockName){
 	}
 
 
-Block Board::generateBlock() {
+Block Board::generateBlock() { // may be useless
 	return blockFactory.generateBlock(this->currentLevel);
 }
 

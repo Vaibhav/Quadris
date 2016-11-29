@@ -31,6 +31,7 @@ Board Game::createBoard() {
 
 void Game::play() {
 	while (true) {
+		printGameBoard();
 		vector < pair<string, vector< string > > > commands;
 		try{
 		 commands = commandIn.nextInput();
@@ -109,7 +110,6 @@ void Game::play() {
 
 			
 		}
-		cout << display;
 		//move();
 	}
 }
@@ -269,3 +269,19 @@ void Game::updateScore(int rowsCleared, vector<int> lvls) {
 	}
 
 }
+
+void printHeader() {
+	cout << "-----------" << endl;
+}
+
+void Game::printGameBoard() {
+	cout << "Level: " << currentLevel << endl;
+  	cout << "Score: " << currentScore << endl;
+  	cout << "Hi Score: " << highScore << endl;
+  	printHeader();
+	cout << display;
+	printHeader();
+	cout << "Next: " << ""/*somehow print next block*/ << endl;
+}
+
+

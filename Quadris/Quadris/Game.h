@@ -50,6 +50,8 @@ private:
 	void increaseLevel(int n);
 	void decreaseLevel(int n);
 
+	void printGameBoard();
+
 };
 
 #endif
