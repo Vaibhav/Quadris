@@ -48,7 +48,7 @@ Block createBlock(string file){
 	getline(input, line);
 	int numOfCoords;
 
-	stringstream ss { input };
+	stringstream ss { line };
 
 	// stores first line as numOfCoords 
 	ss >> numOfCoords; // error handling???
