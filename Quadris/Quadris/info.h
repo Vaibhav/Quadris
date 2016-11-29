@@ -6,7 +6,9 @@
 
 class Info {
 public:
-	Info(std::vector<Cell> cells, int score);
+	Info(std::vector<Cell> prevCells, 
+		std::vector<Cell> cells, int score=-1);
+	std::vector<Cell> prevCells;
 	std::vector<Cell> cells;
 	int score;
 };

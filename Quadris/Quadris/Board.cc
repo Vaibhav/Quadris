@@ -14,7 +14,7 @@ Board::Board(int width, int height): width{width}, height{height},
 
 Info Board::getInfo() const {
 	// calculate score here
-	return Info{cells[0], 0}; // Hack for now, fix later
+	return Info{cells[0], cells[0], 0}; // Hack for now, fix later
 }
 
 void Board::notify(Subject &whoNotified) {

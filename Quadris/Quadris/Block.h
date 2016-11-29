@@ -48,6 +48,7 @@ private:
 	int width;
 	int height;
 	std::string colour;
+	std::vector<Cell> prevCells;
 	std::vector<Cell> cells;
 	Cell lowerLeft;
 	
