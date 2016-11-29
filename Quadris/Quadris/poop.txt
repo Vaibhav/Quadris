@@ -1,0 +1,6 @@
+4left
+3right
+2left
+4left
+6drop
+

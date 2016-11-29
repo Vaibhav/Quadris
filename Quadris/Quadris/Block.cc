@@ -76,4 +76,8 @@ void Block::setLevel(int n){
 	level = n;
 }
 
+string Block::getName(){
+	return this->name;
+}
+
 Block::~Block() {}

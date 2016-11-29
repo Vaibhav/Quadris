@@ -9,13 +9,13 @@ class Block;
 
 class BlockParser {
 public:
-	BlockParser();
+	BlockParser(std::string );
 	~BlockParser();
 	std::vector< Block > parseBlocks();
 
 private:
-	std::string fileName = "blocks.txt";  
-	std::ifstream inputFileStream; 
+	std::string fileName;  
+//	std::ifstream inputFileStream;  VAIBHAV FCK IT DONT DO THIS SUCH A PAIN
 
 };
 

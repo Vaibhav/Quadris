@@ -2,6 +2,7 @@
 #define BLOCKFACTORY_H
 #include "BlockGenerator.h"
 #include "BlockParser.h"
+#include <memory>
 
 //#include "Level.h"
 #include "Block.h"
@@ -19,7 +20,7 @@ public:
 	void restoreRandom();
 
 private:
-	BlockGenerator *generator; // BlockGenerator is abstract, so need ptr
+	BlockGenerator * generator; // BlockGenerator is abstract, so need ptr
 	
 	std::string sequenceFile;
 	int seed;

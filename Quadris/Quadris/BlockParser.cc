@@ -1,5 +1,6 @@
 #include "BlockParser.h"
 #include "Block.h"
+#include <string>
 #include <sstream>
 #include <iostream>
 #include <fstream>
@@ -26,13 +27,13 @@ Block(char dispChar, std::string colour, std::string name, std::vector < std::pa
 
 */
 
-BlockParser::BlockParser(ifstream inputFileStream, string fileName): ifstream{ inputFileStream }, fileName{ fileName } {}
+BlockParser::BlockParser(string fileName = "blocks.txt"): fileName{ fileName } {}
 
 BlockParser::~BlockParser() {}
 
 
 std::vector< Block > BlockParser::parseBlocks() {
-
+/*
 	this->inputFileStream{fileName};
 	string temp; 
 
@@ -45,5 +46,7 @@ std::vector< Block > BlockParser::parseBlocks() {
 	
 	// this->fileName;
 	// this->inputFileStream;
+*/
+	return vector<Block>();
 
 }

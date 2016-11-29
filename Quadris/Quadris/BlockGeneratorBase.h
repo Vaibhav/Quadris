@@ -3,18 +3,22 @@
 
 #include "BlockGenerator.h"
 #include <vector>
+#include <string>
 
-class BlockGeneratorBase : public BlockGenerator { //Will implement Level 0 funtionality
+//Will implement Level 0 funtionality
+class BlockGeneratorBase : public BlockGenerator { 
 public:
 	
-	BlockGeneratorBase() {};
+	BlockGeneratorBase(std::string);
 	Block generateBlock();
 	
-
 private:
-	bool checkBaseBlocksExist(std::vector<Block>); //Check if the 6 default blocks exist in the parsed blocks
-	
-
+	std::string sequenceFile;
+	std::vector<std::string> sequence;
+	void parseSequence();
+	int currentIndex;
+	int numblocksInSequence;
+	bool checkIfBlocksInSequenceExist(std::vector<Block>);
 };
 
 

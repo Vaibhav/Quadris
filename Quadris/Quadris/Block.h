@@ -39,6 +39,7 @@ public:
 
 	void clearRow(int row);
 	Info getInfo() const;
+	std::string getName();
 
 private:
 	int size;

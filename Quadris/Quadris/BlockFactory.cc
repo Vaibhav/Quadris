@@ -1,14 +1,33 @@
 #include "BlockFactory.h"
 #include "Block.h"
+#include "BlockGeneratorBase.h"
+#include <utility>
+#include <memory>
+#include <utility>
 
 using namespace std;
 
+//class std::unique_ptr<T>
+
 Block BlockFactory::generateBlock(int level) {
+	if(level == 0){
+		//auto p = make_unique<new BlockGeneratorBase{}>;
+	unique_ptr< BlockGenerator > p {new BlockGeneratorBase{sequenceFile}};
+
+	} else if (level == 1) {
+
+	} else if(level == 2){
+
+	} else if(level == 3){
+
+	} else if(level ==  4){
+
+	}
 	return Block();
 }
 
 Block BlockFactory::generateBlock(string blockName) {
-	return Block();
+	generateBlock();
 }
 
 	void BlockFactory::setSeed(int n){

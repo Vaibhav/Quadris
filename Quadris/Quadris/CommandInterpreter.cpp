@@ -6,33 +6,53 @@
 #include <algorithm>
 #include <iterator>
 #include <fstream>
+
 using namespace std;
 
 
-std::vector < std::pair < std::string, std::vector<std::string> > > CommandInterpreter::sequenceCommand(std::string file){
+std::vector < std::pair < std::string, std::vector<std::string> > > 
+CommandInterpreter::sequenceCommand(std::string file){
 	std::vector < std::pair < std::string, std::vector<std::string> > > commands;
 	ifstream fin{file};
-	while(fin){
-		std::vector < std::pair < std::string, std::vector<std::string> > > temp = nextInput(fin);
-		std::vector < std::pair < std::string, std::vector<std::string> > > conc;
-		conc.insert(commands.begin(), commands.end(), conc.end());
-		conc.insert(temp.begin(), temp.end(), conc.end());
-		commands = conc;
+	
+	if(!fin.is_open()){
+		throw out_of_range("The file could not be opened");
 	}
+	
+	while(fin){
+		std::vector < std::pair < std::string, std::vector<std::string> > > temp = nextInput(fin, 'f');
+		
+		//cerr << temp.empty();
+		if(!temp.empty()){
+		copy(temp.begin(), temp.end(), back_inserter(commands));
+		}
+	}
+	fin.close();
 	return commands;
+
 }
 
 std::vector < std::pair < std::string, std::vector<std::string> > > CommandInterpreter::nextInput(){
-	return nextInput(this->in);
+	return nextInput(this->in, 'i');
 }
 
-std::vector<std::pair<std::string, std::vector<std::string>>> CommandInterpreter::nextInput(istream& in)
+std::vector<std::pair<std::string, std::vector<std::string>>> 
+CommandInterpreter::nextInput(istream& in, char inputType)
 {
 	string input = "";
 	getline(in, input);
 	stringstream ss{ input };
 	string command;
 	ss >> command;
+	
+	if(command == "" && inputType == 'f'){
+		
+		int x;
+		in >> x;
+
+		return std::vector<std::pair<std::string, std::vector<std::string>>>();
+	}
+
 	string multiplierPrefix;
 	command = parseMultiplier(command, multiplierPrefix);
 
