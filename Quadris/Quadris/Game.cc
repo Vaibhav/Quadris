@@ -200,7 +200,7 @@ void Game::readInHighScore(){
 	// convert string to int and save highscore
 	int hScore;
 	stringstream ss { hs };
-	ss >> hScore;
+	ss >> hScore; // error handling???
 	this->highScore = hScore;
 
 }
