@@ -9,7 +9,7 @@ class Block;
 
 class BlockParser {
 public:
-	BlockParser(std::string );
+	BlockParser(std::string fileName = "blocks.txt");
 	~BlockParser();
 	std::vector< Block > parseBlocks();
 

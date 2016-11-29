@@ -27,7 +27,7 @@ Block(char dispChar, std::string colour, std::string name, std::vector < std::pa
 
 */
 
-BlockParser::BlockParser(string fileName = "blocks.txt"): fileName{ fileName } {}
+BlockParser::BlockParser(string fileName): fileName{ fileName } {}
 
 BlockParser::~BlockParser() {}
 
