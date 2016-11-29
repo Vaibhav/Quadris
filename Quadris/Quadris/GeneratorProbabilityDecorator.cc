@@ -1,4 +1,4 @@
-#include "BlockGeneratorBase.h"
+#include "GeneratorProbabilityDecorator.h"
 #include <string>   
 #include <vector>
 #include <algorithm>
@@ -28,8 +28,8 @@ for(int i = 0; i != blocks.size(); ++i){
 	}
 }
 
-//throw out_of_range("Block in sequence file did not parse from Block files");
-return Block();
+throw out_of_range("Block in sequence file did not parse from Block files");
+
 }
 
 
@@ -41,9 +41,9 @@ bool BlockGeneratorBase::checkIfBlocksInSequenceExist(std::vector<Block> blocks)
 void BlockGeneratorBase::parseSequence(){
 
 	ifstream fin{this->sequenceFile};
-//	if(!fin.is_open()){
-//		throw out_of_range("The file could not be opened");
-//	}
+	if(!fin.is_open()){
+		throw out_of_range("The file could not be opened");
+	}
 	string input;
 	while(fin>>input){
 		this->sequence.emplace_back("BLOCK-" + input);

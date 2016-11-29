@@ -8,8 +8,7 @@ public:
 
 	BlockDecorator(Block * component) : component{ component } {}
 
-	virtual ~BlockDecorator() { //Figure this out 
-	}
+	virtual ~BlockDecorator();
 private:
 	Block * component;
 };
