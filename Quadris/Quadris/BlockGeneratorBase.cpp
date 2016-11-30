@@ -7,16 +7,15 @@
 
 using namespace std;
 
-BlockGeneratorBase::BlockGeneratorBase(string file): sequenceFile{file} {
+BlockGeneratorBase::BlockGeneratorBase(string file): sequenceFile{file}, BlockGenerator{} {
 	this->sequence = vector<string>{};
 	parseSequence();
 	this->currentIndex = 0;
 	this->numblocksInSequence = this->sequence.size();
 
-	/*for(int i = 0; i!= numblocksInSequence; ++i){
+	for(int i = 0; i!= numblocksInSequence; ++i){
 		cout << this->sequence[i] << endl;
-	}*/
-
+	}
 };
 
 
@@ -25,11 +24,11 @@ Block BlockGeneratorBase::generateBlock() {
 vector<Block> blocks = this->getParsedBlocks();
 
 for(int i = 0; i != blocks.size(); ++i){
-	cerr << blocks[i].getName() << endl;
+	//cerr << blocks[i].getName() << endl;
 	vector<Cell> cells = blocks[i].getCells();
-	for(int j = 0; j != cells.size(); ++j){
-		cerr << cells[j].row << " " << cells[j].col << std::endl;
-	}
+//	for(int j = 0; j != cells.size(); ++j){
+//		cerr << cells[j].row << " " << cells[j].col << std::endl;
+//	}
 }
 
 
@@ -37,9 +36,9 @@ for(int i = 0; i != blocks.size(); ++i){
 int blockLen = blocks.size();
 //cerr << this->sequence[this->currentIndex] << endl;
 
-//if(!checkIfBlocksInSequenceExist(blocks)){
-//	throw out_of_range("Block in sequence file was not parsed from Block files");
-//}
+if(!checkIfBlocksInSequenceExist(blocks)){
+	throw out_of_range("Block in sequence file was not parsed from Block files");
+}
 //cout << this->sequence[this->currentIndex];
 /*for(int i = 0; i != blockLen; ++i){
 	if(blocks[i].getName() == this->sequence[this->currentIndex]){		
@@ -48,6 +47,7 @@ int blockLen = blocks.size();
 		} else{
 			++(this->currentIndex); 
 		}
+		cerr << blocks[i].getName();
 		return blocks[i];
 	}
 }*/
@@ -57,8 +57,15 @@ return Block();
 }
 
 
-//TODO
+
 bool BlockGeneratorBase::checkIfBlocksInSequenceExist(std::vector<Block> blocks){
+	int size = sequence.size();
+for(int i = 0; i != size ; ++i ){
+	if(std::find(sequence.begin(), sequence.end(), blocks[i].getName()) == sequence.end()){
+		cerr << "Couldnt Find Block: " << blocks[i].getName();
+		return false;
+	}
+}
 	return true;
 }
 
@@ -66,7 +73,7 @@ void BlockGeneratorBase::parseSequence(){
 
 	ifstream fin{this->sequenceFile};
 	if(!fin.is_open()){
-//		throw out_of_range("The file could not be opened");
+		throw out_of_range("The file could not be opened");
 	}
 	string input;
 	while(fin>>input){
