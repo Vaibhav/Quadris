@@ -4,17 +4,16 @@
 #include "info.h"
 #include <iostream>
 #include <vector>
-
+#include "BlockFactory.h"
 using namespace std;
 
 
-Board::Board(int width, int height): width{width}, height{height}, 
+Board::Board(int width, int height, string sequenceFile): width{width}, height{height}, 
 	blockFactory{BlockFactory()}, currentLevel{0} {
 	//Propertly initialize blockFactory;
 	
 	//blockFactory.setLevel(currentLevel);
-	
-	
+	blockFactory.setSequenceFile(sequenceFile);
 	currentBlock = blockFactory.generateBlock(this->currentLevel);
 }
 
