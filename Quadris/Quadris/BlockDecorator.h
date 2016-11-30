@@ -6,11 +6,12 @@
 class BlockDecorator : public Block {
 public:
 
-	BlockDecorator(Block * component) : component{ component } {}
-
-	virtual ~BlockDecorator();
+	BlockDecorator(std::shared_ptr<Block> component) : component{ component } {}
+	
 private:
-	Block * component;
+
+	std::shared_ptr<Block> component;
+
 };
 
 #endif

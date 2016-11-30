@@ -5,8 +5,10 @@
 
 class GeneratorHeavyBlockDecorator : public BlockGeneratorDecorator {
 
+public:
+	
 
-
+private:
 
 
 };
