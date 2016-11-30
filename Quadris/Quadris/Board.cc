@@ -51,7 +51,7 @@ void Board::currentBlockDown(int n) {
 }
 
 
-bool Board::canMoveDown() const {
+bool Board::canMoveDown() {
 	
 	vector<Cell> blockCells = currentBlock.getCells();
 	// the higher the number the lower the row 
@@ -59,7 +59,7 @@ bool Board::canMoveDown() const {
 	int colOflowestCell = 0; 
 
 	// find lowest cell in current block
-	for (auto i: blockCells){
+	for (int i = 0; i < blockCells.size(); i++) {
 
 		if (blockCells[i].row > lowestRow){
 			lowestRow = blockCells[i].row;
@@ -69,7 +69,7 @@ bool Board::canMoveDown() const {
 	}
 	
 	// check if there are any cells in the board that are 1 row blow that cell
-	for (auto n: this->cells){
+	for (int n; n < this->cells.size(); n++){
 		// check if cell below lowest cell in block exists
 		if (cells[n].row == lowestRow + 1 && cells[n].col == colOflowestCell) {
 			return false; 
@@ -83,7 +83,7 @@ bool Board::canMoveDown() const {
 void Board::currentBlockDrop() {
 
 	// keep moving block down until it can't move down
-	while(currentBlock.canMoveDown()) {
+	while(canMoveDown()) {
 		currentBlock.moveDown(1);
 	}
 

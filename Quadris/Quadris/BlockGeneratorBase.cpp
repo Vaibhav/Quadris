@@ -20,20 +20,22 @@ BlockGeneratorBase::BlockGeneratorBase(string file): sequenceFile{file} {
 };
 
 
-Block BlockGeneratorBase::generateBlock(){
+Block BlockGeneratorBase::generateBlock() {
+
 vector<Block> blocks = this->getParsedBlocks();
+
 for(int i = 0; i != blocks.size(); ++i){
-cerr << blocks[i].getName() << endl;
-vector<Cell> cells = blocks[i].getCells();
-for(int j = 0; j != cells.size(); ++j){
-cerr << cells[j].row << " " << cells[j].col << std::endl;
-}
+	cerr << blocks[i].getName() << endl;
+	vector<Cell> cells = blocks[i].getCells();
+	for(int j = 0; j != cells.size(); ++j){
+		cerr << cells[j].row << " " << cells[j].col << std::endl;
+	}
 }
 
 
 
 int blockLen = blocks.size();
-cerr << this->sequence[this->currentIndex] << endl;
+//cerr << this->sequence[this->currentIndex] << endl;
 
 //if(!checkIfBlocksInSequenceExist(blocks)){
 //	throw out_of_range("Block in sequence file was not parsed from Block files");
@@ -64,7 +66,7 @@ void BlockGeneratorBase::parseSequence(){
 
 	ifstream fin{this->sequenceFile};
 	if(!fin.is_open()){
-		throw out_of_range("The file could not be opened");
+//		throw out_of_range("The file could not be opened");
 	}
 	string input;
 	while(fin>>input){

@@ -204,7 +204,7 @@ CommandInterpreter::findProgramCommands(string userInput)
 		}
 	}
 	if (counter == 0) {
-		throw out_of_range("The command did not exist");
+		throw out_of_range("The command does not exist");
 	}
 	else if (counter >= 2) {
 		throw out_of_range("Ambiguous command call");
