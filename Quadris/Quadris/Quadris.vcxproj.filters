@@ -108,9 +108,6 @@
     <ClCompile Include="untitled.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Observer.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cc">
       <Filter>Source Files</Filter>
     </ClCompile>

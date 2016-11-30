@@ -145,7 +145,6 @@
     <ClCompile Include="Display.cc" />
     <ClCompile Include="Game.cc" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Observer.cc" />
     <ClCompile Include="Subject.cc" />
     <ClCompile Include="untitled.cpp" />
   </ItemGroup>

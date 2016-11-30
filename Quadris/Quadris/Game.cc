@@ -176,6 +176,7 @@ bool file_exists (const string &fname) {
 
 
 // Reads in highscore 
+// 0 is }=1$=8 after encryption. 
 void Game::readInHighScore(){
 
 	// if file doesnt exists, make the file.

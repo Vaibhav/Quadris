@@ -28,7 +28,7 @@ Block BlockFactory::generateBlock(int level) {
 }
 
 Block BlockFactory::generateBlock(string blockName) {
-	generateBlock();
+	return generateBlock();
 }
 
 	void BlockFactory::setSeed(int n){

@@ -3,7 +3,7 @@
 
 #include "BlockGeneratorDecorator.h"
 
-class GeneratorHeavyBlockDecorator : BlockGeneratorDecorator {
+class GeneratorHeavyBlockDecorator : public BlockGeneratorDecorator {
 
 
 
