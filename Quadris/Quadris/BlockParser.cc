@@ -19,6 +19,7 @@ Block BlockParser::createBlock(string file){
 
 	// name is file name without the .txt extension 
 	string name = file.substr(0, file.size() - 4);
+	name = "BLOCK-" + name; 
 	
 	string line;
 	string color;

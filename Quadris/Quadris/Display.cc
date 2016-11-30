@@ -16,9 +16,7 @@ Display::Display(int width, int height): width{width}, height{height} {
   	}
 }
 
-Display::~Display(){
-
-}
+Display::~Display() {}
 
 void Display::notify(Subject &whoNotified) {
   Info info = whoNotified.getInfo();

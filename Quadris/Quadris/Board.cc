@@ -86,7 +86,6 @@ void Board::currentBlockDrop() {
 	while(canMoveDown()) {
 		currentBlock.moveDown(1);
 	}
-
 }
 
 
