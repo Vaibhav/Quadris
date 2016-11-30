@@ -21,7 +21,7 @@ Board::Board(int width, int height): width{width}, height{height},
 
 Info Board::getInfo() const {
 	// calculate score here
-	return Info{cells[0], cells[0], 0}; // Hack for now, fix later
+	return Info{cells, cells, 0}; // Hack for now, fix later
 }
 
 
@@ -52,18 +52,41 @@ void Board::currentBlockDown(int n) {
 
 
 bool Board::canMoveDown() const {
+	
+	vector<Cell> blockCells = currentBlock.getCells();
+	// the higher the number the lower the row 
+	int lowestRow = 0;
+	int colOflowestCell = 0; 
+
 	// find lowest cell in current block
-	for (auto i: cells){
+	for (auto i: blockCells){
+
+		if (blockCells[i].row > lowestRow){
+			lowestRow = blockCells[i].row;
+			colOflowestCell = blockCells[i].col; 
+		} 
 
 	}
 	
-	// check if there are any cells in 
-	// the board that are 1 row blow that cell 
+	// check if there are any cells in the board that are 1 row blow that cell
+	for (auto n: this->cells){
+		// check if cell below lowest cell in block exists
+		if (cells[n].row == lowestRow + 1 && cells[n].col == colOflowestCell) {
+			return false; 
+		}
+	} 
+	
+	// if cell doesn't exist returns true
 	return true;
 }
 
 void Board::currentBlockDrop() {
-	
+
+	// keep moving block down until it can't move down
+	while(currentBlock.canMoveDown()) {
+		currentBlock.moveDown(1);
+	}
+
 }
 
 
@@ -121,8 +144,6 @@ Block Board::generateBlock() { // may be useless
 	return blockFactory.generateBlock(this->currentLevel);
 }
 
-<<<<<<< Updated upstream
-=======
 
 std::vector<int> Board::checkIfRowsComplete() {
 	
@@ -132,6 +153,4 @@ std::vector<int> Board::checkIfRowsComplete() {
 void Board::clearRow(int row) {
 	
 }
-
->>>>>>> Stashed changes
 

@@ -57,7 +57,7 @@ private:
 	BlockFactory blockFactory;
 	int currentLevel;
 
-	std::vector< std::vector< Cell > > cells;
+	std::vector< Cell > cells;
 	std::vector< Block > blocks;
 	Block nextBlock;
 	Block currentBlock;
