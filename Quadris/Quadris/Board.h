@@ -36,6 +36,7 @@ public:
 
 	void clearRow(int row);
 	std::vector<int> checkIfRowsComplete();
+	std::vector<int> blockLevelsDeleted();
 
 	void setLevel(int n);
 	

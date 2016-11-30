@@ -22,8 +22,8 @@ Block::Block(char dispChar,
 		  std::vector < std::pair < int, int > > coords
 		  ): colour(colour), name(name) {
 
-	for (int i=0; i < 4; ++i) { 
-		cells.push_back(Cell{this, dispChar, coords[i].first, coords[i].second});
+	for (auto i:coords) { 
+		cells.push_back(Cell{this, dispChar, i.first, i.second});
 	}
 
 	notifyObservers(SubscriptionType::blockChange);
