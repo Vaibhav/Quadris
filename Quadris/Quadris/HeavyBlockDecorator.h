@@ -15,6 +15,4 @@ public:
 	void moveLeft(int n) override;
 	void moveRight(int n) override;
 
-private:
-
 }

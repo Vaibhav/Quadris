@@ -1,7 +1,7 @@
-#ifndef __SUBSCRIPTIONS_H__
-#define __SUBSCRIPTIONS_H__
+#ifndef _SUBSCRIPTIONS_H_
+#define _SUBSCRIPTIONS_H_
+// deadBlock notifies when a block is removed from the screen
+// blockChange notifies when a block's cells change (ie. rotated, etc)
 
-enum SubscriptionType { all = 0, display = 1, board = 2, block = 3};
-
-#endif 
-
+enum class SubscriptionType { deadBlock, blockChange };
+#endif

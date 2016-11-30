@@ -11,6 +11,7 @@ public:
 	std::vector<Cell> prevCells;
 	std::vector<Cell> cells;
 	int score;
+	int moves;
 };
 
 #endif
