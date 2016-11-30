@@ -9,6 +9,11 @@ using namespace std;
 
 Board::Board(int width, int height): width{width}, height{height}, 
 	blockFactory{BlockFactory()}, currentLevel{0} {
+	//Propertly initialize blockFactory;
+	
+	//blockFactory.setLevel(currentLevel);
+	
+	
 	currentBlock = blockFactory.generateBlock(this->currentLevel);
 }
 
@@ -38,18 +43,7 @@ void Board::currentBlockDown(int n) {
 }
 
 void Board::currentBlockDrop() {
-	while (canMoveDown()) {
-		currentBlockDown(1);
-	}
-	currentBlock = nextBlock;
-	nextBlock = generateBlock();
-	vector<int> completedRows = checkIfRowsComplete();
-	for (auto n:completedRows) {
-		clearRow(n);
-		for (int i; i < width; i++) {
-			// remove cell
-		}
-	}
+	
 }
 
 void Board::showHint(){
@@ -92,18 +86,6 @@ void Board::setCurrentBlock(string blockName){
 
 Block Board::generateBlock() { // may be useless
 	return blockFactory.generateBlock(this->currentLevel);
-}
-
-std::vector<int> Board::checkIfRowsComplete() {
-	
-}
-
-bool Board::canMoveDown() const {
-	return true;
-}
-
-void Board::clearRow(int row) {
-	
 }
 
 

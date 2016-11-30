@@ -94,11 +94,15 @@ std::vector<Block> BlockParser::parseBlocks() {
 	for (int i = 0; i < listOfFiles.size(); i++) {
 		blocks.emplace_back(createBlock(listOfFiles[i]));
 		std::cerr << blocks[i].getName() << endl;
+		vector<Cell> cells = blocks[i].getCells();
+		for(int j = 0; j != cells.size(); ++j){
+		std::cerr << cells[j].row << " " << cells[j].col << std::endl;
+		}
 	} 
 
-
+	return blocks;
 	
-	return std::vector<Block>();
+	//return std::vector<Block>();
 
 }
 

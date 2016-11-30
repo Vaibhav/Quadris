@@ -40,6 +40,7 @@ public:
 	void clearRow(int row);
 	Info getInfo() const;
 	std::string getName();
+	std::vector<Cell> getCells();
 
 private:
 	int size;

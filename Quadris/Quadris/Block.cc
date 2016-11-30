@@ -66,6 +66,9 @@ void Block::moveRight(int n) {
 	notifyObservers(SubscriptionType::blockChange);
 }
 
+vector<Cell> Block::getCells(){
+	return this->cells;
+}
 
 void Block::moveDown(int n) {
 	prevCells = cells;

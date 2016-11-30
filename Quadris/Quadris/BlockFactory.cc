@@ -3,17 +3,21 @@
 #include "BlockGeneratorBase.h"
 #include <utility>
 #include <memory>
+#include <iostream>
 #include <utility>
 
 using namespace std;
 
 //class std::unique_ptr<T>
 
+//BlockFactory::BlockFactory
+
 Block BlockFactory::generateBlock(int level) {
 	if(level == 0){
 		//auto p = make_unique<new BlockGeneratorBase{}>;
 	unique_ptr< BlockGenerator > p {new BlockGeneratorBase{sequenceFile}};
 	return p->generateBlock();
+	//return Block();
 	} else if (level == 1) {
 
 	} else if(level == 2){
@@ -23,7 +27,9 @@ Block BlockFactory::generateBlock(int level) {
 	} else if(level ==  4){
 
 	}
-	//	return p->generateBlock();
+// 	Block block = (p->generateBlock());
+//	cerr << block.getName(); << endl;
+
 	return Block();
 }
 
