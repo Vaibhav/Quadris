@@ -12,10 +12,10 @@ public:
 	BlockParser(std::string fileName = "blocks.txt");
 	~BlockParser();
 	std::vector< Block > parseBlocks();
+	Block createBlock(std::string);
 
 private:
 	std::string fileName;  
-//	std::ifstream inputFileStream;  VAIBHAV FCK IT DONT DO THIS SUCH A PAIN
 
 };
 
