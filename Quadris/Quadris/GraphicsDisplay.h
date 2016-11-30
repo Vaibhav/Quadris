@@ -10,10 +10,12 @@ public:
 	GraphicDisplay(int, int, std::unique_ptr<Xwindow>);
 	SubscriptionType subType() const override;
 	void notify(Subject &whoNotified);
+	~GraphicDisplay();
 
 private:
 	std::unique_ptr<Xwindow> xw;
 	int row;
 	int col;
-
+	std::vector<std::vector<char>> theBoard;
+	int sizeOfDisplay; 
 };
