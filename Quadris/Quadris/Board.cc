@@ -38,14 +38,14 @@ void Board::currentBlockDown(int n) {
 }
 
 void Board::currentBlockDrop() {
-	while (canMoveDown) {
+	while (canMoveDown()) {
 		currentBlockDown(1);
 	}
 	currentBlock = nextBlock;
 	nextBlock = generateBlock();
 	vector<int> completedRows = checkIfRowsComplete();
 	for (auto n:completedRows) {
-		removeRow(n);
+		clearRow(n);
 		for (int i; i < width; i++) {
 			// remove cell
 		}
@@ -100,6 +100,10 @@ std::vector<int> Board::checkIfRowsComplete() {
 
 bool Board::canMoveDown() const {
 	return true;
+}
+
+void Board::clearRow(int row) {
+	
 }
 
 
