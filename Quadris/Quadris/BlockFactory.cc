@@ -31,13 +31,13 @@ Block BlockFactory::generateBlock(string blockName) {
 	return generateBlock();
 }
 
-	void BlockFactory::setSeed(int n){
+void BlockFactory::setSeed(int n){
 		seed = n;
-	}
+}
 	
-	void BlockFactory::setSequenceFile(std::string sequenceFile){
+void BlockFactory::setSequenceFile(std::string sequenceFile){
 		this->sequenceFile = sequenceFile;
-	}
+}
 
 	void BlockFactory::noRandomBlock(std::string file){
 		this->noRandom = true;

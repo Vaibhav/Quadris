@@ -3,19 +3,27 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <memory>
 
 using namespace std;
 
-BlockGeneratorBase::BlockGeneratorBase(string file): sequenceFile{file} {
-	this->sequence = vector<string>{};
-	parseSequence();
-	this->currentIndex = 0;
-	this->numblocksInSequence = this->sequence.size();
-};
+
+GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(std::shared_ptr<BlockGenerator> componenet)
+:BlockGeneratorDecorator{component}{
 
 
-Block BlockGeneratorBase::generateBlock(){
+
+
+
+}
+
+
+Block GeneratorProbabilityDecorator::generateBlock(){
 vector<Block> blocks = this->getParsedBlocks();
+
+
+
+
 
 for(int i = 0; i != blocks.size(); ++i){
 	if(blocks[i].getName() == this->sequence[this->currentIndex]){		
@@ -33,8 +41,39 @@ throw out_of_range("Block in sequence file did not parse from Block files");
 }
 
 
+GenerateProbabilityDecorator::GenerateProbabilityDecorator(std::shared_ptr<BlockGenerator> component,
+std::vector<string> blocks, std::vector<double> probabilities){
+setProbability(blocks, probabilities);
+}
+
+
+
+void GenerateProbabilityDecorator::setProbability(std::vector<std::string> blocks, std::vector<double> probabilities){
+
+
+int size = blocks.size();
+pair<string, double> item;
+
+if(blocks.size() != probabilities.size()){
+	throw out_of_range("The list of blocks specified is not the same size as the list of probabilities specified");
+}
+
+for(int i = 0; i != size; ++i){
+item.first = blocks[i];
+item.second = probabilities[i];
+
+this->blockProbabilities.emplace_back(item);
+}
+
+
+
+}
+
+
+
+/*
 //TODO
-bool BlockGeneratorBase::checkIfBlocksInSequenceExist(std::vector<Block> blocks){
+bool GeneratorProbabilityDecorator::checkIfBlocksInSequenceExist(std::vector<Block> blocks){
 	return true;
 }
 
@@ -50,3 +89,4 @@ void BlockGeneratorBase::parseSequence(){
 	}
 	fin.close();
 }
+*/

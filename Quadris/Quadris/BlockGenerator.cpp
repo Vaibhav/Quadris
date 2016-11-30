@@ -7,13 +7,12 @@
 using namespace std;
 
 std::vector<Block> BlockGenerator::getParsedBlocks()
-{
-	
+{	
 	return this->blockParser.parseBlocks();
 }
 
 BlockGenerator::BlockGenerator(){
-			this->baseBlocks = 
+	this->baseBlocks = 
 	vector<string>{"BLOCK-I", "BLOCK-Z", "BLOCK-T", "BLOCK-S", "BLOCK-O", "BLOCK-J", "BLOCK-L"};
 	blockParser = BlockParser{};
 }
