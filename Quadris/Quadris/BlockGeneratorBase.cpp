@@ -17,18 +17,24 @@ BlockGeneratorBase::BlockGeneratorBase(string file): sequenceFile{file} {
 Block BlockGeneratorBase::generateBlock(){
 vector<Block> blocks = this->getParsedBlocks();
 
-for(int i = 0; i != blocks.size(); ++i){
+int blockLen = blocks.size();
+
+if(!checkIfBlocksInSequenceExist(blocks)){
+	throw out_of_range("Block in sequence file was not parsed from Block files");
+}
+
+for(int i = 0; i != blockLen; ++i){
 	if(blocks[i].getName() == this->sequence[this->currentIndex]){		
 		if(this->currentIndex + 1 == this->numblocksInSequence){
 			this->currentIndex = 0;
 		} else{
-			++this->currentIndex; 
+			++(this->currentIndex); 
 		}
 		return blocks[i];
 	}
 }
 
-//throw out_of_range("Block in sequence file did not parse from Block files");
+//throw out_of_range("Block in sequence file was not parsed from Block files");
 return Block();
 }
 

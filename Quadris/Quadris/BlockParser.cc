@@ -80,8 +80,11 @@ std::vector<Block> BlockParser::parseBlocks() {
 	
 	for (int i = 0; i < listOfFiles.size(); i++) {
 		blocks.emplace_back(createBlock(listOfFiles[i]));
+		std::cerr << blocks[i].getName() << endl;
 	} 
 
-	return blocks;
+
+	
+	return std::vector<Block>();
 
 }
