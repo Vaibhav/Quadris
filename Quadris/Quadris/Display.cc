@@ -21,9 +21,13 @@ Display::~Display(){
 }
 
 void Display::notify(Subject &whoNotified) {
-	Info info = whoNotified.getInfo();
+  Info info = whoNotified.getInfo();
   vector <Cell> cells = info.cells;
+  vector <Cell> toDelete = info.prevCells;
   int j = cells.size();
+  for (int i=0; i < j; i++) {
+    theBoard[toDelete[i].row][toDelete[i].col] = '*';
+  }
   for (int i=0; i < j; i++) {
 	 theBoard[cells[i].row][cells[i].col] = cells[i].displayCharacter;
   }

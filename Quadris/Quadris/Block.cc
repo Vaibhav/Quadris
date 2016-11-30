@@ -32,6 +32,7 @@ Block::Block(char dispChar,
 Block::Block() {} // default ctor
 
 void Block::rotateClockWise(int n) {
+	prevCells = cells;
 	int leftRow = lowerLeft.row;
 	int leftCol = lowerLeft.col;
 	for (int i = 0; i < cells.size(); i++) {
@@ -40,6 +41,7 @@ void Block::rotateClockWise(int n) {
 		cells[i].row = leftRow - height + colt;
 		cells[i].col = leftCol - width + rowt;
 	}
+	notifyObservers(SubscriptionType::blockChange);
 }
 
 void Block::rotateCounterClockWise(int n) {
@@ -47,29 +49,35 @@ void Block::rotateCounterClockWise(int n) {
 }
 
 void Block::moveLeft(int n) {
+	prevCells = cells;
 	for (int i=0; i < cells.size(); i++) {
 		cells[i].col -= n;
 	}
 	lowerLeft.col -= n;
+	notifyObservers(SubscriptionType::blockChange);
 }
 
 void Block::moveRight(int n) {
+	prevCells = cells;
 	for (int i = 0; i < cells.size(); i++) {
 		cells[i].col += n;
 	}
-	lowerLeft.col -= n;
+	lowerLeft.col += n;
+	notifyObservers(SubscriptionType::blockChange);
 }
 
 
 void Block::moveDown(int n) {
+	prevCells = cells;
 	for (int i = 0; i < cells.size(); i++) {
-		cells[i].row -= n;
+		cells[i].row += n;
 	}
-	lowerLeft.row -= n;
+	lowerLeft.row += n;
+	notifyObservers(SubscriptionType::blockChange);
 }
 
 Info Block::getInfo() const {
-	return Info{cells, -1}; // Array of cells so display know what to update
+	return Info{prevCells, cells}; // Array of cells so display knows what to update
 }
 
 void Block::setLevel(int n){
@@ -81,3 +89,4 @@ string Block::getName(){
 }
 
 Block::~Block() {}
+
