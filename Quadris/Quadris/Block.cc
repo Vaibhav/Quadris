@@ -6,16 +6,6 @@
 #include <iostream> //debug
 using namespace std;
 
-/*Block::Block(char dispChar, string colour, int level): 
-	colour{colour}, level{level} {
-	int r = 3;
-	int c = 0;
-	for (int i=0; i < 4; i++, r++) { 
-		cells.push_back(Cell{this, dispChar, r, c});
-	}
-	notifyObservers(SubscriptionType::blockChange);
-}*/
-
 int calcHeight(std::vector < std::pair < int, int > > coords) {
 	int highest = 0;
 	int lowest = 0;
@@ -63,6 +53,7 @@ void Block::rotateUpdate() {
 		cells[i].row = lowerLeft.row + coords[i].first;
 		cells[i].col = lowerLeft.col + coords[i].second;
 	}
+	lowerLeft = findLowest('x'); // we might not need dispChar
 	notifyObservers(SubscriptionType::blockChange);
 }
 

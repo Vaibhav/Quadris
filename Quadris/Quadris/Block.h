@@ -13,7 +13,6 @@ class Info;
 class Block: public Subject {
 
 public:	
-	//Block(char dispChar, std::string colour, int level);
 	Block(char dispChar, 
 	 	  std::string colour, 
 		  std::string name,
