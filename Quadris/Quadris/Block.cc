@@ -8,22 +8,29 @@ using namespace std;
 
 int calcHeight(std::vector < std::pair < int, int > > coords) {
 	int highest = 0;
-	int lowest = 0;
 	for (auto i:coords) {
 		if (i.first > highest) highest = i.first;
-		if (i.first < lowest) lowest = i.first;
 	}
-	return highest - lowest;
+	return highest;
 }
 
 int calcWidth(std::vector < std::pair < int, int > > coords) {
 	int highest = 0;
-	int lowest = 0;
 	for (auto i:coords) {
 		if (i.second > highest) highest = i.second;
-		if (i.second < lowest) lowest = i.second;
 	}
-	return highest - lowest;
+	return highest;
+}
+
+pair<int, int> Block::findLowest() {
+	int furthestLeft = cells[0].col;
+	int furthestDown = cells[0].row;
+	for (auto i:cells) {
+		if (i.col < furthestLeft) furthestLeft = i.col;
+		if (i.row > furthestDown) furthestDown = i.row;
+	}
+	pair<int,int> p2{furthestDown, furthestLeft};
+	return p2;
 }
 
 //This is for the block parser
@@ -40,7 +47,7 @@ Block::Block(char dispChar,
 	height = calcHeight(coords);
 	width = calcWidth(coords);
 	
-	lowerLeft = findLowest(dispChar);
+	lowerLeft = findLowest();
 
 	notifyObservers(SubscriptionType::blockChange);
 }
@@ -50,10 +57,13 @@ Block::Block() {} // default ctor
 void Block::rotateUpdate() {
 	int csize = cells.size();
 	for (int i=0; i < csize; i++) { // cannot use auto here
-		cells[i].row = lowerLeft.row + coords[i].first;
-		cells[i].col = lowerLeft.col + coords[i].second;
+		cells[i].row = lowerLeft.first -width + coords[i].first;
+		cells[i].col = lowerLeft.second + coords[i].second;
+		cout << lowerLeft.first << endl;
 	}
-	lowerLeft = findLowest('x'); // we might not need dispChar
+	lowerLeft = findLowest();
+	height = calcHeight(coords);
+	width = calcWidth(coords);
 	notifyObservers(SubscriptionType::blockChange);
 }
 
@@ -63,7 +73,7 @@ void Block::rotateClockWise(int n) {
 		int row = i.first;
 		int col = i.second;
 		i.first = col;
-		i.second = width - row;
+		i.second = height - row;
 	}
 	rotateUpdate();	
 }
@@ -73,7 +83,7 @@ void Block::rotateCounterClockWise(int n) {
 	for (auto &i:coords) {
 		int row = i.first;
 		int col = i.second;
-		i.first = height - col;
+		i.first = width - col;
 		i.second = row;
 	}
 	rotateUpdate();
@@ -82,14 +92,14 @@ void Block::rotateCounterClockWise(int n) {
 void Block::moveLeft(int n) {
 	prevCells = cells;
 	for (auto &i:cells) i.col -= n;
-	lowerLeft.col -= n;
+	lowerLeft.second -= n;
 	notifyObservers(SubscriptionType::blockChange);
 }
 
 void Block::moveRight(int n) {
 	prevCells = cells;
 	for (auto &i:cells) i.col += n;
-	lowerLeft.col += n;
+	lowerLeft.second += n;
 	notifyObservers(SubscriptionType::blockChange);
 }
 
@@ -99,9 +109,9 @@ vector<Cell> Block::getCells(){
 
 bool Block::moveDown(int n, int restraint) {
 	prevCells = cells;
-	if (lowerLeft.row + n >= restraint) return false;
+	if (lowerLeft.first + n >= restraint) return false;
 	for (auto &i:cells) i.row += n;
-	lowerLeft.row += n;
+	lowerLeft.first += n;
 	notifyObservers(SubscriptionType::blockChange);
 	return true;
 }
@@ -119,23 +129,6 @@ string Block::getName(){
 }
 
 Block::~Block() {}
-
-Cell Block::findLowest(char displayChar){
-
-	int lowestRow = 0; 
-	int colOflowestCell; 
-
-	for (auto i: this->cells) {
-		if (i.row > lowestRow){
-			lowestRow = i.row;
-			colOflowestCell = i.col; 
-		}
-	}
-
-	Cell newCell{this, displayChar, lowestRow, colOflowestCell};
-	return newCell;
-
-}
 
 ostream &operator<<(std::ostream &out, const Block&b) {
 

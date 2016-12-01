@@ -40,7 +40,7 @@ public:
 	Info getInfo() const;
 	std::string getName();
 	std::vector<Cell> getCells();
-	Cell findLowest(char);
+	std::pair<int, int> findLowest();
 
 private:
 	int size;
@@ -52,7 +52,7 @@ private:
 	std::vector<Cell> prevCells;
 	std::vector < std::pair < int, int > > coords;
 	std::vector<Cell> cells;
-	Cell lowerLeft;
+	std::pair<int, int> lowerLeft;
 
 	void rotateUpdate();
 	friend std::ostream &operator<<(std::ostream &out, const Block&b);
