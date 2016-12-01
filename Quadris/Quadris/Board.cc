@@ -69,6 +69,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 
 	// Idk wtf all the shit above is, but we need this:
 	currentBlock.attach(d);
+	currentBlock.notifyObservers(SubscriptionType::blockChange);
 	
 	
 }

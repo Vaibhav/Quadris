@@ -106,7 +106,7 @@ Cell Block::findLowest(char displayChar){
 		}
 	}
 
-	Cell newCell(this, displayChar, lowestRow, colOflowestCell);
+	Cell newCell{this, displayChar, lowestRow, colOflowestCell};
 	return newCell;
 
 }

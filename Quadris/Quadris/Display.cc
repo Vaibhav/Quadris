@@ -11,7 +11,7 @@ Display::Display(int width, int height): width{width}, height{height} {
 	for (int i=0; i < height; i++) {
     	theBoard.emplace_back();
     	for (int j=0; j < width; j++) {
-      		theBoard[i].emplace_back('*');
+      		theBoard[i].emplace_back(' ');
     	}
   	}
 }
@@ -24,7 +24,7 @@ void Display::notify(Subject &whoNotified) {
   vector <Cell> cells = info.cells;
   vector <Cell> toDelete = info.prevCells;
   for (auto i:toDelete) {
-    theBoard[i.row][i.col] = '*';
+    theBoard[i.row][i.col] = ' ';
   }
   for (auto i:cells) {
 	 theBoard[i.row][i.col] = i.displayCharacter;

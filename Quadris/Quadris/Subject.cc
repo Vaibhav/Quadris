@@ -10,7 +10,7 @@ Subject::~Subject() {
 
 void Subject::attach(Observer* o) {
 	observers.push_back(o);
-	notifyObservers(SubscriptionType::blockChange); // hack
+	//notifyObservers(SubscriptionType::blockChange); // hack
 }
 
 void Subject::notifyObservers(SubscriptionType t) {
