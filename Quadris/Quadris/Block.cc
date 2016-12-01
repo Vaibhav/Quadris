@@ -25,6 +25,8 @@ Block::Block(char dispChar,
 	for (auto i:coords) { 
 		cells.push_back(Cell{this, dispChar, i.first, i.second});
 	}
+	
+	lowerLeft = findLowest(dispChar);
 
 	notifyObservers(SubscriptionType::blockChange);
 }
@@ -92,3 +94,19 @@ string Block::getName(){
 
 Block::~Block() {}
 
+Cell Block::findLowest(char displayChar){
+
+	int lowestRow = 0; 
+	int colOflowestCell; 
+
+	for (auto i: this->cells) {
+		if (i.row > lowestRow){
+			lowestRow = i.row;
+			colOflowestCell = i.col; 
+		}
+	}
+
+	Cell newCell(this, displayChar, lowestRow, colOflowestCell);
+	return newCell;
+
+}

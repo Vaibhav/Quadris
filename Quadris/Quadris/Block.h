@@ -41,6 +41,7 @@ public:
 	Info getInfo() const;
 	std::string getName();
 	std::vector<Cell> getCells();
+	Cell findLowest();
 
 private:
 	int size;
