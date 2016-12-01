@@ -30,7 +30,7 @@ public:
 	//As a single turn in the game, the block moves n times
 	void rotateClockWise(int n);
 	void rotateCounterClockWise(int n);
-	void moveDown(int n, int restraint);
+	bool moveDown(int n, int restraint);
 	void moveLeft(int n);
 	void moveRight(int n);
 	void setLevel(int n);

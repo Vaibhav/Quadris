@@ -142,7 +142,8 @@ void Board::currentBlockDrop() {
 
 	// keep moving block down until it can't move down
 	while(canMoveDown()) {
-		currentBlock.moveDown(1, height);
+		if (currentBlock.moveDown(1, height));
+		else break;
 	}
 }
 

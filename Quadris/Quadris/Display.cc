@@ -19,7 +19,6 @@ Display::Display(int width, int height): width{width}, height{height} {
 Display::~Display() {}
 
 void Display::notify(Subject &whoNotified) {
-  cout << "Display notified! " << endl;
   Info info = whoNotified.getInfo();
   vector <Cell> cells = info.cells;
   vector <Cell> toDelete = info.prevCells;

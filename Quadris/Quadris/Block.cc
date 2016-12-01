@@ -3,7 +3,6 @@
 #include "info.h"
 #include <string>
 #include <vector>
-#include <iostream>
 using namespace std;
 
 /*Block::Block(char dispChar, string colour, int level): 
@@ -73,13 +72,13 @@ vector<Cell> Block::getCells(){
 	return this->cells;
 }
 
-void Block::moveDown(int n, int restraint) {
+bool Block::moveDown(int n, int restraint) {
 	prevCells = cells;
-	if (lowerLeft.row + n >= restraint) return;
+	if (lowerLeft.row + n >= restraint) return false;
 	for (auto &i:cells) i.row += n;
 	lowerLeft.row += n;
-	cout << lowerLeft.row << endl;
 	notifyObservers(SubscriptionType::blockChange);
+	return true;
 }
 
 Info Block::getInfo() const {
