@@ -7,10 +7,15 @@
 #include <string>
 class GeneratorProbabilityDecorator : public BlockGeneratorDecorator{
 public:
-GeneratorProbabilityDecorator(std::shared_ptr<BlockGenerator> , int, int randomNumberRange = 100);
-GeneratorProbabilityDecorator(std::shared_ptr<BlockGenerator> , 
-                             std::vector<std::string> , 
-                             std::vector<double>, int, int randomNumberRange = 100);
+GeneratorProbabilityDecorator(std::shared_ptr<BlockGenerator> component, 
+                              int randSeed, 
+                              int randomNumberRange = 100);
+
+GeneratorProbabilityDecorator(std::shared_ptr<BlockGenerator> component, 
+                              std::vector<std::string> blocks, 
+                              std::vector<double> probabilities, 
+                              int randSeed, 
+                              int randomNumberRange = 100);
                             
 
 

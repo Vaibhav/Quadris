@@ -94,17 +94,10 @@ std::vector<Block> BlockParser::parseBlocks() {
 	// go though vector and create blocks from the definition in the text files 
 	for (int i = 0; i < listOfFiles.size(); i++) {
 		blocks.emplace_back(createBlock(listOfFiles[i]));
-		//std::cerr << blocks[i].getName() << endl;
 		vector<Cell> cells = blocks[i].getCells();
-		//for(int j = 0; j != cells.size(); ++j){
-		//std::cerr << cells[j].row << " " << cells[j].col << std::endl;
-		//}
 	} 
 
 	return blocks;
-	
-	//return std::vector<Block>();
-
 }
 
 // Example blocks.txt file

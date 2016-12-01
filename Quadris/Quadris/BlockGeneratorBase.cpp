@@ -13,9 +13,9 @@ BlockGeneratorBase::BlockGeneratorBase(string file): sequenceFile{file}, BlockGe
 	this->currentIndex = 0;
 	this->numblocksInSequence = this->sequence.size();
 
-	for(int i = 0; i!= numblocksInSequence; ++i){
-		cout << this->sequence[i] << endl;
-	}
+	//for(int i = 0; i!= numblocksInSequence; ++i){
+//		cout << this->sequence[i] << endl;
+//	}
 };
 
 

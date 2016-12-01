@@ -66,6 +66,7 @@ private:
 	const int width;
 	const int height;
 
+	Display * display;
 	bool canRotateLeft() const;
 	bool canRotateRight() const;
 	bool canMoveLeft() const;

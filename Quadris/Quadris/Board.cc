@@ -9,7 +9,7 @@ using namespace std;
 
 
 Board::Board(Display* d, int width, int height, string sequenceFile): 
-	width{width}, height{height}, 
+	width{width}, height{height}, display{d},
 	blockFactory{BlockFactory()}, currentLevel{0} {
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
@@ -46,7 +46,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	currentBlock = blockFactory.generateBlock(this->currentLevel);
 	cerr << currentBlock.getName();
 	*/
-		currentBlock = blockFactory.generateBlock(1);
+/*	currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
 	currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
@@ -54,6 +54,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	cerr << currentBlock.getName();
 	currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
+	*/
 /*			currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
 			currentBlock = blockFactory.generateBlock(1);
@@ -75,6 +76,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 */
 
 	// Idk wtf all the shit above is, but we need this:
+	 
 	currentBlock.attach(d);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
 	
@@ -176,9 +178,14 @@ void Board::setLevel(int n){
 	currentLevel = n;
 }
 
-
+//HIJACKED FUNCTIONALITY CHANGE BACK LATER
 void Board::setCurrentBlock(string blockName){
+//	currentBlock = blockFactory.generateBlock(this->currentLevel);
+//	cerr << currentBlock.getName() << endl;
+//	currentBlock = blockFactory.generateBlock(blockName);
 	currentBlock = blockFactory.generateBlock(blockName);
+	currentBlock.attach(this->display);
+	currentBlock.notifyObservers(SubscriptionType::blockChange);
 }
 
 
