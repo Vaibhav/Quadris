@@ -16,18 +16,39 @@ using namespace std;
 	notifyObservers(SubscriptionType::blockChange);
 }*/
 
+int calcHeight(std::vector < std::pair < int, int > > coords) {
+	int highest = 0;
+	int lowest = 0;
+	for (auto i:coords) {
+		if (i.first > highest) highest = i.first;
+		if (i.first < lowest) lowest = i.first;
+	}
+	return highest - lowest;
+}
+
+int calcWidth(std::vector < std::pair < int, int > > coords) {
+	int highest = 0;
+	int lowest = 0;
+	for (auto i:coords) {
+		if (i.second > highest) highest = i.second;
+		if (i.second < lowest) lowest = i.second;
+	}
+	return highest - lowest;
+}
+
 //This is for the block parser
 Block::Block(char dispChar, 
 	 	  std::string colour, 
 		  std::string name,
 		  std::vector < std::pair < int, int > > coords
-		  ): colour(colour), name(name) {
+		  ): colour(colour), name(name), coords(coords) {
 
 	for (auto i:coords) { 
 		cells.push_back(Cell{this, dispChar, i.first, i.second});
 	}
 
-	//height(h), width(w)
+	height = calcHeight(coords);
+	width = calcWidth(coords);
 	
 	lowerLeft = findLowest(dispChar);
 
@@ -36,23 +57,35 @@ Block::Block(char dispChar,
 
 Block::Block() {} // default ctor
 
-void Block::rotateClockWise(int n) {
-	prevCells = cells;
-	int leftRow = lowerLeft.row;
-	int leftCol = lowerLeft.col;
-	for (auto &i:cells) {
-		int rowt = i.row;
-		int colt = i.col;
-		i.row = leftRow - height + colt;
-		i.col = leftCol - width + rowt;
-		cout << i.row << endl;
-		cout << i.col << endl;
+void Block::rotateUpdate() {
+	int csize = cells.size();
+	for (int i=0; i < csize; i++) { // cannot use auto here
+		cells[i].row = lowerLeft.row + coords[i].first;
+		cells[i].col = lowerLeft.col + coords[i].second;
 	}
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-void Block::rotateCounterClockWise(int n) {
+void Block::rotateClockWise(int n) {
+	prevCells = cells;
+	for (auto &i:coords) {
+		int row = i.first;
+		int col = i.second;
+		i.first = col;
+		i.second = width - row;
+	}
+	rotateUpdate();	
+}
 
+void Block::rotateCounterClockWise(int n) {
+	prevCells = cells;
+	for (auto &i:coords) {
+		int row = i.first;
+		int col = i.second;
+		i.first = height - col;
+		i.second = row;
+	}
+	rotateUpdate();
 }
 
 void Block::moveLeft(int n) {

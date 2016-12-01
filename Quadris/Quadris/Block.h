@@ -51,9 +51,11 @@ private:
 	int height;
 	std::string colour;
 	std::vector<Cell> prevCells;
-	//std::vector < std::pair < int, int > > coords;
+	std::vector < std::pair < int, int > > coords;
 	std::vector<Cell> cells;
 	Cell lowerLeft;
+
+	void rotateUpdate();
 	friend std::ostream &operator<<(std::ostream &out, const Block&b);
 };
 
