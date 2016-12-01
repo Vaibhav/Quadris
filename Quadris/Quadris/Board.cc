@@ -102,7 +102,7 @@ void Board::currentBlockRight(int n) {
 
 
 void Board::currentBlockDown(int n) {
-	currentBlock.moveDown(n);
+	currentBlock.moveDown(n, height);
 }
 
 
@@ -115,19 +115,19 @@ bool Board::canMoveDown() {
 
 
 	// find lowest cell in current block
-	for (int i = 0; i < blockCells.size(); i++) {
+	for (auto i:blockCells) {
 
-		if (blockCells[i].row > lowestRow){
-			lowestRow = blockCells[i].row;
-			colOflowestCell = blockCells[i].col; 
+		if (i.row > lowestRow){
+			lowestRow = i.row;
+			colOflowestCell = i.col; 
 		} 
 
 	}
 	
-	// check if there are any cells in the board that are 1 row blow that cell
-	for (int n; n < this->cells.size(); n++){
+	// check if there are any cells in the board that are 1 row below that cell
+	for (auto n:cells) {
 		// check if cell below lowest cell in block exists
-		if (cells[n].row == lowestRow + 1 && cells[n].col == colOflowestCell) {
+		if (n.row == lowestRow + 1 && n.col == colOflowestCell) {
 			return false; 
 		}
 	} 
@@ -140,7 +140,7 @@ void Board::currentBlockDrop() {
 
 	// keep moving block down until it can't move down
 	while(canMoveDown()) {
-		currentBlock.moveDown(1);
+		currentBlock.moveDown(1, height);
 	}
 }
 

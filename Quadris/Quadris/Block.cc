@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-Block::Block(char dispChar, string colour, int level): 
+/*Block::Block(char dispChar, string colour, int level): 
 	colour{colour}, level{level} {
 	int r = 3;
 	int c = 0;
@@ -13,7 +13,7 @@ Block::Block(char dispChar, string colour, int level):
 		cells.push_back(Cell{this, dispChar, r, c});
 	}
 	notifyObservers(SubscriptionType::blockChange);
-}
+}*/
 
 //This is for the block parser
 Block::Block(char dispChar, 
@@ -35,11 +35,11 @@ void Block::rotateClockWise(int n) {
 	prevCells = cells;
 	int leftRow = lowerLeft.row;
 	int leftCol = lowerLeft.col;
-	for (int i = 0; i < cells.size(); i++) {
-		int rowt = cells[i].row;
-		int colt = cells[i].col;
-		cells[i].row = leftRow - height + colt;
-		cells[i].col = leftCol - width + rowt;
+	for (auto i:cells) {
+		int rowt = i.row;
+		int colt = i.col;
+		i.row = leftRow - height + colt;
+		i.col = leftCol - width + rowt;
 	}
 	notifyObservers(SubscriptionType::blockChange);
 }
@@ -70,11 +70,10 @@ vector<Cell> Block::getCells(){
 	return this->cells;
 }
 
-void Block::moveDown(int n) {
+void Block::moveDown(int n, int restraint) {
 	prevCells = cells;
-	for (int i = 0; i < cells.size(); i++) {
-		cells[i].row += n;
-	}
+	if (lowerLeft.row + n > restraint) return;
+	for (auto i:cells) i.row += n;
 	lowerLeft.row += n;
 	notifyObservers(SubscriptionType::blockChange);
 }

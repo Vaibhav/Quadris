@@ -13,7 +13,7 @@ class Info;
 class Block: public Subject {
 
 public:	
-	Block(char dispChar, std::string colour, int level);
+	//Block(char dispChar, std::string colour, int level);
 	Block(char dispChar, 
 	 	  std::string colour, 
 		  std::string name,
@@ -30,7 +30,7 @@ public:
 	//As a single turn in the game, the block moves n times
 	void rotateClockWise(int n);
 	void rotateCounterClockWise(int n);
-	void moveDown(int n);
+	void moveDown(int n, int restraint);
 	void moveLeft(int n);
 	void moveRight(int n);
 	void setLevel(int n);
