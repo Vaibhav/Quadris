@@ -3,6 +3,7 @@
 #include "info.h"
 #include <string>
 #include <vector>
+#include <iostream> //debug
 using namespace std;
 
 /*Block::Block(char dispChar, string colour, int level): 
@@ -25,6 +26,8 @@ Block::Block(char dispChar,
 	for (auto i:coords) { 
 		cells.push_back(Cell{this, dispChar, i.first, i.second});
 	}
+
+	//height(h), width(w)
 	
 	lowerLeft = findLowest(dispChar);
 
@@ -37,11 +40,13 @@ void Block::rotateClockWise(int n) {
 	prevCells = cells;
 	int leftRow = lowerLeft.row;
 	int leftCol = lowerLeft.col;
-	for (auto i:cells) {
+	for (auto &i:cells) {
 		int rowt = i.row;
 		int colt = i.col;
 		i.row = leftRow - height + colt;
 		i.col = leftCol - width + rowt;
+		cout << i.row << endl;
+		cout << i.col << endl;
 	}
 	notifyObservers(SubscriptionType::blockChange);
 }
@@ -52,18 +57,14 @@ void Block::rotateCounterClockWise(int n) {
 
 void Block::moveLeft(int n) {
 	prevCells = cells;
-	for (int i=0; i < cells.size(); i++) {
-		cells[i].col -= n;
-	}
+	for (auto &i:cells) i.col -= n;
 	lowerLeft.col -= n;
 	notifyObservers(SubscriptionType::blockChange);
 }
 
 void Block::moveRight(int n) {
 	prevCells = cells;
-	for (int i = 0; i < cells.size(); i++) {
-		cells[i].col += n;
-	}
+	for (auto &i:cells) i.col += n;
 	lowerLeft.col += n;
 	notifyObservers(SubscriptionType::blockChange);
 }
@@ -111,3 +112,8 @@ Cell Block::findLowest(char displayChar){
 	return newCell;
 
 }
+
+ostream &operator<<(std::ostream &out, const Block&b) {
+
+}
+

@@ -70,7 +70,7 @@ private:
 	bool canRotateRight() const;
 	bool canMoveLeft() const;
 	bool canMoveRight() const;
-	bool canMoveDown() const;
+	bool canMoveDown();
 	void getNextBlock();
 	void updateScore() const;
 	

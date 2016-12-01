@@ -107,7 +107,7 @@ void Board::currentBlockDown(int n) {
 }
 
 
-bool Board::canMoveDown() const {
+bool Board::canMoveDown() {
 	
 	// Cells in the block
 	vector<Cell> blockCells = currentBlock.getCells();
@@ -134,6 +134,14 @@ void Board::currentBlockDrop() {
 		if (currentBlock.moveDown(1, height));
 		else break;
 	}
+	for (auto i:currentBlock.getCells()) cells.push_back(i);
+	blocks.push_back(currentBlock);
+
+	// Check if rows deleted and..
+	// update score
+
+	currentBlock = nextBlock;
+	// generate nextBlock
 }
 
 

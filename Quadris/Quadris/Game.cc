@@ -284,7 +284,8 @@ void Game::printGameBoard() {
   	printHeader();
 	cout << display;
 	printHeader();
-	cout << "Next: " << ""/*somehow print next block*/ << endl;
+	cout << "Next: " << endl;
+	//cout << b.nextBlock;
 }
 
 

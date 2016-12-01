@@ -34,14 +34,24 @@ SubscriptionType Display::subType() const {
   return SubscriptionType::blockChange;
 }
 
+void printThreeRows(std::ostream &out, int width) {
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < width; j++) {
+      out << ' ';
+    }
+    endl(out);
+  }
+}
+
 ostream &operator<<(std::ostream &out, const Display&d) {
+  printThreeRows(out, d.width);
   for (int i = 0; i < d.height; i++) {
     for (int j = 0; j < d.width; j++) {
-      cout << d.theBoard[i][j];
+      out << d.theBoard[i][j];
     }
-    endl(cout);
+    endl(out);
   }
-  return cout;
+  return out;
 }
 
 
