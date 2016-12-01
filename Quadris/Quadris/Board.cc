@@ -109,28 +109,17 @@ void Board::currentBlockDown(int n) {
 
 bool Board::canMoveDown() {
 	
+	// Cells in the block
 	vector<Cell> blockCells = currentBlock.getCells();
-	// the higher the number the lower the row 
-	int lowestRow = 0;
-	int colOflowestCell = 0; 
-
-
-	// find lowest cell in current block
-	for (auto i:blockCells) {
-
-		if (i.row > lowestRow){
-			lowestRow = i.row;
-			colOflowestCell = i.col; 
-		} 
-
-	}
 	
 	// check if there are any cells in the board that are 1 row below that cell
-	for (auto n:cells) {
-		// check if cell below lowest cell in block exists
-		if (n.row == lowestRow + 1 && n.col == colOflowestCell) {
-			cout << "nigga we made it" << endl;
-			return false; 
+	for (auto i: blockCells) {
+		
+		for (auto n : cells) {
+		// check if cell below cell in block exists
+			if (n.row == i.row + 1 && n.col == i.col){
+				return false;
+			}
 		}
 	} 
 	
