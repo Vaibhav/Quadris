@@ -8,7 +8,8 @@
 using namespace std;
 
 
-Board::Board(int width, int height, string sequenceFile): width{width}, height{height}, 
+Board::Board(Display* d, int width, int height, string sequenceFile): 
+	width{width}, height{height}, 
 	blockFactory{BlockFactory()}, currentLevel{0} {
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
@@ -64,6 +65,10 @@ Board::Board(int width, int height, string sequenceFile): width{width}, height{h
 	cerr << currentBlock.getName();
 			currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
+
+
+	// Idk wtf all the shit above is, but we need this:
+	currentBlock.attach(d);
 	
 	
 }

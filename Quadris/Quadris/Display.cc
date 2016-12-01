@@ -19,15 +19,15 @@ Display::Display(int width, int height): width{width}, height{height} {
 Display::~Display() {}
 
 void Display::notify(Subject &whoNotified) {
+  cout << "Display notified! " << endl;
   Info info = whoNotified.getInfo();
   vector <Cell> cells = info.cells;
   vector <Cell> toDelete = info.prevCells;
-  int j = cells.size();
-  for (int i=0; i < j; i++) {
-    theBoard[toDelete[i].row][toDelete[i].col] = '*';
+  for (auto i:toDelete) {
+    theBoard[i.row][i.col] = '*';
   }
-  for (int i=0; i < j; i++) {
-	 theBoard[cells[i].row][cells[i].col] = cells[i].displayCharacter;
+  for (auto i:cells) {
+	 theBoard[i.row][i.col] = i.displayCharacter;
   }
 }
 

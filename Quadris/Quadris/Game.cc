@@ -28,7 +28,7 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 	}
 
 Board Game::createBoard() {
-	return Board{};
+	return Board{&display};
 }
 
 void Game::play() {
