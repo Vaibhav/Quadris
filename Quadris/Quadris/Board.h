@@ -35,7 +35,6 @@ public:
 	void notify(Subject &whoNotified); // ... and an observer
 	SubscriptionType subType() const;
 
-	void clearRow(int row);
 	std::vector<int> checkIfRowsComplete();
 	std::vector<int> blockLevelsDeleted();
 
@@ -53,7 +52,9 @@ public:
 	void restoreRandom();
 	void setSeed(int seed);
 	void setSequence(std::string sequenceFile);
-	
+	vector<int> clearRows(std::vector<int>);
+	void clearRow(int row);
+
 private:
 	BlockFactory blockFactory;
 	int currentLevel;

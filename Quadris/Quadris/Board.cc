@@ -134,11 +134,18 @@ void Board::currentBlockDrop() {
 		if (currentBlock.moveDown(1, height));
 		else break;
 	}
-	for (auto i:currentBlock.getCells()) cells.push_back(i);
+
+	// update cells vector 
+	for (auto i:currentBlock.getCells()) {
+		cells.push_back(i);
+	}
+
+	// updates blocks vector 
 	blocks.push_back(currentBlock);
 
-	// Check if rows deleted and..
-	// update score
+	// check if any row is completed
+	// clear the rows 
+	// update score 
 
 	currentBlock = nextBlock;
 	// generate nextBlock
@@ -201,11 +208,16 @@ Block Board::generateBlock() { // may be useless
 
 
 std::vector<int> Board::checkIfRowsComplete() {
-	
+	// returns which rows are completed 
 }
 
+void Board::clearRows(vector<int> rowsCompleted) {
+
+}
 
 void Board::clearRow(int row) {
 	
 }
+
+
 
