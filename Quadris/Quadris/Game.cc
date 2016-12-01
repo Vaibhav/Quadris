@@ -21,6 +21,8 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 		this->filename = filename;
 		this->currentScore = 0;
 		this->highScore = 0;
+		b.setLevel(currentLevel);
+		b.setSeed(seed);
 		
 		readInHighScore();
 	}

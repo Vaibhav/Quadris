@@ -1,9 +1,12 @@
 #include "BlockFactory.h"
 #include "Block.h"
 #include "BlockGeneratorBase.h"
+#include "GeneratorProbabilityDecorator.h"
 #include <utility>
 #include <memory>
 #include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -15,13 +18,33 @@ Block BlockFactory::generateBlock(int level)
 {
     if (level == 0)
     {
-	//auto p = make_unique<new BlockGeneratorBase{}>;
+/*	//auto p = make_unique<new BlockGeneratorBase{}>;
 	unique_ptr<BlockGenerator> p{new BlockGeneratorBase{sequenceFile}};
 	return p->generateBlock();
 	//return Block();
+    */
+          vector<double> probabilities = vector<double> 
+        {1.0/12.0, 1.0/12.0, 1.0/6.0, 1.0/6.0, 1.0/6.0, 1.0/6.0, 1.0/6.0 };
+       	vector<string> blocks =  
+        vector<string>{"BLOCK-S", "BLOCK-Z", "BLOCK-T", "BLOCK-I", "BLOCK-O", "BLOCK-J", "BLOCK-L"};
+      	shared_ptr<BlockGenerator> component {new BlockGeneratorBase{sequenceFile}};
+        unique_ptr<BlockGenerator> p{new GeneratorProbabilityDecorator{
+                                         component,
+                                         blocks, probabilities, seed, 100}}; 
+        	return p->generateBlock(); 
     }
     else if (level == 1)
     {
+        vector<double> probabilities = vector<double> 
+        {1.0/12.0, 1.0/12.0, 1.0/6.0, 1.0/6.0, 1.0/6.0, 1.0/6.0, 1.0/6.0 };
+       	vector<string> blocks =  
+        vector<string>{"BLOCK-S", "BLOCK-Z", "BLOCK-T", "BLOCK-I", "BLOCK-O", "BLOCK-J", "BLOCK-L"};
+      	shared_ptr<BlockGenerator> component {new BlockGeneratorBase{sequenceFile}};
+        unique_ptr<BlockGenerator> p{new GeneratorProbabilityDecorator{
+                                         component,
+                                         blocks, probabilities, seed, 100}}; 
+        	return p->generateBlock(); 
+    
     }
     else if (level == 2)
     {
@@ -32,8 +55,6 @@ Block BlockFactory::generateBlock(int level)
     else if (level == 4)
     {
     }
-    // 	Block block = (p->generateBlock());
-    //	cerr << block.getName(); << endl;
 
     return Block();
 }

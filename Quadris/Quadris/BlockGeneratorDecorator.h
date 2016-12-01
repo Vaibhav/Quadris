@@ -7,7 +7,7 @@
 class BlockGeneratorDecorator : public BlockGenerator {
 public:
 	BlockGeneratorDecorator(std::shared_ptr< BlockGenerator > component) : component{component} {}
-private:
+protected:
 	std::shared_ptr< BlockGenerator > component;
 };
 

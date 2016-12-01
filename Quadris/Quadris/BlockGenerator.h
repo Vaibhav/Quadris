@@ -8,10 +8,13 @@
 
 class BlockGenerator {
 public:
-	virtual Block generateBlock() = 0;
+	virtual Block generateBlock() = 0;	
+	Block generateBlock(std::string);
+
 protected:
-	BlockGenerator();
 	std::vector< Block > getParsedBlocks();
+	std::vector< Block > getParsedBlocksBase();
+	BlockGenerator();
 private:
 	BlockParser blockParser;
 	//Check if the 7 default blocks exist in the parsed blocks

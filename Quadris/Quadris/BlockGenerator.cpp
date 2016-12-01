@@ -11,6 +11,42 @@ std::vector<Block> BlockGenerator::getParsedBlocks()
 	return this->blockParser.parseBlocks();
 }
 
+std::vector<Block> BlockGenerator::getParsedBlocksBase()
+{	
+	vector<Block> blocks = this->blockParser.parseBlocks();
+	
+	if(!checkBaseBlocksExist(blocks)){
+		throw out_of_range("Base blocks did not exist to be parsed so cannot get base blocks");
+	}
+	
+	int baseBlocksSize = baseBlocks.size();
+	int parsedBlocksSize = blocks.size();
+
+	vector<Block> base = vector<Block>{};
+	for(int i = 0; i!= baseBlocksSize; ++i){
+		for(int j = 0; j!= parsedBlocksSize; ++j){
+			if(baseBlocks[i] == blocks[j].getName() ){
+				base.emplace_back(blocks[j]);
+				break;
+			}
+		}
+	}
+	return base;
+}
+
+Block BlockGenerator::generateBlock(std::string name){
+vector<Block> blocks = this->getParsedBlocks();
+int blockLen = blocks.size();
+
+for(int i = 0; i != blockLen; ++i){
+	if(blocks[i].getName() == name){		
+		//cerr << blocks[i].getName();
+		return blocks[i];
+	}
+}
+	throw out_of_range("That block did not exist in the parsed blocks");
+}
+
 BlockGenerator::BlockGenerator(){
 	this->baseBlocks = 
 	vector<string>{"BLOCK-I", "BLOCK-Z", "BLOCK-T", "BLOCK-S", "BLOCK-O", "BLOCK-J", "BLOCK-L"};

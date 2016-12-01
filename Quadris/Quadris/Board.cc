@@ -11,10 +11,61 @@ using namespace std;
 Board::Board(int width, int height, string sequenceFile): width{width}, height{height}, 
 	blockFactory{BlockFactory()}, currentLevel{0} {
 	//Propertly initialize blockFactory;
-	
 	//blockFactory.setLevel(currentLevel);
 	blockFactory.setSequenceFile(sequenceFile);
 	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName();
+
+		currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+			currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+			currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+			currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+			currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+			currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+			currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+			currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+			currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+			currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+	
+	
 }
 
 
@@ -56,6 +107,7 @@ bool Board::canMoveDown() {
 	// the higher the number the lower the row 
 	int lowestRow = 0;
 	int colOflowestCell = 0; 
+
 
 	// find lowest cell in current block
 	for (int i = 0; i < blockCells.size(); i++) {

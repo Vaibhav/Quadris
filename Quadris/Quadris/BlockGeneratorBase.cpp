@@ -40,22 +40,19 @@ if(!checkIfBlocksInSequenceExist(blocks)){
 	throw out_of_range("Block in sequence file was not parsed from Block files");
 }
 //cout << this->sequence[this->currentIndex];
-/*for(int i = 0; i != blockLen; ++i){
+for(int i = 0; i != blockLen; ++i){
 	if(blocks[i].getName() == this->sequence[this->currentIndex]){		
 		if(this->currentIndex + 1 == this->numblocksInSequence){
 			this->currentIndex = 0;
 		} else{
 			++(this->currentIndex); 
 		}
-		cerr << blocks[i].getName();
+	//	cerr << blocks[i].getName();
 		return blocks[i];
 	}
-}*/
-
-//throw out_of_range("Block in sequence file was not parsed from Block files");
-return Block();
 }
 
+}
 
 
 bool BlockGeneratorBase::checkIfBlocksInSequenceExist(std::vector<Block> blocks){

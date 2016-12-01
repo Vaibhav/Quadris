@@ -10,8 +10,7 @@ class BlockGeneratorBase : public BlockGenerator {
 public:
 	
 	BlockGeneratorBase(std::string);
-	Block generateBlock();
-	
+	Block generateBlock() override;
 private:
 	std::string sequenceFile;
 	std::vector<std::string> sequence;
