@@ -107,14 +107,14 @@ void Board::currentBlockDown(int n) {
 }
 
 
-bool Board::canMoveDown() {
+bool Board::canMoveDown() const {
 	
 	// Cells in the block
 	vector<Cell> blockCells = currentBlock.getCells();
 	
 	// check if there are any cells in the board that are 1 row below that cell
 	for (auto i: blockCells) {
-		
+
 		for (auto n : cells) {
 		// check if cell below cell in block exists
 			if (n.row == i.row + 1 && n.col == i.col){
