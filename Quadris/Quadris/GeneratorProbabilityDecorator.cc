@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <iostream>
 #include <memory>
 #include <stdlib.h>
 
@@ -12,22 +13,24 @@ GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
     std::shared_ptr<BlockGenerator> component, int randSeed, int randomNumberRange)
     : BlockGeneratorDecorator{component}, randSeed{randSeed}, randomNumberRange{randomNumberRange}
 {
+     srand(randSeed);
 }
 
 Block GeneratorProbabilityDecorator::generateBlock()
 {
-    srand(randSeed);
+   
     //Generate a number between 0 to 99 when randomNumberRange set to 100
     int num = (rand() % randomNumberRange);
-
+    cerr << num << endl;
     double totProb = 0;
     int size = blockProbabilities.size();
     for (int i = 0; i != size; ++i)
     {
 	totProb += blockProbabilities[i].second;
-	if (num < totProb * randomNumberRange)
+	if (num < (totProb * randomNumberRange))
 	{
-	    return this->component->generateBlock(blockProbabilities[i].first);
+	    cerr << blockProbabilities[i].first << endl;
+        return this->component->generateBlock(blockProbabilities[i].first);
 	}
     }
 }
@@ -42,7 +45,7 @@ GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(std::shared_ptr<Blo
 }
 
 void GeneratorProbabilityDecorator::setProbability(vector<string> blocks,
-						  vector<double> probabilities)
+						                           vector<double> probabilities)
 {
 
     int size = blocks.size();

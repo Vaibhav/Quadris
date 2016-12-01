@@ -14,6 +14,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
 	blockFactory.setSequenceFile(sequenceFile);
+	/*
 	currentBlock = blockFactory.generateBlock(this->currentLevel);
 	cerr << currentBlock.getName();
 	currentBlock = blockFactory.generateBlock(this->currentLevel);
@@ -44,10 +45,16 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	cerr << currentBlock.getName();
 	currentBlock = blockFactory.generateBlock(this->currentLevel);
 	cerr << currentBlock.getName();
-
+	*/
 		currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
-			currentBlock = blockFactory.generateBlock(1);
+	currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+	currentBlock = blockFactory.generateBlock(1);
+	cerr << currentBlock.getName();
+/*			currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
 			currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
@@ -65,7 +72,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	cerr << currentBlock.getName();
 			currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
-
+*/
 
 	// Idk wtf all the shit above is, but we need this:
 	currentBlock.attach(d);
