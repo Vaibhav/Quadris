@@ -129,6 +129,7 @@ bool Board::canMoveDown() {
 	for (auto n:cells) {
 		// check if cell below lowest cell in block exists
 		if (n.row == lowestRow + 1 && n.col == colOflowestCell) {
+			cout << "nigga we made it" << endl;
 			return false; 
 		}
 	} 
