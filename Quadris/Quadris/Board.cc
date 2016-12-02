@@ -5,10 +5,11 @@
 #include <iostream>
 #include <vector>
 #include "BlockFactory.h"
+#include <algorithm>
 using namespace std;
 
 
-Board::Board(Display* d, int width, int height, string sequenceFile): 
+Board::Board(Display* d, int width, int height, string sequenceFile):
 	width{width}, height{height}, display{d},
 	blockFactory{BlockFactory()}, currentLevel{0} {
 	//Propertly initialize blockFactory;
@@ -18,11 +19,11 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	nextBlock = blockFactory.generateBlock(1);
 
 	// Idk wtf all the shit above is, but we need this:
-	 
+
 	currentBlock.attach(d);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
-	
-	
+
+
 }
 
 
@@ -45,7 +46,7 @@ SubscriptionType Board::subType() const {
 void Board::currentBlockLeft(int n) {
 	for (int i=0; i< n; i++) currentBlock.moveLeft();
 }
-	
+
 void Board::currentBlockRight(int n) {
 	for (int i=0; i< n; i++) currentBlock.moveRight(width);
 }
@@ -57,10 +58,10 @@ void Board::currentBlockDown(int n) {
 
 
 bool Board::canMoveDown() {
-	
+
 	// Cells in the block
 	vector<Cell> blockCells = currentBlock.getCells();
-	
+
 	// check if there are any cells in the board that are 1 row below that cell
 	for (auto i: blockCells) {
 
@@ -70,52 +71,11 @@ bool Board::canMoveDown() {
 				return false;
 			}
 		}
-	} 
-	
+	}
+
 	// if cell doesn't exist returns true
 	return true;
 }
-
-void Board::currentBlockDrop() {
-
-	// keep moving block down until it can't move down
-	while(canMoveDown()) {
-		if (currentBlock.moveDown(1, height));
-		else break;
-	}
-
-	// update cells vector 
-	for (auto i:currentBlock.getCells()) {
-		cells.push_back(i);
-	}
-
-	// updates blocks vector 
-	blocks.push_back(currentBlock);
-
-	// check if any row is completed
-	vector<int> rowsCompleted = checkIfRowsComplete();
-
-	if ( !(rowsCompleted.empty()) ){
-		
-		// clear the rows
-		vector<int> listOfLevels = clearRows(rowsCompleted);
-		// update score
-		// Game::updateScore();
-
-	}
-	
- 	
-	
-	// get new current block
-	currentBlock = nextBlock;
-	// create next block
-	nextBlock = generateBlock();
-
-	currentBlock.attach(display);
-	currentBlock.notifyObservers(SubscriptionType::blockChange);
-
-}
-
 
 void Board::showHint(){
 
@@ -123,7 +83,7 @@ void Board::showHint(){
 
 
 void Board::restart(){
-	
+
 }
 
 
@@ -143,14 +103,14 @@ void Board::setLevel(int n){
 
 //HIJACKED FUNCTIONALITY CHANGE BACK LATER
 void Board::setCurrentBlock(string blockName){
-//	currentBlock = blockFactory.generateBlock(this->currentLevel);
-//	cerr << currentBlock.getName() << endl;
-//	currentBlock = blockFactory.generateBlock(blockName);
-	currentBlock.clearBlockFromScreen();
-	currentBlock.detach(display);
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+	cerr << currentBlock.getName() << endl;
 	currentBlock = blockFactory.generateBlock(blockName);
-	currentBlock.attach(this->display);
-	currentBlock.notifyObservers(SubscriptionType::blockChange);
+//	currentBlock.clearBlockFromScreen();
+//	currentBlock.detach(display);
+//	currentBlock = blockFactory.generateBlock(blockName);
+//	currentBlock.attach(this->display);
+//	currentBlock.notifyObservers(SubscriptionType::blockChange);
 }
 
 
@@ -179,37 +139,88 @@ Block Board::generateBlock() { // may be useless
 }
 
 
-// RIP 
+// RIP
+bool inVec(vector<int> anycontainer, int testvalue){
+	bool contains = find(anycontainer.begin(), anycontainer.end(), testvalue) != anycontainer.end();
+	return !contains;
+}
+
 
 // returns which rows are completed
 vector<int> Board::checkIfRowsComplete() {
-	
+
 	vector<int> v;
-	int counter = 0; 
+	vector<int> cols;
+	int counter = 0;
 	//const int width;
 	int rows = this->height;
+	int rowToClear;
 
 	for (int i = 0; i < rows; i++) {
 		for (auto n: this->cells){
-			if (n.row == i) {
+			if (n.row == i && inVec(cols, n.col)) {
+				cols.emplace_back(n.col);
 				counter++;
 			}
 		}
-
 		if (counter == width){
 			v.emplace_back(i);
 		}
 	}
 
-	return v; 
+	return v;
 }
+
+
+
+void Board::currentBlockDrop() {
+
+	// keep moving block down until it can't move down
+	while(canMoveDown()) {
+		if (currentBlock.moveDown(1, height));
+		else break;
+	}
+
+	// update cells vector
+	for (auto i:currentBlock.getCells()) {
+		cells.push_back(i);
+	}
+
+	// updates blocks vector
+	blocks.push_back(currentBlock);
+
+	// check if any row is completed
+	vector<int> rowsCompleted = checkIfRowsComplete();
+
+	if ( !(rowsCompleted.empty()) ){
+		// cout << "rows completed not empty" << endl;
+		// clear the rows
+		vector<int> listOfLevels = clearRows(rowsCompleted);
+		// update score
+		// Game::updateScore();
+
+	}
+
+	// get new current block
+	currentBlock = nextBlock;
+	// create next block
+	nextBlock = generateBlock();
+
+	currentBlock.attach(display);
+	currentBlock.notifyObservers(SubscriptionType::blockChange);
+
+}
+
+
+
 
 vector<int> Board::clearRows(vector<int> rowsCompleted) {
 
 	vector<int> lvls;
-	vector<int> listOfLevels; 
+	vector<int> listOfLevels;
 
 	for (auto i: rowsCompleted) {
+		 cout << "clearRows: " << i << endl;
 		 lvls = clearRow(i);
 
 		 if ( !(lvls.empty()) ) {
@@ -224,26 +235,39 @@ vector<int> Board::clearRows(vector<int> rowsCompleted) {
 }
 
 vector<int> Board::clearRow(int theRow) {
-	
-	// vector of cells that need to be deleted 
+
+	cout << "clearRow Called" << endl;
+	// vector of cells that need to be deleted
 	vector<Cell> toDelete;
 	int theLevel;
-	vector<int> levels; 
+	vector<int> levels;
+	vector<int> index;
+	vector<int> cols;
 
 	int size = cells.size();
 	for(int i =0; i < size; i++){
-		if (cells[i].row = theRow){
+		if (cells[i].row == theRow && inVec(cols, cells[i].col)){
+			cout << "row iter: " << i << endl;
+			cout << "row: " << cells[i].row << " cols: " << cells[i].col << endl;
 			toDelete.emplace_back(cells[i]);
-			this->cells.erase(cells.begin()+i);
+			index.emplace_back(i);
+			cols.emplace_back(cells[i].col);
 		}
-
 	}
 
+	int size2 = index.size();
+
+	for (int j = 0; j < size2; j++) {
+		this->cells.erase(cells.begin()+index[j]);
+	}
+
+
+	cout << "made it out of first loop" << endl;
 	for(auto n: toDelete){
 
 		int cellRow = n.row;
-		int cellCol = n.col;
-		theLevel = n.blockPtr->deleteCells(cellRow, cellCol);
+		int cellCol = this->width;
+		theLevel = n.blockPtr->updateCells(cellRow, cellCol);
 		if (theLevel != -1) levels.emplace_back(theLevel);
 
 	}
@@ -258,5 +282,5 @@ void Board::printNextBlock() {
 }
 
 bool Board::canMoveLeft() const {
-	
+
 }
