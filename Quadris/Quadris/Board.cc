@@ -151,11 +151,23 @@ void Board::currentBlockDrop() {
 	blocks.push_back(currentBlock);
 
 	// check if any row is completed
-	// clear the rows 
-	// update score 
+	vector<int> rowsCompleted = checkIfRowsComplete();
 
+	if ( !(rowsCompleted.empty()) ){
+		
+		// clear the rows
+		vector<int> listOfLevels = clearRows(rowsCompleted);
+		// update score
+		// Game::updateScore();
+
+	}
+	
+ 	
+	
+	// get new current block
 	currentBlock = nextBlock;
-	// generate nextBlock
+	// create next block
+	nextBlock = generateBlock();
 }
 
 
@@ -214,17 +226,98 @@ Block Board::generateBlock() { // may be useless
 }
 
 
-std::vector<int> Board::checkIfRowsComplete() {
-	// returns which rows are completed 
-}
+// RIP 
 
-void Board::clearRows(vector<int> rowsCompleted) {
-
-}
-
-void Board::clearRow(int row) {
+// returns which rows are completed
+vector<int> Board::checkIfRowsComplete() {
 	
+	vector<int> v;
+	int counter = 0; 
+	//const int width;
+	int rows = this->height;
+
+	for (int i = 0; i < rows; i++) {
+		for (auto n: this->cells){
+			if (n.row == i) {
+				counter++;
+			}
+		}
+
+		if (counter == width){
+			v.emplace_back(i);
+		}
+	}
+
+	return v; 
 }
 
+vector<int> Board::clearRows(vector<int> rowsCompleted) {
 
+	vector<int> lvls;
+	vector<int> listOfLevels; 
 
+	for (auto i: rowsCompleted) {
+		 lvls = clearRow(i);
+
+		 if ( !(lvl.empty()) ) {
+		 	for (auto n: lvls) {
+		 		listOfLevels.emplace_back(n);
+		 	}
+		 }
+	}
+
+	return listOfLevels;
+
+}
+
+vector<int> Board::clearRow(int theRow) {
+	
+	// vector of cells that need to be deleted 
+	vector<Cell> toDelete;
+	int theLevel;
+	vector<int> levels; 
+
+	for(auto i: this->cells){
+		if (i.row = theRow){
+			toDelete.emplace_back(i);
+			this->cells.erase(i);
+		}
+
+	}
+
+	for(auto n: toDelete){
+
+		int cellRow = n.row;
+		int cellCol = n.col;
+		theLevel = n.blockPtr->deleteCell(cellRow, cellCol);
+		if (theLevel != -1) levels.emplace_back(theLevel);
+
+	}
+
+	return theLevel;
+
+}
+
+// Each of the cells have ptr to a block
+//
+// to delete the cell go to the block ptr 
+// make a func in block called deleteCell
+// takes row and col as params -> returns int which tells u if block is fully deleted 
+// if the int is -1, block is not deleted 	
+// check if cell vector is empty 
+// 
+
+/*
+for (auto i: this->cells) {
+		if (i.row == theRow && i.col == theCol) {
+			//remove from cells vector 
+			this->cells.erase(i);
+		}
+	}
+
+	if ( !(this->cells.empty()) ){
+		return thsi->level;
+	} else {
+		return -1;
+	}
+*/

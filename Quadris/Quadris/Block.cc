@@ -141,3 +141,21 @@ ostream &operator<<(std::ostream &out, const Block&b) {
 
 }
 
+
+int deleteCells(int theRow, int theCol){
+
+	for (auto i: this->cells) {
+		if (i.row == theRow && i.col == theCol) {
+			//remove from cells vector 
+			this->cells.erase(i);
+		}
+	}
+
+	if ( !(this->cells.empty()) ){
+		return thsi->level;
+	} else {
+		return -1;
+	}
+
+}
+

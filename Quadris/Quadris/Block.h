@@ -42,6 +42,8 @@ public:
 	std::vector<Cell> getCells();
 	Cell findLowest(char);
 
+	int deleteCells(int, int);
+
 private:
 	int size;
 	std::string name;

@@ -53,7 +53,7 @@ public:
 	void setSeed(int seed);
 	void setSequence(std::string sequenceFile);
 	vector<int> clearRows(std::vector<int>);
-	void clearRow(int row);
+	vector<int> clearRow(int row);
 
 private:
 	BlockFactory blockFactory;
