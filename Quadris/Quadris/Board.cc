@@ -154,7 +154,6 @@ vector<int> Board::checkIfRowsComplete() {
 	int counter = 0;
 	//const int width;
 	int rows = this->height;
-	int rowToClear;
 
 	for (int i = 0; i < rows; i++) {
 		for (auto n: this->cells){
@@ -200,7 +199,6 @@ void Board::currentBlockDrop() {
 		// Game::updateScore();
 
 	}
-
 	// get new current block
 	currentBlock = nextBlock;
 	// create next block
@@ -259,16 +257,25 @@ vector<int> Board::clearRow(int theRow) {
 
 	for (int j = 0; j < size2; j++) {
 		this->cells.erase(cells.begin()+index[j]);
+		for (int i = j+1; i < size2;  i++) {
+				index[i] -= 1;
+		}
 	}
+
 
 
 	cout << "made it out of first loop" << endl;
 	for(auto n: toDelete){
 
+		cout << "0" << endl;
 		int cellRow = n.row;
-		int cellCol = this->width;
-		theLevel = n.blockPtr->updateCells(cellRow, cellCol);
+		cout << "1" << endl;
+		cout << "2" << endl;
+		//WELL FUCK
+		theLevel = n.blockPtr->updateCells(cellRow, this->width);
+		cout << "3" << endl;
 		if (theLevel != -1) levels.emplace_back(theLevel);
+		cout << "4" << endl;
 
 	}
 
