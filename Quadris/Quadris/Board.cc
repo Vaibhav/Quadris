@@ -15,7 +15,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	//blockFactory.setLevel(currentLevel);
 	blockFactory.setSequenceFile(sequenceFile);
 	currentBlock = blockFactory.generateBlock(1);
- 	nextBlock = blockFactory.generateBlock(1);
+	nextBlock = blockFactory.generateBlock(1);
 
 	// Idk wtf all the shit above is, but we need this:
 	 
@@ -43,13 +43,11 @@ SubscriptionType Board::subType() const {
 
 
 void Board::currentBlockLeft(int n) {
-	currentBlock.moveLeft(n);
+	for (int i=0; i< n; i++) currentBlock.moveLeft();
 }
 	
-
-
 void Board::currentBlockRight(int n) {
-	currentBlock.moveRight(n);
+	for (int i=0; i< n; i++) currentBlock.moveRight(width);
 }
 
 
@@ -130,12 +128,12 @@ void Board::restart(){
 
 
 void Board::currentBlockRotateClockwise(int n) {
-	currentBlock.rotateClockWise(n);
+	for (int i=0; i< n; i++) currentBlock.rotateClockWise();
 }
 
 
 void Board::currentBlockRotateCounterClockwise(int n) {
-	currentBlock.rotateCounterClockWise(n);
+	for (int i=0; i< n; i++) currentBlock.rotateCounterClockWise();
 }
 
 
@@ -257,4 +255,8 @@ vector<int> Board::clearRow(int theRow) {
 
 void Board::printNextBlock() {
 	cout << nextBlock;
+}
+
+bool Board::canMoveLeft() const {
+	
 }

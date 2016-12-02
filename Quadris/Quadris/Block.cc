@@ -69,7 +69,7 @@ void Block::rotateUpdate() {
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-void Block::rotateClockWise(int n) {
+void Block::rotateClockWise() {
 	prevCells = cells;
 	for (auto &i:coords) {
 		int row = i.first;
@@ -86,7 +86,7 @@ void Block::clearBlockFromScreen(){
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-void Block::rotateCounterClockWise(int n) {
+void Block::rotateCounterClockWise() {
 	prevCells = cells;
 	for (auto &i:coords) {
 		int row = i.first;
@@ -97,17 +97,19 @@ void Block::rotateCounterClockWise(int n) {
 	rotateUpdate();
 }
 
-void Block::moveLeft(int n) {
+void Block::moveLeft() {
+	if (lowerLeft.second <= 0) return;
 	prevCells = cells;
-	for (auto &i:cells) i.col -= n;
-	lowerLeft.second -= n;
+	for (auto &i:cells) i.col -= 1;
+	lowerLeft.second -= 1;
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-void Block::moveRight(int n) {
+void Block::moveRight(int restraint) {
+	if (lowerLeft.second + width + 1 >= restraint) return;
 	prevCells = cells;
-	for (auto &i:cells) i.col += n;
-	lowerLeft.second += n;
+	for (auto &i:cells) i.col += 1;
+	lowerLeft.second += 1;
 	notifyObservers(SubscriptionType::blockChange);
 }
 

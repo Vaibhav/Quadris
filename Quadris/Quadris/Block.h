@@ -18,20 +18,16 @@ public:
 		  std::string name,
 		  std::vector < std::pair < int, int > > coords
 		  );
-	//Block(std::vector<Cell>);
-	//Block(const Block&);
-	//Block(Block&&);
-	//Block& operator=(const Block&);
-	//Block& operator=(Block&&);
+
 	Block();
 	~Block();
 
 	//As a single turn in the game, the block moves n times
-	void rotateClockWise(int n);
-	void rotateCounterClockWise(int n);
+	void rotateClockWise();
+	void rotateCounterClockWise();
 	bool moveDown(int n, int restraint);
-	void moveLeft(int n);
-	void moveRight(int n);
+	void moveLeft();
+	void moveRight(int restraint);
 	void setLevel(int n);
 
 	void switchCurrentBlock(std::string blockName);
