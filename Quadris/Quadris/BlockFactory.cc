@@ -16,22 +16,14 @@ using namespace std;
 
 Block BlockFactory::generateBlock(int level)
 {
+    
+    Block generatedBlock;
     if (level == 0)
     {
-/*	//auto p = make_unique<new BlockGeneratorBase{}>;
+	//auto p = make_unique<new BlockGeneratorBase{}>;
 	unique_ptr<BlockGenerator> p{new BlockGeneratorBase{sequenceFile}};
 	return p->generateBlock();
 	//return Block();
-    */
-          vector<double> probabilities = vector<double> 
-        {1.0/12.0, 1.0/12.0, 1.0/6.0, 1.0/6.0, 1.0/6.0, 1.0/6.0, 1.0/6.0 };
-       	vector<string> blocks =  
-        vector<string>{"BLOCK-S", "BLOCK-Z", "BLOCK-T", "BLOCK-I", "BLOCK-O", "BLOCK-J", "BLOCK-L"};
-      	shared_ptr<BlockGenerator> component {new BlockGeneratorBase{sequenceFile}};
-        unique_ptr<BlockGenerator> p{new GeneratorProbabilityDecorator{
-                                         component,
-                                         blocks, probabilities, seed, 100}}; 
-        	return p->generateBlock(); 
     }
     else if (level == 1)
     {
@@ -42,12 +34,18 @@ Block BlockFactory::generateBlock(int level)
       	shared_ptr<BlockGenerator> component {new BlockGeneratorBase{sequenceFile}};
         unique_ptr<BlockGenerator> p{new GeneratorProbabilityDecorator{
                                          component,
-                                         blocks, probabilities, seed, 100}}; 
-        	return p->generateBlock(); 
+                                         blocks, 
+                                         probabilities, 
+                                         seed
+                                         }}; 
+        	generatedBlock = p->generateBlock(); 
     
     }
     else if (level == 2)
     {
+
+
+
     }
     else if (level == 3)
     {
@@ -55,13 +53,14 @@ Block BlockFactory::generateBlock(int level)
     else if (level == 4)
     {
     }
-
-    return Block();
+    generatedBlock.setLevel(level);
+    return generatedBlock;
 }
 
 Block BlockFactory::generateBlock(string blockName)
 {
-    return generateBlock();
+	unique_ptr<BlockGenerator> p{new BlockGeneratorBase{sequenceFile}};
+	return p->generateBlock(blockName);    
 }
 
 void BlockFactory::setSeed(int n)
