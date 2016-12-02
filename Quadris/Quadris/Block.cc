@@ -149,17 +149,18 @@ ostream &operator<<(std::ostream &out, const Block&b) {
 }
 
 
-int deleteCells(int theRow, int theCol){
+int Block::deleteCells(int theRow, int theCol){
 
-	for (auto i: this->cells) {
-		if (i.row == theRow && i.col == theCol) {
+	int size = cells.size();
+	for(int i =0; i < size; i++){
+		if (cells[i].row == theRow && cells[i].col == theCol) {
 			//remove from cells vector 
-			this->cells.erase(i);
+			this->cells.erase(cells.begin()+i);
 		}
 	}
 
 	if ( !(this->cells.empty()) ){
-		return thsi->level;
+		return this->level;
 	} else {
 		return -1;
 	}

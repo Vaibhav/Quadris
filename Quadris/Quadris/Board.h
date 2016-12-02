@@ -52,8 +52,8 @@ public:
 	void restoreRandom();
 	void setSeed(int seed);
 	void setSequence(std::string sequenceFile);
-	vector<int> clearRows(std::vector<int>);
-	vector<int> clearRow(int row);
+	std::vector<int> clearRows(std::vector<int>);
+	std::vector<int> clearRow(int row);
 	void printNextBlock();
 	
 

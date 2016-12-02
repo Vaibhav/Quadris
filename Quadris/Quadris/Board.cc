@@ -14,66 +14,8 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
 	blockFactory.setSequenceFile(sequenceFile);
-	/*
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName();
-	*/
-/*	currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
 	currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-	currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-	*/
-/*			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();*/
-			currentBlock = blockFactory.generateBlock(1);
-	//cerr << currentBlock.getName();
-			nextBlock = blockFactory.generateBlock(1);
+]	nextBlock = blockFactory.generateBlock(1);
 
 	// Idk wtf all the shit above is, but we need this:
 	 
@@ -170,6 +112,10 @@ void Board::currentBlockDrop() {
 	currentBlock = nextBlock;
 	// create next block
 	nextBlock = generateBlock();
+
+	currentBlock.attach(display);
+	currentBlock.notifyObservers(SubscriptionType::blockChange);
+
 }
 
 
@@ -266,7 +212,7 @@ vector<int> Board::clearRows(vector<int> rowsCompleted) {
 	for (auto i: rowsCompleted) {
 		 lvls = clearRow(i);
 
-		 if ( !(lvl.empty()) ) {
+		 if ( !(lvls.empty()) ) {
 		 	for (auto n: lvls) {
 		 		listOfLevels.emplace_back(n);
 		 	}
@@ -284,10 +230,11 @@ vector<int> Board::clearRow(int theRow) {
 	int theLevel;
 	vector<int> levels; 
 
-	for(auto i: this->cells){
-		if (i.row = theRow){
-			toDelete.emplace_back(i);
-			this->cells.erase(i);
+	int size = cells.size();
+	for(int i =0; i < size; i++){
+		if (cells[i].row = theRow){
+			toDelete.emplace_back(cells[i]);
+			this->cells.erase(cells.begin()+i);
 		}
 
 	}
@@ -296,12 +243,12 @@ vector<int> Board::clearRow(int theRow) {
 
 		int cellRow = n.row;
 		int cellCol = n.col;
-		theLevel = n.blockPtr->deleteCell(cellRow, cellCol);
+		theLevel = n.blockPtr->deleteCells(cellRow, cellCol);
 		if (theLevel != -1) levels.emplace_back(theLevel);
 
 	}
 
-	return theLevel;
+	return levels;
 
 }
 
