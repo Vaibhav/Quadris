@@ -7,7 +7,7 @@ class Subject;
 
 class Display : public Observer {
 public:
-	Display(int width=11, int height=15);
+	Display(int width=11, int height=18);
 	~Display();
 	void notify(Subject &whoNotified);
 	SubscriptionType subType() const;

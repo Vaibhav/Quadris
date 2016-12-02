@@ -3,7 +3,7 @@
 #include "info.h"
 #include <string>
 #include <vector>
-#include <iostream> //debug
+#include <iostream>
 using namespace std;
 
 int calcHeight(std::vector < std::pair < int, int > > coords) {
@@ -38,11 +38,11 @@ Block::Block(char dispChar,
 	 	  std::string colour, 
 		  std::string name,
 		  std::vector < std::pair < int, int > > coords
-		  ): colour(colour), name(name), coords(coords) {
+		  ): colour(colour), name(name), coords(coords), dispChar(dispChar) {
 
 	for (auto i:coords) { 
-		cells.push_back(Cell{this, dispChar, i.first, i.second});
-	}
+		cells.push_back(Cell{this, dispChar, i.first+3, i.second});
+	} // Add 3 to le height for safety purposes
 
 	height = calcHeight(coords);
 	width = calcWidth(coords);
@@ -131,6 +131,18 @@ string Block::getName(){
 Block::~Block() {}
 
 ostream &operator<<(std::ostream &out, const Block&b) {
-
+	int curRow = 0;
+	int curCol = 0;
+	for (auto i:b.coords) {
+		if (i.first > curCol) {
+			curCol ++;
+			endl(out);
+		}
+		if (i.second > curRow) {
+			curRow ++;
+			cout << ' ';
+		}
+		cout << b.dispChar;
+	}
 }
 

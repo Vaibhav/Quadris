@@ -49,6 +49,7 @@ private:
 	int width;
 	int height;
 	std::string colour;
+	char dispChar;
 	std::vector<Cell> prevCells;
 	std::vector < std::pair < int, int > > coords;
 	std::vector<Cell> cells;
