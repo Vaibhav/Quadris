@@ -36,19 +36,19 @@ pair<int, int> Block::findLowest() {
 }
 
 //This is for the block parser
-Block::Block(char dispChar, 
-	 	  std::string colour, 
+Block::Block(char dispChar,
+	 	  std::string colour,
 		  std::string name,
 		  std::vector < std::pair < int, int > > coords
 		  ): name(name), colour(colour), dispChar(dispChar), coords(coords) {
 
-	for (auto i:coords) { 
+	for (auto i:coords) {
 		cells.push_back(Cell{this, dispChar, i.first+3, i.second});
 	} // Add 3 to le height for safety purposes
 
 	height = calcHeight(coords);
 	width = calcWidth(coords);
-	
+
 	lowerLeft = findLowest();
 
 	notifyObservers(SubscriptionType::blockChange);
@@ -78,7 +78,7 @@ void Block::rotateClockWise(int restraint) {
 		i.first = col;
 		i.second = height - row;
 	}
-	rotateUpdate();	
+	rotateUpdate();
 }
 
 void Block::clearBlockFromScreen(){
@@ -160,16 +160,27 @@ ostream &operator<<(std::ostream &out, const Block&b) {
 }
 
 
-int Block::deleteCells(int theRow, int theCol){
+
+void Block::deleteCells(int theRow, int theCol){
 
 	int size = cells.size();
 	for(int i =0; i < size; i++){
 		if (cells[i].row == theRow && cells[i].col == theCol) {
-			//remove from cells vector 
+			//remove from cells vector
 			this->cells.erase(cells.begin()+i);
 		}
 	}
 
+
+}
+
+int Block::updateCells(int rows, int cols){
+	prevCells = cells;
+	for (int i = 0; i < cols; i++) {
+		deleteCells(rows, i);
+	}
+
+	notifyObservers(SubscriptionType::blockChange);
 	if ( !(this->cells.empty()) ){
 		return this->level;
 	} else {

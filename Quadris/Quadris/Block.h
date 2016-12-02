@@ -12,9 +12,9 @@ class Info;
 
 class Block: public Subject {
 
-public:	
-	Block(char dispChar, 
-	 	  std::string colour, 
+public:
+	Block(char dispChar,
+	 	  std::string colour,
 		  std::string name,
 		  std::vector < std::pair < int, int > > coords
 		  );
@@ -40,8 +40,8 @@ public:
 	int getWidth() const;
 	std::pair<int, int> findLowest();
 	void clearBlockFromScreen();
-
-	int deleteCells(int, int);
+	int updateCells(int, int);
+	void deleteCells(int, int);
 
 private:
 	int size;
