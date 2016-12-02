@@ -6,6 +6,8 @@
 #include <iostream>
 using namespace std;
 
+
+// NOTE: height and width start at zero (ie. I-block has height 0)
 int calcHeight(std::vector < std::pair < int, int > > coords) {
 	int highest = 0;
 	for (auto i:coords) {
@@ -131,18 +133,18 @@ string Block::getName(){
 Block::~Block() {}
 
 ostream &operator<<(std::ostream &out, const Block&b) {
-	int curRow = 0;
-	int curCol = 0;
-	for (auto i:b.coords) {
-		if (i.first > curCol) {
-			curCol ++;
-			endl(out);
+	bool printed = false;
+	for (int i = 0; i <= b.height; i++) {
+		for (int j = 0; j <= b.width; j++) {
+			for (auto k:b.coords) {
+				if (k.first == i && k.second == j) {
+					out << b.dispChar;
+					printed = true;
+				}
+			}
+			if(!printed) out << ' ';
 		}
-		if (i.second > curRow) {
-			curRow ++;
-			cout << ' ';
-		}
-		cout << b.dispChar;
+		endl(out);
 	}
 }
 

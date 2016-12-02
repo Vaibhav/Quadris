@@ -70,10 +70,10 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 			currentBlock = blockFactory.generateBlock(1);
 	cerr << currentBlock.getName();
 			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
+	cerr << currentBlock.getName();*/
 			currentBlock = blockFactory.generateBlock(1);
-	cerr << currentBlock.getName();
-*/
+	//cerr << currentBlock.getName();
+			nextBlock = blockFactory.generateBlock(1);
 
 	// Idk wtf all the shit above is, but we need this:
 	 
@@ -221,5 +221,9 @@ std::vector<int> Board::checkIfRowsComplete() {
 
 void Board::clearRow(int row) {
 	
+}
+
+void Board::printNextBlock() {
+	cout << nextBlock;
 }
 

@@ -53,6 +53,8 @@ public:
 	void restoreRandom();
 	void setSeed(int seed);
 	void setSequence(std::string sequenceFile);
+
+	void printNextBlock();
 	
 private:
 	BlockFactory blockFactory;
