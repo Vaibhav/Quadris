@@ -43,20 +43,29 @@ SubscriptionType Board::subType() const {
 
 
 void Board::currentBlockLeft(int n) {
-	for (int i=0; i< n; i++) currentBlock.moveLeft();
+	for (int i=0; i< n; i++) {
+		if (!canMoveLeft()) return;
+		currentBlock.moveLeft();
+	}
 }
 	
 void Board::currentBlockRight(int n) {
-	for (int i=0; i< n; i++) currentBlock.moveRight(width);
+	for (int i=0; i< n; i++) {
+		if (!canMoveRight()) return;
+		currentBlock.moveRight(width);
+	}
 }
 
 
 void Board::currentBlockDown(int n) {
-	currentBlock.moveDown(n, height);
+	for (int i=0; i< n; i++) {
+		if (!canMoveDown()) return;
+		currentBlock.moveDown(height);
+	}
 }
 
 
-bool Board::canMoveDown() {
+bool Board::canMoveDown() const {
 	
 	// Cells in the block
 	vector<Cell> blockCells = currentBlock.getCells();
@@ -80,7 +89,7 @@ void Board::currentBlockDrop() {
 
 	// keep moving block down until it can't move down
 	while(canMoveDown()) {
-		if (currentBlock.moveDown(1, height));
+		if (currentBlock.moveDown(height));
 		else break;
 	}
 
@@ -128,12 +137,18 @@ void Board::restart(){
 
 
 void Board::currentBlockRotateClockwise(int n) {
-	for (int i=0; i< n; i++) currentBlock.rotateClockWise();
+	for (int i=0; i< n; i++) {
+		if (!canRotateCW()) return;
+		currentBlock.rotateClockWise(width);
+	}
 }
 
 
 void Board::currentBlockRotateCounterClockwise(int n) {
-	for (int i=0; i< n; i++) currentBlock.rotateCounterClockWise();
+	for (int i=0; i< n; i++)  {
+		if (!canRotateCCW()) return;
+		currentBlock.rotateCounterClockWise(width);
+	}
 }
 
 
@@ -258,5 +273,41 @@ void Board::printNextBlock() {
 }
 
 bool Board::canMoveLeft() const {
-	
+	vector<Cell> blockCells = currentBlock.getCells();
+	for (auto i: blockCells) {
+		for (auto n : cells) {
+			if (n.row == i.row && n.col == i.col - 1) return false;
+		}
+	} 
+	return true;
+}
+
+bool Board::canMoveRight(int k) const {
+	vector<Cell> blockCells = currentBlock.getCells();
+	for (auto i: blockCells) {
+		for (auto n : cells) {
+			if (n.row == i.row && n.col == i.col + k) return false;
+		}
+	} 
+	return true;
+}
+
+bool Board::canRotateCW() const {
+	int h = currentBlock.getHeight();
+	bool flag = false;
+	for (int i=1; i <= h; i++) {
+		if (!canMoveRight(i)) flag = true;
+	}
+	if (flag && h > currentBlock.getWidth()) return false;
+	return true;
+}
+
+bool Board::canRotateCCW() const {
+	int h = currentBlock.getHeight();
+	bool flag = false;
+	for (int i=1; i <= h; i++) {
+		if (!canMoveRight(i)) flag = true;
+	}
+	if (flag && h > currentBlock.getWidth()) return false;
+	return true;
 }

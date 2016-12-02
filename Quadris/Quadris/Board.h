@@ -70,11 +70,11 @@ private:
 	const int height;
 
 	Display * display;
-	bool canRotateLeft() const;
-	bool canRotateRight() const;
+	bool canRotateCW() const;
+	bool canRotateCCW() const;
 	bool canMoveLeft() const;
-	bool canMoveRight() const;
-	bool canMoveDown();
+	bool canMoveRight(int k=1) const;
+	bool canMoveDown() const;
 	void getNextBlock();
 	void updateScore() const;
 	

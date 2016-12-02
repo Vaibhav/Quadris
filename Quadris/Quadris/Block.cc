@@ -69,7 +69,8 @@ void Block::rotateUpdate() {
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-void Block::rotateClockWise() {
+void Block::rotateClockWise(int restraint) {
+	if (lowerLeft.second + height >= restraint) return;
 	prevCells = cells;
 	for (auto &i:coords) {
 		int row = i.first;
@@ -86,7 +87,8 @@ void Block::clearBlockFromScreen(){
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-void Block::rotateCounterClockWise() {
+void Block::rotateCounterClockWise(int restraint) {
+	if (lowerLeft.second + height >= restraint) return;
 	prevCells = cells;
 	for (auto &i:coords) {
 		int row = i.first;
@@ -113,15 +115,15 @@ void Block::moveRight(int restraint) {
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-vector<Cell> Block::getCells(){
+vector<Cell> Block::getCells() const {
 	return this->cells;
 }
 
-bool Block::moveDown(int n, int restraint) {
+bool Block::moveDown(int restraint) {
 	prevCells = cells;
-	if (lowerLeft.first + n >= restraint) return false;
-	for (auto &i:cells) i.row += n;
-	lowerLeft.first += n;
+	if (lowerLeft.first + 1 >= restraint) return false;
+	for (auto &i:cells) i.row += 1;
+	lowerLeft.first += 1;
 	notifyObservers(SubscriptionType::blockChange);
 	return true;
 }
@@ -154,6 +156,7 @@ ostream &operator<<(std::ostream &out, const Block&b) {
 		}
 		endl(out);
 	}
+	return out;
 }
 
 
@@ -173,5 +176,13 @@ int Block::deleteCells(int theRow, int theCol){
 		return -1;
 	}
 
+}
+
+int Block::getHeight() const {
+	return height;
+}
+
+int Block::getWidth() const {
+	return width;
 }
 
