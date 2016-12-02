@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 
@@ -160,26 +161,51 @@ ostream &operator<<(std::ostream &out, const Block&b) {
 }
 
 
+bool isInVec(vector<int> anycontainer, int testvalue){
+	bool contains = find(anycontainer.begin(), anycontainer.end(), testvalue) != anycontainer.end();
+	return !contains;
+}
 
 void Block::deleteCells(int theRow, int theCol){
 
-	int size = cells.size();
-	for(int i =0; i < size; i++){
-		if (cells[i].row == theRow && cells[i].col == theCol) {
-			//remove from cells vector
-			this->cells.erase(cells.begin()+i);
+	vector<int> index;
+	vector<int> cols;
+
+	cout << "wtf" << endl;
+	//	int size = cells.size();
+	for(int i = 0; i < cells.size(); i++){
+		cout << "indexsss: " << i << endl;
+		if (cells[i].row == theRow && cells[i].col == theCol && isInVec(cols, cells[i].col)) {
+				cout << "in if" << endl;
+				index.emplace_back(i);
+				cols.emplace_back(cells[i].col);
+				cout << "fuvk ogf bu=ig b v you fucking asshole" << endl;
 		}
 	}
+
+	cout << "wtff" << endl;
+	int size2 = index.size();
+	for (int j = 0; j < size2; j++) {
+		this->cells.erase(cells.begin()+index[j]);
+		for (int i = j+1; i < size2;  i++) {
+				index[i] -= 1;
+		}
+	}
+
+
 
 
 }
 
 int Block::updateCells(int rows, int cols){
-	prevCells = cells;
+	cout << "YO FAMY" << endl;
+	// prevCells = cells;
 	for (int i = 0; i < cols; i++) {
+		cout << "pls call" << endl;
 		deleteCells(rows, i);
 	}
 
+	cout << "YO FAMY" << endl;
 	notifyObservers(SubscriptionType::blockChange);
 	if ( !(this->cells.empty()) ){
 		return this->level;
