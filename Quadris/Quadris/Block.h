@@ -41,6 +41,7 @@ public:
 	std::string getName();
 	std::vector<Cell> getCells();
 	std::pair<int, int> findLowest();
+	void clearBlockFromScreen();
 
 	int deleteCells(int, int);
 

@@ -80,6 +80,12 @@ void Block::rotateClockWise(int n) {
 	rotateUpdate();	
 }
 
+void Block::clearBlockFromScreen(){
+	prevCells = cells;
+	cells.clear();
+	notifyObservers(SubscriptionType::blockChange);
+}
+
 void Block::rotateCounterClockWise(int n) {
 	prevCells = cells;
 	for (auto &i:coords) {

@@ -15,7 +15,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	//blockFactory.setLevel(currentLevel);
 	blockFactory.setSequenceFile(sequenceFile);
 	currentBlock = blockFactory.generateBlock(1);
-]	nextBlock = blockFactory.generateBlock(1);
+ 	nextBlock = blockFactory.generateBlock(1);
 
 	// Idk wtf all the shit above is, but we need this:
 	 
@@ -148,6 +148,8 @@ void Board::setCurrentBlock(string blockName){
 //	currentBlock = blockFactory.generateBlock(this->currentLevel);
 //	cerr << currentBlock.getName() << endl;
 //	currentBlock = blockFactory.generateBlock(blockName);
+	currentBlock.clearBlockFromScreen();
+	currentBlock.detach(display);
 	currentBlock = blockFactory.generateBlock(blockName);
 	currentBlock.attach(this->display);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
