@@ -12,6 +12,7 @@ using namespace std;
 
 Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string filename): 
 	b{ createBoard() }, commandIn { CommandInterpreter{cin} } {
+		cout << "Game::Game called" << endl;
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
 		this->b.setLevel(currentLevel);
@@ -25,10 +26,12 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 		b.setSeed(seed);
 		
 		readInHighScore();
+		cout << "Game constructed" << endl;
 	}
 
 Board Game::createBoard() {
-	return Board{&display};
+	cout << "createBoard called" << endl;
+	return Board{&display, &gd};
 }
 
 void Game::play() {

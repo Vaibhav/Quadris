@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 
-Display::Display(int width, int height): width{width}, height{height} {
+TextDisplay::TextDisplay(int width, int height): width{width}, height{height} {
 	for (int i=0; i < height; i++) {
     	theBoard.emplace_back();
     	for (int j=0; j < width; j++) {
@@ -16,9 +16,9 @@ Display::Display(int width, int height): width{width}, height{height} {
   	}
 }
 
-Display::~Display() {}
+TextDisplay::~TextDisplay() {}
 
-void Display::notify(Subject &whoNotified) {
+void TextDisplay::notify(Subject &whoNotified) {
   Info info = whoNotified.getInfo();
   vector <Cell> cells = info.cells;
   vector <Cell> toDelete = info.prevCells;
@@ -30,11 +30,11 @@ void Display::notify(Subject &whoNotified) {
   }
 }
 
-SubscriptionType Display::subType() const {
+SubscriptionType TextDisplay::subType() const {
   return SubscriptionType::blockChange;
 }
 
-ostream &operator<<(std::ostream &out, const Display&d) {
+ostream &operator<<(std::ostream &out, const TextDisplay&d) {
   for (int i = 0; i < d.height; i++) {
     for (int j = 0; j < d.width; j++) {
       out << d.theBoard[i][j];

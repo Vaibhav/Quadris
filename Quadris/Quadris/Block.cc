@@ -129,7 +129,7 @@ bool Block::moveDown(int restraint) {
 }
 
 Info Block::getInfo() const {
-	return Info{prevCells, cells}; // Array of cells so display knows what to update
+	return Info{prevCells, cells, -1, colour}; // Array of cells so display knows what to update
 }
 
 void Block::setLevel(int n){
@@ -185,4 +185,3 @@ int Block::getHeight() const {
 int Block::getWidth() const {
 	return width;
 }
-

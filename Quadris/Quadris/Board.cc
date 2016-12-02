@@ -8,8 +8,8 @@
 using namespace std;
 
 
-Board::Board(Display* d, int width, int height, string sequenceFile): 
-	display{d}, blockFactory{BlockFactory()}, currentLevel{0},
+Board::Board(TextDisplay* d, GraphicDisplay *gd, int width, int height, string sequenceFile): 
+	display{d}, gd{gd}, blockFactory{BlockFactory()}, currentLevel{0},
 	width{width}, height{height} {
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
@@ -20,6 +20,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	// Idk wtf all the shit above is, but we need this:
 	 
 	currentBlock.attach(d);
+	currentBlock.attach(gd);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
 	
 	
@@ -121,6 +122,7 @@ void Board::currentBlockDrop() {
 	nextBlock = generateBlock();
 
 	currentBlock.attach(display);
+	currentBlock.attach(gd);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
 
 }
@@ -165,6 +167,7 @@ void Board::setCurrentBlock(string blockName){
 	currentBlock.detach(display);
 	currentBlock = blockFactory.generateBlock(blockName);
 	currentBlock.attach(this->display);
+	currentBlock.attach(this->gd);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
 }
 
