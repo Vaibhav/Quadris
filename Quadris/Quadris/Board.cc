@@ -9,8 +9,8 @@ using namespace std;
 
 
 Board::Board(Display* d, int width, int height, string sequenceFile): 
-	width{width}, height{height}, display{d},
-	blockFactory{BlockFactory()}, currentLevel{0} {
+	display{d}, blockFactory{BlockFactory()}, currentLevel{0},
+	width{width}, height{height} {
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
 	blockFactory.setSequenceFile(sequenceFile);

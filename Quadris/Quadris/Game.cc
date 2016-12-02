@@ -11,7 +11,7 @@
 using namespace std;
 
 Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string filename): 
-	commandIn { CommandInterpreter{cin} }, b{ createBoard() } {
+	b{ createBoard() }, commandIn { CommandInterpreter{cin} } {
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
 		this->b.setLevel(currentLevel);
@@ -97,7 +97,8 @@ void Game::play() {
 				b.showHint();
 			} else if(commands[i].first == "RANDOM"){
 		//		cerr << "RANDOM";
-				for(int j = 0; j!= commands[i].second.size(); ++j){
+				int s = commands[i].second.size();
+				for(int j = 0; j!= s; ++j){
 					cerr <<  commands[i].second[j];
 				}
 				b.restoreRandom();

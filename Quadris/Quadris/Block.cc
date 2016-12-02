@@ -40,7 +40,7 @@ Block::Block(char dispChar,
 	 	  std::string colour, 
 		  std::string name,
 		  std::vector < std::pair < int, int > > coords
-		  ): colour(colour), name(name), coords(coords), dispChar(dispChar) {
+		  ): name(name), colour(colour), dispChar(dispChar), coords(coords) {
 
 	for (auto i:coords) { 
 		cells.push_back(Cell{this, dispChar, i.first+3, i.second});

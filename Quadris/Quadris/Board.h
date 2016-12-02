@@ -58,6 +58,7 @@ public:
 	
 
 private:
+	Display * display;
 	BlockFactory blockFactory;
 	int currentLevel;
 
@@ -69,7 +70,6 @@ private:
 	const int width;
 	const int height;
 
-	Display * display;
 	bool canRotateCW() const;
 	bool canRotateCCW() const;
 	bool canMoveLeft() const;
