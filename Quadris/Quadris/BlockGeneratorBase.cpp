@@ -56,7 +56,11 @@ for(int i = 0; i != blockLen; ++i){
 */
 
 	Block generatedBlock = BlockGenerator::generateBlock(this->sequence[this->currentIndex]);
-	++(this->currentIndex); 
+	if(this->currentIndex + 1 == this->numblocksInSequence){
+			this->currentIndex = 0;
+		} else{
+			++(this->currentIndex); 
+		}
 	return generatedBlock;
 
 }

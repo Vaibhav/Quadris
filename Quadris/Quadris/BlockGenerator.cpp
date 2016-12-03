@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -44,7 +45,11 @@ for(int i = 0; i != blockLen; ++i){
 		return blocks[i];
 	}
 }
-	throw out_of_range("That block did not exist in the parsed blocks");
+if(name == ""){
+	std::cout << "empty shit rite here" << endl;
+}
+	std::cout << name << endl << endl << endl;
+	throw out_of_range("THat blcok did not exist to be parsed");
 }
 
 BlockGenerator::BlockGenerator(){
