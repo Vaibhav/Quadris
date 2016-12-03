@@ -282,27 +282,26 @@ level 3, you get 1 point.)
 */
 
 void Game::updateScore(int rowsCleared, vector<int> lvls) {
-	cout << "update score runs" << endl;
+
 	int levelNow = this->currentLevel;
 	int curScore = this->currentScore;
 	int score;
 
 	score = pow((levelNow + rowsCleared), 2);
-	cout << "score updates to rowsCleared" << endl;
+
 	// if the vector is empty (no full blocks were cleared)
 
 	if (lvls.empty()) {
-		cout << "lvls is empty?" << endl;
+
 		score += curScore;
 		this->currentScore = score;
 		return;
 	}
 
 	int temp;
-	cout << "lvls is not empty" << endl;
+
 	while (!lvls.empty()) {
 		temp = lvls.back();
-		cout << "levels of blocks in update score " << temp << endl;
 		score += pow((temp + 1), 2);
 	 	lvls.pop_back();
 	}

@@ -275,23 +275,20 @@ vector<int> Board::clearRow(int theRow) {
 		}
 	}
 
-	int size2 = index.size();
+	for(auto n: toDelete){
+		int cellRow = n.row;
+		int cellCol = n.col;
+		theLevel = getLevel(cellRow, cellCol, this->width);
+		if (theLevel != -1) levels.emplace_back(theLevel);
+	}
 
+
+	int size2 = index.size();
 	for (int j = 0; j < size2; j++) {
 		this->cells.erase(cells.begin()+index[j]);
 		for (int i = j+1; i < size2;  i++) {
 				index[i] -= 1;
 		}
-	}
-
-
-	for(auto n: toDelete){
-
-		int cellRow = n.row;
-		int cellCol = n.col;
-		theLevel = getLevel(cellRow, cellCol, this->width);
-		cout << "level returned: " << theLevel << endl;
-		if (theLevel != -1) levels.emplace_back(theLevel);
 	}
 
 	return levels;
@@ -324,8 +321,9 @@ void Board::shiftBoardDown(vector<int> rows) {
 		int bs = blocks.size();
 		for (int j=0; j < bs; j++) {
 			blocks[j].moveCellsAboveDown(r);
-		} 
+		}
 	}
+
 }
 
 

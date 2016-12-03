@@ -46,6 +46,7 @@ Block::Block(char dispChar,
 
 	for (auto i:coords) {
 		cells.emplace_back(Cell{this, dispChar, i.first+3, i.second});
+
 	} // Add 3 to le height for safety purposes
 
 	height = calcHeight(coords);
@@ -60,15 +61,16 @@ Block::Block() {} // default ctor
 
 void Block::rotateUpdate() {
 	int csize = cells.size();
+	cout << "csize: " << csize << endl;
 	for (int i=0; i < csize; i++) { // cannot use auto here
 		cells[i].row = lowerLeft.first -width + coords[i].first;
 		cells[i].col = lowerLeft.second + coords[i].second;
-		cout << lowerLeft.first << endl;
 	}
 	lowerLeft = findLowest();
 	height = calcHeight(coords);
 	width = calcWidth(coords);
 	notifyObservers(SubscriptionType::blockChange);
+	cout << "csize update:" << cells.size() << endl;
 }
 
 void Block::rotateClockWise(int restraint) {
@@ -176,9 +178,9 @@ void Block::deleteCells(int theRow, int theCol){
 	vector<int> index;
 	vector<int> cols;
 
-	int size = cells.size();
-
 	// get indexes of the cells to delete in cells vector
+	int size = this->cells.size();
+
 	for(int i = 0; i < size; i++){
 
 		if (cells[i].row == theRow && cells[i].col == theCol && isInVec(cols, cells[i].col)) {
@@ -199,9 +201,7 @@ void Block::deleteCells(int theRow, int theCol){
 
 
 int Block::updateCells(int rows, int cols){
-
 	prevCells = cells;
-	// delete all the cells in the row
 	for (int i = 0; i < cols; i++) {
 		deleteCells(rows, i);
 	}
