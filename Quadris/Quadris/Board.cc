@@ -87,7 +87,7 @@ bool Board::canMoveDown() const {
 	return true;
 }
 
-void Board::currentBlockDrop() {
+pair<int, vector<int>> Board::currentBlockDrop() {
 
 	// keep moving block down until it can't move down
 	while(canMoveDown()) {
@@ -105,16 +105,21 @@ void Board::currentBlockDrop() {
 
 	// check if any row is completed
 	vector<int> rowsCompleted = checkIfRowsComplete();
+	pair<int, vector<int>> toReturn;
 
 	if ( !(rowsCompleted.empty()) ){
-
+		int numOfRows = rowsCompleted.size();
 		// clear the rows
 		vector<int> listOfLevels = clearRows(rowsCompleted);
 		// update score
-		// Game::updateScore();
 
+		toReturn.first = numOfRows;
+		toReturn.second = listOfLevels;
+
+	} else {
+		toReturn.first = 0;
+		toReturn.second = vector<int>();
 	}
-
 
 
 	// get new current block
@@ -124,6 +129,7 @@ void Board::currentBlockDrop() {
 	currentBlock.attach(display);
 	currentBlock.attach(gd);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
+	return toReturn;
 }
 
 void Board::showHint(){
@@ -280,7 +286,7 @@ vector<int> Board::clearRow(int theRow) {
 		if (theLevel != -1) levels.emplace_back(theLevel);
 	}
 
-	return levels;	
+	return levels;
 }
 
 
@@ -290,12 +296,12 @@ int Board::getLevel(int row, int col, int width) {
 
 	for (int i =0; i < blockSize; i++) {
 		for (unsigned int j = 0; j < blocks[i].getCells().size(); j++) {
-			// update the cell and if it deletes a block then it returns the level of the block 
+			// update the cell and if it deletes a block then it returns the level of the block
 			if (blocks[i].getCells()[j].row == row && blocks[i].getCells()[j].col == col) {
 				return blocks[i].updateCells(row, width);
 				//return blocks[i].level;
 			}
-		
+
 		}
 	}
 	return -1;
