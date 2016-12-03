@@ -28,11 +28,11 @@ Block BlockParser::createBlock(string file){
 	vector< pair <int, int>> v; 
 
 	// gets the number of coords to read in 
-	cout << input.badbit;
+//	cout << input.badbit;
 	getline(input, line);
 	int numOfCoords;
 	stringstream ss { line };
-	cout << line << endl;
+//	cout << line << endl;
 	// stores first line as numOfCoords 
 	// ensures numOfCoords is int 
 	if (!(ss >> numOfCoords)) {
@@ -74,7 +74,6 @@ Block BlockParser::createBlock(string file){
 
 
 std::vector<Block> BlockParser::parseBlocks() {
-
 	// open the file which contains the blocks 
 	ifstream inputFileStream{this->fileName};
 	string temp; 

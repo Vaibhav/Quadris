@@ -10,10 +10,24 @@
 using namespace std;
 
 GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
-    std::shared_ptr<BlockGenerator> component, int randSeed, int randomNumberRange)
+    std::shared_ptr<BlockGenerator> component,  std::vector<string> blocks, int randSeed, int randomNumberRange)
     : BlockGeneratorDecorator{component}, randSeed{randSeed}, randomNumberRange{randomNumberRange}
 {
      srand(randSeed);
+     setEqualProbability(blocks);
+}
+
+GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
+                               std::shared_ptr<BlockGenerator> component,
+							   std::vector<string> blocks, 
+                               std::vector<double> probabilities, 
+                               int randSeed, int randomNumberRange)
+                            :  BlockGeneratorDecorator{component}, 
+                               randSeed{randSeed}, 
+                               randomNumberRange{randomNumberRange}
+{
+    srand(randSeed);
+    setProbability(blocks, probabilities);
 }
 
 Block GeneratorProbabilityDecorator::generateBlock()
@@ -35,17 +49,7 @@ Block GeneratorProbabilityDecorator::generateBlock()
     }
 }
 
-GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
-                               std::shared_ptr<BlockGenerator> component,
-							   std::vector<string> blocks, 
-                               std::vector<double> probabilities, 
-                               int randSeed, int randomNumberRange)
-                            :  BlockGeneratorDecorator{component}, 
-                               randSeed{randSeed}, 
-                               randomNumberRange{randomNumberRange}
-{
-    setProbability(blocks, probabilities);
-}
+
 
 void GeneratorProbabilityDecorator::setProbability(vector<string> blocks,
 						                           vector<double> probabilities)
@@ -65,4 +69,11 @@ void GeneratorProbabilityDecorator::setProbability(vector<string> blocks,
 	item.second = probabilities[i];
 	this->blockProbabilities.emplace_back(item);
     }
+}
+
+void GeneratorProbabilityDecorator::setEqualProbability(std::vector<std::string> blocks){
+    int size = blocks.size();
+    double probability = static_cast<double>(1.0/size);
+    vector<double> probabilities = vector<double>(size, probability);
+    setProbability(blocks, probabilities);
 }

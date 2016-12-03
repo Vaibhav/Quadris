@@ -52,12 +52,32 @@ if(name == ""){
 	throw out_of_range("THat blcok did not exist to be parsed");
 }
 
-BlockGenerator::BlockGenerator(){
-	this->baseBlocks = 
+BlockGenerator::BlockGenerator()
+{
+    this->baseBlocks =
 	vector<string>{"BLOCK-I", "BLOCK-Z", "BLOCK-T", "BLOCK-S", "BLOCK-O", "BLOCK-J", "BLOCK-L"};
-	blockParser = BlockParser{};
-}
+    blockParser = BlockParser{};
+    
+	vector<Block> parsedBlocks = getParsedBlocks();
+    int size = parsedBlocks.size();
+    
+	allBlocks = vector<string>{};
+    
 	
+	for (int i = 0; i != size; ++i)
+    {
+	allBlocks.emplace_back(parsedBlocks[i].getName());
+    }
+}
+
+std::vector<std::string> BlockGenerator::getBaseBlockNames(){
+		return this->baseBlocks;
+}
+
+std::vector<std::string> BlockGenerator::getAllBlockNames(){
+		return this->allBlocks;
+}
+
 bool BlockGenerator::checkBaseBlocksExist(std::vector<Block> blocks){
 int size = baseBlocks.size();
 for(int i = 0; i != size ; ++i ){

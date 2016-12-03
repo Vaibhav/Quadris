@@ -7,7 +7,10 @@
 #include <string>
 class GeneratorProbabilityDecorator : public BlockGeneratorDecorator{
 public:
+
+//Equal Probability Generation
 GeneratorProbabilityDecorator(std::shared_ptr<BlockGenerator> component, 
+                              std::vector<std::string> blocks,
                               int randSeed, 
                               int randomNumberRange = 100);
 
@@ -22,12 +25,14 @@ GeneratorProbabilityDecorator(std::shared_ptr<BlockGenerator> component,
 
 Block generateBlock() override;
 
-void setProbability(std::vector<std::string> blocks, std::vector<double> probabilities);
-
 private:
 std::vector<std::pair<std::string, double > > blockProbabilities;
 int randSeed;
 const int randomNumberRange;
+
+
+void setProbability(std::vector<std::string> blocks, std::vector<double> probabilities);
+void setEqualProbability(std::vector<std::string> blocks);
 };
 
 #endif
