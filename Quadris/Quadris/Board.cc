@@ -227,47 +227,6 @@ vector<int> Board::checkIfRowsComplete() {
 }
 
 
-
-void Board::currentBlockDrop() {
-
-	// keep moving block down until it can't move down
-	while(canMoveDown()) {
-		if (currentBlock.moveDown(1, height));
-		else break;
-	}
-
-	// update cells vector
-	for (auto i:currentBlock.getCells()) {
-		cells.push_back(i);
-	}
-
-	// updates blocks vector
-	blocks.push_back(currentBlock);
-
-	// check if any row is completed
-	vector<int> rowsCompleted = checkIfRowsComplete();
-
-	if ( !(rowsCompleted.empty()) ){
-		// cout << "rows completed not empty" << endl;
-		// clear the rows
-		vector<int> listOfLevels = clearRows(rowsCompleted);
-		// update score
-		// Game::updateScore();
-
-	}
-	// get new current block
-	currentBlock = nextBlock;
-	// create next block
-	nextBlock = generateBlock();
-
-	currentBlock.attach(display);
-	currentBlock.notifyObservers(SubscriptionType::blockChange);
-
-}
-
-
-
-
 vector<int> Board::clearRows(vector<int> rowsCompleted) {
 
 	vector<int> lvls;
