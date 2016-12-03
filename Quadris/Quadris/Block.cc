@@ -172,9 +172,11 @@ void Block::deleteCells(int theRow, int theCol){
 	vector<int> cols;
 
 	cout << "wtf" << endl;
-	//	int size = cells.size();
-	for(int i = 0; i < cells.size(); i++){
+	int size = cells.size();
+	cout << "size: " << size << endl;
+	for(int i = 0; i < size; i++){
 		cout << "indexsss: " << i << endl;
+
 		if (cells[i].row == theRow && cells[i].col == theCol && isInVec(cols, cells[i].col)) {
 				cout << "in if" << endl;
 				index.emplace_back(i);
@@ -191,9 +193,6 @@ void Block::deleteCells(int theRow, int theCol){
 				index[i] -= 1;
 		}
 	}
-
-
-
 
 }
 
