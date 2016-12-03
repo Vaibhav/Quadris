@@ -1,5 +1,8 @@
 #include "Cell.h"
 
+//Constructor
+Cell::Cell (std::shared_ptr <Block> b, char d, int r, int c): blockPtr{b}, displayCharacter{d}, row{r}, col{c} {}
+
 // copy assignment operator
 Cell::Cell& operator=( const Cell &other ) {
 
