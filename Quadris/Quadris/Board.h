@@ -79,6 +79,8 @@ private:
 	bool canMoveDown() const;
 	void getNextBlock();
 	void updateScore() const;
+
+	int getLevel(int row, int col, int width); // Gets level from block basically
 	
 };
 

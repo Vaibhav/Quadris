@@ -104,7 +104,8 @@ void Block::rotateCounterClockWise(int restraint) {
 void Block::moveLeft() {
 	if (lowerLeft.second <= 0) return;
 	prevCells = cells;
-	for (auto &i:cells) i.col -= 1;
+	int bugBreaker = cells.size();
+	for (int i = 0; i < bugBreaker; i++) cells[i].col -= 1;
 	lowerLeft.second -= 1;
 	notifyObservers(SubscriptionType::blockChange);
 }
@@ -112,7 +113,8 @@ void Block::moveLeft() {
 void Block::moveRight(int restraint) {
 	if (lowerLeft.second + width + 1 >= restraint) return;
 	prevCells = cells;
-	for (auto &i:cells) i.col += 1;
+	int bugBreaker = cells.size();
+	for (int i = 0; i < bugBreaker; i++) cells[i].col += 1;
 	lowerLeft.second += 1;
 	notifyObservers(SubscriptionType::blockChange);
 }
@@ -124,7 +126,8 @@ vector<Cell> Block::getCells() const {
 bool Block::moveDown(int restraint) {
 	prevCells = cells;
 	if (lowerLeft.first + 1 >= restraint) return false;
-	for (auto &i:cells) i.row += 1;
+	int bugBreaker = cells.size();
+	for (int i = 0; i < bugBreaker; i++) cells[i].row += 1;
 	lowerLeft.first += 1;
 	notifyObservers(SubscriptionType::blockChange);
 	return true;
