@@ -12,11 +12,12 @@
 class Game : public Observer {
 public:
 	Game(int maxLevel = 4,
-		 bool text = false, 
-		 int seed = 0, 
-		 std::string scriptFile = "sequence.txt", 
+		 bool text = false,
+		 int seed = 0,
+		 std::string scriptFile = "sequence.txt",
 		 int startLevel = 0,
-		 std::string scoreFile = "score.txt");
+		 std::string filename = "score.txt",
+	 	 bool bonus = false);
 
 	void play();
 	void notify(Subject &whoNotified);
@@ -27,21 +28,23 @@ private:
 	TextDisplay display;
 	GraphicDisplay gd;
 	Board b;
-	CommandInterpreter commandIn; 
-	
-	int highScore; 
+	CommandInterpreter commandIn;
+
+	int highScore;
 	int currentScore;
 	std::string filename;
-	
+
 	int maxLevel;
 	int currentLevel;
 	bool textMode; //Runs Text Only
 	int randSeed;
 	std::string scriptFile;
+	bool bonus;
 
 
-	void move(); //Uses commandIn to take in a command and then execute the correct Board Function 
+	void move(); //Uses commandIn to take in a command and then execute the correct Board Function
 	void readInHighScore();
+	void resetHighScore();
 	void updateHighScore();
 
 	void updateScore(int rowsCleared, std::vector<int> lvls);

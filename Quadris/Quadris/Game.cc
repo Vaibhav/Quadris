@@ -12,15 +12,15 @@ using namespace std;
 
 
 /*
-Game::Game(int maxLevel, 
-		   bool text, 
-		   int seed, 
-		   string scriptFile, 
-		   int startLevel, 
-		   string scoreFile): 
-		 commandIn { CommandInterpreter{cin} }, b{ Board{&display, scriptFile, 11, 18}} {	
-*/			 	
-Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string filename):
+Game::Game(int maxLevel,
+		   bool text,
+		   int seed,
+		   string scriptFile,
+		   int startLevel,
+		   string scoreFile):
+		 commandIn { CommandInterpreter{cin} }, b{ Board{&display, scriptFile, 11, 18}} {
+*/
+Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string filename, bool bonus):
 	b{ createBoard() }, commandIn { CommandInterpreter{cin} } {
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
@@ -31,10 +31,15 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 		this->filename = filename;
 		this->currentScore = 0;
 		this->highScore = 0;
+		this->bonus = bonus;
 		b.setLevel(currentLevel);
 		b.setSeed(seed);
 
-		readInHighScore();
+		if (this->bonus) {
+			readInHighScore();
+		} else {
+			resetHighScore();
+		}
 	}
 
 
@@ -104,7 +109,7 @@ void Game::play() {
 				temp = b.currentBlockDrop();
 				if (temp.first != 0) {
 					updateScore(temp.first, temp.second);
-				}	
+				}
 			} else if(commands[i].first == "RESTART"){
 		//		cerr << "RESTART" << commands[i].second[0];
 				b.restart();
@@ -225,7 +230,22 @@ void Game::readInHighScore(){
 
 }
 
+void Game::resetHighScore() {
+	this->highScore = 0;
+	ofstream file;
+	file.open(this->filename);
 
+	//convert high score to string
+	string hs = to_string(this->highScore);
+
+	//encrypt the highscore
+	hs = hs + "kysvk";
+	string toWrite = decrypt_encrypt(hs);
+
+	//write to file
+	file << toWrite;
+	file.close();
+}
 
 void Game::updateHighScore(){
 
