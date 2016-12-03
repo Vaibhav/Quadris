@@ -16,7 +16,7 @@ public:
 		 int seed = 0, 
 		 std::string scriptFile = "sequence.txt", 
 		 int startLevel = 0,
-		 std::string filename = "score.txt");
+		 std::string scoreFile = "score.txt");
 
 	void play();
 	void notify(Subject &whoNotified);

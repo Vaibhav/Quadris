@@ -10,8 +10,14 @@
 
 using namespace std;
 
-Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string filename): 
-	b{ createBoard() }, commandIn { CommandInterpreter{cin} } {
+
+Game::Game(int maxLevel, 
+		   bool text, 
+		   int seed, 
+		   string scriptFile, 
+		   int startLevel, 
+		   string scoreFile): 
+		 commandIn { CommandInterpreter{cin} }, b{ Board{&display, scriptFile, 11, 18}} {		
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
 		this->b.setLevel(currentLevel);
@@ -27,9 +33,6 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 		readInHighScore();
 	}
 
-Board Game::createBoard() {
-	return Board{&display};
-}
 
 void Game::play() {
 	while (true) {

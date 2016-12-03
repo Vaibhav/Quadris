@@ -10,6 +10,7 @@
 class BlockFactory {
 
 public:
+	BlockFactory();
 	// We need this to be virtual so that it calls the correct function
 	virtual Block generateBlock(int level = 0);
 	Block generateBlock(std::string blockName);
@@ -20,12 +21,14 @@ public:
 	void restoreRandom();
 
 private:
-	//BlockGenerator * generator; // BlockGenerator is abstract, so need ptr
-	
+	std::unique_ptr<BlockGenerator> generator; // BlockGenerator is abstract, so need ptr
+	int prevLevel;
 	std::string sequenceFile;
 	int seed;
 	std::string noRandomBlockFile;
 	bool noRandom;
+
+	std::unique_ptr<BlockGenerator> createBlockGenerator(int level);
 	
 };
 

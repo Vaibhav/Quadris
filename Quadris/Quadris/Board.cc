@@ -8,21 +8,18 @@
 using namespace std;
 
 
-Board::Board(Display* d, int width, int height, string sequenceFile): 
+Board::Board(Display* d, string sequenceFile, int width, int height): 
 	display{d}, blockFactory{BlockFactory()}, currentLevel{0},
 	width{width}, height{height} {
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
 	blockFactory.setSequenceFile(sequenceFile);
-	currentBlock = blockFactory.generateBlock(1);
-	nextBlock = blockFactory.generateBlock(1);
-
+	currentBlock = blockFactory.generateBlock(this->currentLevel);
+ 	nextBlock = blockFactory.generateBlock(this->currentLevel);
 	// Idk wtf all the shit above is, but we need this:
 	 
 	currentBlock.attach(d);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
-	
-	
 }
 
 

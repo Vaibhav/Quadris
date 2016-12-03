@@ -26,8 +26,7 @@ public:
 	void clearBoard();
 	void restart();
 
-	Board(Display *d, int width=11, int height = 18, 
-		std::string sequenceFile = "sequence.txt");
+	Board(Display *d, std::string sequenceFile = "sequence.txt", int width=11, int height = 18);
 
 	Block generateBlock(); // maybe make a smart pointer
 

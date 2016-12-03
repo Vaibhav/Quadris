@@ -28,13 +28,15 @@ Block BlockParser::createBlock(string file){
 	vector< pair <int, int>> v; 
 
 	// gets the number of coords to read in 
+	cout << input.badbit;
 	getline(input, line);
 	int numOfCoords;
 	stringstream ss { line };
-
+	cout << line << endl;
 	// stores first line as numOfCoords 
 	// ensures numOfCoords is int 
 	if (!(ss >> numOfCoords)) {
+		cout << name << endl;
 		throw out_of_range("Improper input file. Check if size is an integer.");
 	}
 	
@@ -93,7 +95,7 @@ std::vector<Block> BlockParser::parseBlocks() {
 	
 	// go though vector and create blocks from the definition in the text files 
 	int lofsize = listOfFiles.size();
-	for (int i = 0; i < lofsize; i++) {
+	for (int i = 0; i < lofsize-1; i++) {
 		blocks.emplace_back(createBlock(listOfFiles[i]));
 		vector<Cell> cells = blocks[i].getCells();
 	} 

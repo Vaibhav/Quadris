@@ -15,8 +15,8 @@ private:
 	std::string sequenceFile;
 	std::vector<std::string> sequence;
 	void parseSequence();
-	int currentIndex;
 	int numblocksInSequence;
+	int currentIndex;
 	bool checkIfBlocksInSequenceExist(std::vector<Block>);
 };
 

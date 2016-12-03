@@ -10,19 +10,15 @@
 
 using namespace std;
 
-//class std::unique_ptr<T>
+BlockFactory::BlockFactory(): prevLevel(-1) {
+}
 
-//BlockFactory::BlockFactory
-
-Block BlockFactory::generateBlock(int level)
-{
-    
-    Block generatedBlock;
+unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level){
+    cerr << "called Create BlockGenerator" << endl;
     if (level == 0)
     {
-	//auto p = make_unique<new BlockGeneratorBase{}>;
-	unique_ptr<BlockGenerator> p{new BlockGeneratorBase{sequenceFile}};
-	return p->generateBlock();
+    return unique_ptr<BlockGenerator>{new BlockGeneratorBase{sequenceFile}};
+    //return p->generateBlock();
 	//return Block();
     }
     else if (level == 1)
@@ -32,13 +28,13 @@ Block BlockFactory::generateBlock(int level)
        	vector<string> blocks =  
         vector<string>{"BLOCK-S", "BLOCK-Z", "BLOCK-T", "BLOCK-I", "BLOCK-O", "BLOCK-J", "BLOCK-L"};
       	shared_ptr<BlockGenerator> component {new BlockGeneratorBase{sequenceFile}};
-        unique_ptr<BlockGenerator> p{new GeneratorProbabilityDecorator{
+        return unique_ptr<BlockGenerator>{new GeneratorProbabilityDecorator{
                                          component,
                                          blocks, 
                                          probabilities, 
                                          seed
                                          }}; 
-        	generatedBlock = p->generateBlock(); 
+       // 	generatedBlock = p->generateBlock(); 
     
     }
     else if (level == 2)
@@ -53,6 +49,23 @@ Block BlockFactory::generateBlock(int level)
     else if (level == 4)
     {
     }
+    //PLease delete THIS LINE
+   return unique_ptr<BlockGenerator>{new BlockGeneratorBase{sequenceFile}};
+}
+
+Block BlockFactory::generateBlock(int level)
+{
+    
+    //if prevLevel was == -1, then it Block factory has just been created
+    if(prevLevel == -1 || prevLevel != level){
+        
+        //DBG
+        cout << prevLevel << " fook " << level; 
+
+        this->generator = createBlockGenerator(level);
+        prevLevel = level;
+    }
+    Block generatedBlock = generator->generateBlock();
     generatedBlock.setLevel(level);
     return generatedBlock;
 }
