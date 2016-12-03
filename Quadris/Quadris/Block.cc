@@ -44,7 +44,8 @@ Block::Block(char dispChar,
 		  ): name(name), colour(colour), dispChar(dispChar), coords(coords) {
 
 	for (auto i:coords) {
-		cells.push_back(Cell{this, dispChar, i.first+3, i.second});
+
+		cells.push_back(Cell::Cell{this, dispChar, i.first+3, i.second});
 	} // Add 3 to le height for safety purposes
 
 	height = calcHeight(coords);
@@ -173,7 +174,9 @@ void Block::deleteCells(int theRow, int theCol){
 
 	cout << "wtf" << endl;
 	int size = cells.size();
+
 	cout << "size: " << size << endl;
+
 	for(int i = 0; i < size; i++){
 		cout << "indexsss: " << i << endl;
 
@@ -183,6 +186,7 @@ void Block::deleteCells(int theRow, int theCol){
 				cols.emplace_back(cells[i].col);
 				cout << "fuvk ogf bu=ig b v you fucking asshole" << endl;
 		}
+
 	}
 
 	cout << "wtff" << endl;
