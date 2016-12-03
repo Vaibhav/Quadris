@@ -23,7 +23,13 @@ public:
 
 
 struct Cell {
-	Block * blockPtr;
+
+	Cell(Block * blockPointer, char displayCharacter, int row, int col)
+	: displayCharacter{displayCharacter}, row{row}, col{col}{
+	
+	}
+
+	std::shared_ptr<Block> blockPtr;
 	char displayCharacter;
 	int row;
 	int col;

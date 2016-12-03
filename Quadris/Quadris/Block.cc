@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <memory>
 using namespace std;
 
 
@@ -44,8 +45,7 @@ Block::Block(char dispChar,
 		  ): name(name), colour(colour), dispChar(dispChar), coords(coords) {
 
 	for (auto i:coords) {
-
-		cells.push_back(Cell{this, dispChar, i.first+3, i.second});
+		cells.emplace_back(Cell{this, dispChar, i.first+3, i.second});
 	} // Add 3 to le height for safety purposes
 
 	height = calcHeight(coords);
@@ -200,6 +200,7 @@ void Block::deleteCells(int theRow, int theCol){
 
 }
 
+
 int Block::updateCells(int rows, int cols){
 	cout << "YO FAMY" << endl;
 	// prevCells = cells;
@@ -215,7 +216,6 @@ int Block::updateCells(int rows, int cols){
 	} else {
 		return -1;
 	}
-
 }
 
 int Block::getHeight() const {
