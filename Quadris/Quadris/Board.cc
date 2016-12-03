@@ -161,8 +161,8 @@ void Board::setLevel(int n){
 
 //HIJACKED FUNCTIONALITY CHANGE BACK LATER
 void Board::setCurrentBlock(string blockName){
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
-	cerr << currentBlock.getName() << endl;
+	currentBlock.clearBlockFromScreen();
+	currentBlock.detach(display);
 	currentBlock = blockFactory.generateBlock(blockName);
 	currentBlock.attach(this->display);
 	currentBlock.attach(this->gd);

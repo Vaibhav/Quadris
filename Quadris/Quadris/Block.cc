@@ -112,7 +112,7 @@ void Block::moveRight(int restraint) {
 	if (lowerLeft.second + width + 1 >= restraint) return;
 	prevCells = cells;
 	for (auto &i:cells) i.col += 1;
-	lowerLeft.second += 1;
+	lowerLeft.second += 1;	
 	notifyObservers(SubscriptionType::blockChange);
 }
 
