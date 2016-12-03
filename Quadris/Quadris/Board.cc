@@ -230,7 +230,6 @@ vector<int> Board::clearRows(vector<int> rowsCompleted) {
 	vector<int> listOfLevels;
 
 	for (auto i: rowsCompleted) {
-		 cout << "clearRows: " << i << endl;
 		 lvls = clearRow(i);
 
 		 if ( !(lvls.empty()) ) {
@@ -277,18 +276,21 @@ vector<int> Board::clearRow(int theRow) {
 		int cellRow = n.row;
 		int cellCol = n.col;
 		theLevel = getLevel(cellRow, cellCol, this->width);
+		cout << "level returned: " << theLevel << endl;
 		if (theLevel != -1) levels.emplace_back(theLevel);
 	}
+
 	return levels;	
 }
 
 
+// gets the level on the block if deleted, else it returns -1
 int Board::getLevel(int row, int col, int width) {
 	int blockSize = blocks.size();
 
 	for (int i =0; i < blockSize; i++) {
 		for (unsigned int j = 0; j < blocks[i].getCells().size(); j++) {
-		
+			// update the cell and if it deletes a block then it returns the level of the block 
 			if (blocks[i].getCells()[j].row == row && blocks[i].getCells()[j].col == col) {
 				return blocks[i].updateCells(row, width);
 				//return blocks[i].level;

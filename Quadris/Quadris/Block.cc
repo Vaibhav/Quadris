@@ -170,56 +170,53 @@ bool isInVec(vector<int> anycontainer, int testvalue){
 	return !contains;
 }
 
+
 void Block::deleteCells(int theRow, int theCol){
 
 	vector<int> index;
 	vector<int> cols;
 
-	cout << "wtf" << endl;
 	int size = cells.size();
 
-	cout << "size: " << size << endl;
-
+	// get indexes of the cells to delete in cells vector
 	for(int i = 0; i < size; i++){
-		cout << "indexsss: " << i << endl;
 
 		if (cells[i].row == theRow && cells[i].col == theCol && isInVec(cols, cells[i].col)) {
-				cout << "in if" << endl;
 				index.emplace_back(i);
 				cols.emplace_back(cells[i].col);
-				cout << "fuvk ogf bu=ig b v you fucking asshole" << endl;
 		}
-
 	}
 
-	cout << "wtff" << endl;
 	int size2 = index.size();
+	// Properly deleting cells from cells vector 
 	for (int j = 0; j < size2; j++) {
 		this->cells.erase(cells.begin()+index[j]);
 		for (int i = j+1; i < size2;  i++) {
 				index[i] -= 1;
 		}
 	}
-
 }
 
 
-int Block::updateCells(int rows, int cols){
-	cout << "YO FAMY" << endl;
-	// prevCells = cells;
+int Block::updateCells(int rows, int cols){	
+	
+	prevCells = cells;
+	// delete all the cells in the row 
 	for (int i = 0; i < cols; i++) {
-		cout << "pls call" << endl;
 		deleteCells(rows, i);
 	}
 
-	cout << "YO FAMY" << endl;
+	// notify changes made
 	notifyObservers(SubscriptionType::blockChange);
+	
+	// return level if block is destoryed 
 	if ( !(this->cells.empty()) ){
 		cout << "level: " << this->level << endl;
 		return this->level;
 	} else {
 		return -1;
 	}
+
 }
 
 int Block::getHeight() const {
