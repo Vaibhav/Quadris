@@ -11,6 +11,7 @@ Subject::~Subject() {
 }
 
 void Subject::attach(Observer* o) {
+	cout << "attach called" << endl;
 	observers.push_back(o);
 }
 

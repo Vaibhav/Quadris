@@ -6,6 +6,7 @@
 #include "Block.h"
 #include "Cell.h"
 #include "Display.h"
+#include "GraphicsDisplay.h"
 #include "BlockFactory.h"
 #include "subscriptions.h"
 #include "info.h"
@@ -26,7 +27,7 @@ public:
 	void clearBoard();
 	void restart();
 
-	Board(Display *d, int width=11, int height = 18, 
+	Board(TextDisplay *d, GraphicDisplay *gd, int width=11, int height = 18, 
 		std::string sequenceFile = "sequence.txt");
 
 	Block generateBlock(); // maybe make a smart pointer
@@ -58,6 +59,8 @@ public:
 	
 
 private:
+	TextDisplay * display;
+	GraphicDisplay *gd;
 	BlockFactory blockFactory;
 	int currentLevel;
 
@@ -69,12 +72,11 @@ private:
 	const int width;
 	const int height;
 
-	Display * display;
-	bool canRotateLeft() const;
-	bool canRotateRight() const;
+	bool canRotateCW() const;
+	bool canRotateCCW() const;
 	bool canMoveLeft() const;
-	bool canMoveRight() const;
-	bool canMoveDown();
+	bool canMoveRight(int k=1) const;
+	bool canMoveDown() const;
 	void getNextBlock();
 	void updateScore() const;
 	

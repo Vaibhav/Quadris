@@ -23,9 +23,9 @@ public:
 	~Block();
 
 	//As a single turn in the game, the block moves n times
-	void rotateClockWise();
-	void rotateCounterClockWise();
-	bool moveDown(int n, int restraint);
+	void rotateClockWise(int restraint);
+	void rotateCounterClockWise(int restraint);
+	bool moveDown(int restraint);
 	void moveLeft();
 	void moveRight(int restraint);
 	void setLevel(int n);
@@ -35,7 +35,9 @@ public:
 	void clearRow(int row);
 	Info getInfo() const;
 	std::string getName();
-	std::vector<Cell> getCells();
+	std::vector<Cell> getCells() const;
+	int getHeight() const;
+	int getWidth() const;
 	std::pair<int, int> findLowest();
 	void clearBlockFromScreen();
 	int updateCells(int, int);

@@ -9,9 +9,11 @@
 using namespace std;
 
 
-Board::Board(Display* d, int width, int height, string sequenceFile):
-	width{width}, height{height}, display{d},
-	blockFactory{BlockFactory()}, currentLevel{0} {
+
+Board::Board(TextDisplay* d, GraphicDisplay *gd, int width, int height, string sequenceFile): 
+	display{d}, gd{gd}, blockFactory{BlockFactory()}, currentLevel{0},
+	width{width}, height{height} {
+
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
 	blockFactory.setSequenceFile(sequenceFile);
@@ -21,6 +23,7 @@ Board::Board(Display* d, int width, int height, string sequenceFile):
 	// Idk wtf all the shit above is, but we need this:
 
 	currentBlock.attach(d);
+	currentBlock.attach(gd);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
 
 
@@ -44,20 +47,30 @@ SubscriptionType Board::subType() const {
 
 
 void Board::currentBlockLeft(int n) {
-	for (int i=0; i< n; i++) currentBlock.moveLeft();
+	for (int i=0; i< n; i++) {
+		if (!canMoveLeft()) return;
+		currentBlock.moveLeft();
+	}
 }
 
 void Board::currentBlockRight(int n) {
-	for (int i=0; i< n; i++) currentBlock.moveRight(width);
+	for (int i=0; i< n; i++) {
+		if (!canMoveRight()) return;
+		currentBlock.moveRight(width);
+	}
 }
 
 
 void Board::currentBlockDown(int n) {
-	currentBlock.moveDown(n, height);
+	for (int i=0; i< n; i++) {
+		if (!canMoveDown()) return;
+		currentBlock.moveDown(height);
+	}
 }
 
 
-bool Board::canMoveDown() {
+
+bool Board::canMoveDown() const {
 
 	// Cells in the block
 	vector<Cell> blockCells = currentBlock.getCells();
@@ -71,10 +84,53 @@ bool Board::canMoveDown() {
 				return false;
 			}
 		}
-	}
-
+	} 
+	
 	// if cell doesn't exist returns true
 	return true;
+}
+
+
+void Board::currentBlockDrop() {
+
+	// keep moving block down until it can't move down
+	while(canMoveDown()) {
+		if (currentBlock.moveDown(height));
+		else break;
+	}
+
+	// update cells vector 
+	for (auto i:currentBlock.getCells()) {
+		cells.push_back(i);
+	}
+
+	// updates blocks vector 
+	blocks.push_back(currentBlock);
+
+	// check if any row is completed
+	vector<int> rowsCompleted = checkIfRowsComplete();
+
+	if ( !(rowsCompleted.empty()) ){
+		
+		// clear the rows
+		vector<int> listOfLevels = clearRows(rowsCompleted);
+		// update score
+		// Game::updateScore();
+
+	}
+	
+ 	
+	
+	// get new current block
+	currentBlock = nextBlock;
+	// create next block
+	nextBlock = generateBlock();
+
+	currentBlock.attach(display);
+	currentBlock.attach(gd);
+	currentBlock.notifyObservers(SubscriptionType::blockChange);
+
+>>>>>>> origin/master
 }
 
 void Board::showHint(){
@@ -88,12 +144,18 @@ void Board::restart(){
 
 
 void Board::currentBlockRotateClockwise(int n) {
-	for (int i=0; i< n; i++) currentBlock.rotateClockWise();
+	for (int i=0; i< n; i++) {
+		if (!canRotateCW()) return;
+		currentBlock.rotateClockWise(width);
+	}
 }
 
 
 void Board::currentBlockRotateCounterClockwise(int n) {
-	for (int i=0; i< n; i++) currentBlock.rotateCounterClockWise();
+	for (int i=0; i< n; i++)  {
+		if (!canRotateCCW()) return;
+		currentBlock.rotateCounterClockWise(width);
+	}
 }
 
 
@@ -106,11 +168,17 @@ void Board::setCurrentBlock(string blockName){
 	currentBlock = blockFactory.generateBlock(this->currentLevel);
 	cerr << currentBlock.getName() << endl;
 	currentBlock = blockFactory.generateBlock(blockName);
+<<<<<<< HEAD
 //	currentBlock.clearBlockFromScreen();
 //	currentBlock.detach(display);
 //	currentBlock = blockFactory.generateBlock(blockName);
 //	currentBlock.attach(this->display);
 //	currentBlock.notifyObservers(SubscriptionType::blockChange);
+=======
+	currentBlock.attach(this->display);
+	currentBlock.attach(this->gd);
+	currentBlock.notifyObservers(SubscriptionType::blockChange);
+>>>>>>> origin/master
 }
 
 
@@ -290,4 +358,41 @@ void Board::printNextBlock() {
 
 bool Board::canMoveLeft() const {
 
+	vector<Cell> blockCells = currentBlock.getCells();
+	for (auto i: blockCells) {
+		for (auto n : cells) {
+			if (n.row == i.row && n.col == i.col - 1) return false;
+		}
+	} 
+	return true;
+}
+
+bool Board::canMoveRight(int k) const {
+	vector<Cell> blockCells = currentBlock.getCells();
+	for (auto i: blockCells) {
+		for (auto n : cells) {
+			if (n.row == i.row && n.col == i.col + k) return false;
+		}
+	} 
+	return true;
+}
+
+bool Board::canRotateCW() const {
+	int h = currentBlock.getHeight();
+	bool flag = false;
+	for (int i=1; i <= h; i++) {
+		if (!canMoveRight(i)) flag = true;
+	}
+	if (flag && h > currentBlock.getWidth()) return false;
+	return true;
+}
+
+bool Board::canRotateCCW() const {
+	int h = currentBlock.getHeight();
+	bool flag = false;
+	for (int i=1; i <= h; i++) {
+		if (!canMoveRight(i)) flag = true;
+	}
+	if (flag && h > currentBlock.getWidth()) return false;
+	return true;
 }

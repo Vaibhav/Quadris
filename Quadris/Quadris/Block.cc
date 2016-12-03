@@ -41,7 +41,7 @@ Block::Block(char dispChar,
 	 	  std::string colour,
 		  std::string name,
 		  std::vector < std::pair < int, int > > coords
-		  ): colour(colour), name(name), coords(coords), dispChar(dispChar) {
+		  ): name(name), colour(colour), dispChar(dispChar), coords(coords) {
 
 	for (auto i:coords) {
 		cells.push_back(Cell{this, dispChar, i.first+3, i.second});
@@ -70,7 +70,8 @@ void Block::rotateUpdate() {
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-void Block::rotateClockWise() {
+void Block::rotateClockWise(int restraint) {
+	if (lowerLeft.second + height >= restraint) return;
 	prevCells = cells;
 	for (auto &i:coords) {
 		int row = i.first;
@@ -87,7 +88,8 @@ void Block::clearBlockFromScreen(){
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-void Block::rotateCounterClockWise() {
+void Block::rotateCounterClockWise(int restraint) {
+	if (lowerLeft.second + height >= restraint) return;
 	prevCells = cells;
 	for (auto &i:coords) {
 		int row = i.first;
@@ -114,21 +116,21 @@ void Block::moveRight(int restraint) {
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-vector<Cell> Block::getCells(){
+vector<Cell> Block::getCells() const {
 	return this->cells;
 }
 
-bool Block::moveDown(int n, int restraint) {
+bool Block::moveDown(int restraint) {
 	prevCells = cells;
-	if (lowerLeft.first + n >= restraint) return false;
-	for (auto &i:cells) i.row += n;
-	lowerLeft.first += n;
+	if (lowerLeft.first + 1 >= restraint) return false;
+	for (auto &i:cells) i.row += 1;
+	lowerLeft.first += 1;
 	notifyObservers(SubscriptionType::blockChange);
 	return true;
 }
 
 Info Block::getInfo() const {
-	return Info{prevCells, cells}; // Array of cells so display knows what to update
+	return Info{prevCells, cells, -1, colour}; // Array of cells so display knows what to update
 }
 
 void Block::setLevel(int n){
@@ -155,6 +157,7 @@ ostream &operator<<(std::ostream &out, const Block&b) {
 		}
 		endl(out);
 	}
+	return out;
 }
 
 
@@ -211,3 +214,12 @@ int Block::updateCells(int rows, int cols){
 	}
 
 }
+
+int Block::getHeight() const {
+	return height;
+}
+
+int Block::getWidth() const {
+	return width;
+}
+
