@@ -188,7 +188,7 @@ void Block::deleteCells(int theRow, int theCol){
 	}
 
 	int size2 = index.size();
-	// Properly deleting cells from cells vector 
+	// Properly deleting cells from cells vector
 	for (int j = 0; j < size2; j++) {
 		this->cells.erase(cells.begin()+index[j]);
 		for (int i = j+1; i < size2;  i++) {
@@ -198,20 +198,19 @@ void Block::deleteCells(int theRow, int theCol){
 }
 
 
-int Block::updateCells(int rows, int cols){	
-	
+int Block::updateCells(int rows, int cols){
+
 	prevCells = cells;
-	// delete all the cells in the row 
+	// delete all the cells in the row
 	for (int i = 0; i < cols; i++) {
 		deleteCells(rows, i);
 	}
 
 	// notify changes made
 	notifyObservers(SubscriptionType::blockChange);
-	
-	// return level if block is destoryed 
-	if ( !(this->cells.empty()) ){
-		cout << "level: " << this->level << endl;
+
+	// return level if block is destoryed
+	if ( (this->cells.empty()) ){
 		return this->level;
 	} else {
 		return -1;
