@@ -219,6 +219,14 @@ int Block::updateCells(int rows, int cols){
 
 }
 
+void Block::moveCellsAboveDown(int row) {
+	prevCells = cells;
+	for (auto &i:cells) {
+		if (i.row < row) i.row++;
+ 	}
+ 	notifyObservers(SubscriptionType::blockChange);
+}
+
 int Block::getHeight() const {
 	return height;
 }

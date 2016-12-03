@@ -42,6 +42,7 @@ public:
 	void clearBlockFromScreen();
 	int updateCells(int, int);
 	void deleteCells(int, int);
+	void moveCellsAboveDown(int row);
 
 private:
 	int size;

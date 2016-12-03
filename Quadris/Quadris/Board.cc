@@ -115,6 +115,10 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 		vector<int> listOfLevels = clearRows(rowsCompleted);
 		// update score
 
+
+		// move everything down
+		shiftBoardDown(rowsCompleted);
+
 		toReturn.first = numOfRows;
 		toReturn.second = listOfLevels;
 
@@ -308,6 +312,18 @@ int Board::getLevel(int row, int col, int width) {
 		}
 	}
 	return -1;
+}
+
+void Board::shiftBoardDown(vector<int> rows) {
+	for (auto r:rows) {
+		for (auto &i:cells) {
+			if (i.row < r) i.row++;
+		}
+		int bs = blocks.size();
+		for (int j=0; j < bs; j++) {
+			blocks[j].moveCellsAboveDown(r);
+		} 
+	}
 }
 
 
