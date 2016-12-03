@@ -300,7 +300,8 @@ int Board::getLevel(int row, int col, int width) {
 		for (unsigned int j = 0; j < blocks[i].getCells().size(); j++) {
 			// update the cell and if it deletes a block then it returns the level of the block
 			if (blocks[i].getCells()[j].row == row && blocks[i].getCells()[j].col == col) {
-				return blocks[i].updateCells(row, width);
+				int x = blocks[i].updateCells(row, width);
+				cout << "get Level update cells return: "  << x << endl;
 				//return blocks[i].level;
 			}
 
