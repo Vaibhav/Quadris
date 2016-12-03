@@ -215,6 +215,7 @@ int Block::updateCells(int rows, int cols){
 	cout << "YO FAMY" << endl;
 	notifyObservers(SubscriptionType::blockChange);
 	if ( !(this->cells.empty()) ){
+		cout << "level: " << this->level << endl;
 		return this->level;
 	} else {
 		return -1;

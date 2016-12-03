@@ -121,7 +121,6 @@ void Board::currentBlockDrop() {
 	currentBlock = nextBlock;
 	// create next block
 	nextBlock = generateBlock();
-
 	currentBlock.attach(display);
 	currentBlock.attach(gd);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
@@ -247,30 +246,6 @@ vector<int> Board::clearRows(vector<int> rowsCompleted) {
 
 vector<int> Board::clearRow(int theRow) {
 
-
-#ifdef bullshit	
-int size = cells.size();
-	for(int i =0; i < size; i++){
-		if (cells[i].row == theRow){
-			cout << "row iter: " << i << endl;
-			cout << "row: " << cells[i].row << " cols: " << cells[i].col << endl;	
-			//cout << cells[i].blockPtr;
-			//cout << cells[i].blockPtr->getName() << endl;
-	/*		vector<Cell> fart =  cells[i].blockPtr->getCells();
-			cout << "THis block contains: " << endl << "size" << cells[i].blockPtr->getCells().size();
-			for(int j = 0; j != fart.size(); ++j){
-				cout << "row: " << fart[j].row << " cols: " << fart[j].col  << endl;
-			}
-	*/
-		}
-	}
-	//return vector<int>();
-#endif
-
-
-
-
-	cout << "clearRow Called" << endl;
 	// vector of cells that need to be deleted
 	vector<Cell> toDelete;
 	int theLevel;
@@ -279,10 +254,8 @@ int size = cells.size();
 	vector<int> cols;
 
 	int size = cells.size();
-	for(int i =0; i < size; i++){
+	for(int i = 0; i < size; i++) {
 		if (cells[i].row == theRow && inVec(cols, cells[i].col)){
-			cout << "row iter: " << i << endl;
-			cout << "row: " << cells[i].row << " cols: " << cells[i].col << endl;
 			toDelete.emplace_back(cells[i]);
 			index.emplace_back(i);
 			cols.emplace_back(cells[i].col);
@@ -298,35 +271,29 @@ int size = cells.size();
 		}
 	}
 
-	cout << "made it out of first loop" << endl;
+
 	for(auto n: toDelete){
 
-		cout << "0" << endl;
 		int cellRow = n.row;
 		int cellCol = n.col;
-		cout << "1" << endl;
-		cout << "2" << endl;
-		//WELL FUCK
-		theLevel = getLevel(cellRow, cellCol, this->width);//n.blockPtr->updateCells(cellRow, this->width);
-		cout << "3" << endl;
+		theLevel = getLevel(cellRow, cellCol, this->width);
 		if (theLevel != -1) levels.emplace_back(theLevel);
-		cout << "4" << endl;
-
 	}
-
-	return levels;
-	
+	return levels;	
 }
+
 
 int Board::getLevel(int row, int col, int width) {
 	int blockSize = blocks.size();
+
 	for (int i =0; i < blockSize; i++) {
 		for (unsigned int j = 0; j < blocks[i].getCells().size(); j++) {
-			if (blocks[i].getCells()[j].row == row 
-				&& blocks[i].getCells()[j].col == col) {
+		
+			if (blocks[i].getCells()[j].row == row && blocks[i].getCells()[j].col == col) {
 				return blocks[i].updateCells(row, width);
 				//return blocks[i].level;
 			}
+		
 		}
 	}
 	return -1;
