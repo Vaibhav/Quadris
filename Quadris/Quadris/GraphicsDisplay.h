@@ -18,8 +18,14 @@ public:
 
 private:
 	int sizeOfDisplay;
+	int marginHeight;
+	int topMargin;
 	int row;
 	int col;
+	int blockSize;
+	int marginWidth;
 	std::vector<std::vector<char>> theBoard; 
+
+	int calcMarginWidth();
 };
 #endif

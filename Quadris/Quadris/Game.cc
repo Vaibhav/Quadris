@@ -22,7 +22,6 @@ Game::Game(int maxLevel,
 */			 	
 Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string filename):
 	b{ createBoard() }, commandIn { CommandInterpreter{cin} } {
-		cout << "Game::Game called" << endl;
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
 		this->b.setLevel(currentLevel);
@@ -36,12 +35,10 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 		b.setSeed(seed);
 
 		readInHighScore();
-		cout << "Game constructed" << endl;
 	}
 
 
 Board Game::createBoard() {
-	cout << "createBoard called" << endl;
 	return Board{&display, &gd};
 }
 
@@ -298,6 +295,8 @@ void printHeader() {
 }
 
 void Game::printGameBoard() {
+
+	// Print Text Display
 	cout << "Level: " << currentLevel << endl;
   	cout << "Score: " << currentScore << endl;
   	cout << "Hi Score: " << highScore << endl;
@@ -306,4 +305,10 @@ void Game::printGameBoard() {
 	printHeader();
 	cout << "Next: " << endl;
 	b.printNextBlock();
+
+	// Write to Graphics Display
+	gd.xw.drawString(30, 10, "Level: ");// + level);
+	gd.xw.drawString(30, 20, "Score: ");
+	gd.xw.drawString(30, 30, "Hi Score: ");
+	gd.xw.drawString(30, 470, "Next: ");
 }
