@@ -11,13 +11,18 @@
 using namespace std;
 
 
+/*
 Game::Game(int maxLevel, 
 		   bool text, 
 		   int seed, 
 		   string scriptFile, 
 		   int startLevel, 
 		   string scoreFile): 
-		 commandIn { CommandInterpreter{cin} }, b{ Board{&display, scriptFile, 11, 18}} {		
+		 commandIn { CommandInterpreter{cin} }, b{ Board{&display, scriptFile, 11, 18}} {	
+*/			 	
+Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string filename):
+	b{ createBoard() }, commandIn { CommandInterpreter{cin} } {
+		cout << "Game::Game called" << endl;
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
 		this->b.setLevel(currentLevel);
@@ -29,9 +34,16 @@ Game::Game(int maxLevel,
 		this->highScore = 0;
 		b.setLevel(currentLevel);
 		b.setSeed(seed);
-		
+
 		readInHighScore();
+		cout << "Game constructed" << endl;
 	}
+
+
+Board Game::createBoard() {
+	cout << "createBoard called" << endl;
+	return Board{&display, &gd};
+}
 
 
 void Game::play() {
@@ -49,7 +61,7 @@ void Game::play() {
 			if (commands[i].first == "L") {
 				//First argument is multiplier, which is by default 1
 			//	cerr << "L" << stoi(commands[i].second[0]);
-				b.currentBlockLeft(stoi(commands[i].second[0])); 
+				b.currentBlockLeft(stoi(commands[i].second[0]));
 			} else if (commands[i].first == "R") {
 		//		cerr << "R" << stoi(commands[i].second[0]);
 				b.currentBlockRight(stoi(commands[i].second[0]));
@@ -87,16 +99,20 @@ void Game::play() {
 		//		cerr << "BLOCK-Z" << commands[i].second[0];
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "BLOCK-T"){
-		//	 	cerr << "BLOCK-T" << commands[i].second[0];		
+		//	 	cerr << "BLOCK-T" << commands[i].second[0];
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "DROP"){
-		//		cerr << "DROP" << commands[i].second[0];			
-				b.currentBlockDrop();
+		//		cerr << "DROP" << commands[i].second[0];
+				std::pair<int, vector<int>> temp;
+				temp = b.currentBlockDrop();
+				if (temp.first != 0) {
+					updateScore(temp.first, temp.second);
+				}	
 			} else if(commands[i].first == "RESTART"){
-		//		cerr << "RESTART" << commands[i].second[0];				
+		//		cerr << "RESTART" << commands[i].second[0];
 				b.restart();
 			} else if(commands[i].first == "HINT"){
-		//		cerr << "HINT" << commands[i].second[0];				
+		//		cerr << "HINT" << commands[i].second[0];
 				b.showHint();
 			} else if(commands[i].first == "RANDOM"){
 		//		cerr << "RANDOM";
@@ -106,7 +122,7 @@ void Game::play() {
 				}
 				b.restoreRandom();
 			} else if(commands[i].first == "NORANDOM"){
-		//		cerr << "NORANDOM" << commands[i].second[0];				
+		//		cerr << "NORANDOM" << commands[i].second[0];
 				b.noRandomBlock(commands[i].second[0]);
 			} else {
 				cout << "programCode is not used" << endl;
@@ -114,7 +130,7 @@ void Game::play() {
 
 
 
-			
+
 		}
 		//move();
 	}
@@ -161,7 +177,7 @@ SubscriptionType Game::subType() const {
 // Uses XOR encryption to encrypt the highscore before it is saved to text file
 // Prevents the user from cheating
 string decrypt_encrypt(string str) {
-    
+
     char key[6] = {'M', 'V', 'H', 'W', 'K', 'S'};
     string s = str;
     int si = str.size();
@@ -169,7 +185,7 @@ string decrypt_encrypt(string str) {
     for (int i = 0; i < si; i++) {
     	s[i] = str[i] ^ key[i % (sizeof(key) / sizeof(char))];
     }
-    
+
     return s;
 }
 
@@ -181,8 +197,8 @@ bool file_exists (const string &fname) {
 }
 
 
-// Reads in highscore 
-// 0 is }=1$=8 after encryption. 
+// Reads in highscore
+// 0 is }=1$=8 after encryption.
 void Game::readInHighScore(){
 
 	// if file doesnt exists, make the file.
@@ -200,7 +216,7 @@ void Game::readInHighScore(){
 	// make file contents a string
 	getline(file, temp);
 	file.close();
-	
+
 	// decrypt string
 	string hs = decrypt_encrypt(temp);
 	hs = hs.substr(0, hs.size() - 5);
@@ -218,16 +234,16 @@ void Game::updateHighScore(){
 
 	this->highScore = this->currentScore;
 	ofstream file;
-	file.open(this->filename); 
+	file.open(this->filename);
 
 	//convert high score to string
 	string hs = to_string(this->highScore);
-	
+
 	//encrypt the highscore
 	hs = hs + "kysvk";
 	string toWrite = decrypt_encrypt(hs);
 
-	//write to file 
+	//write to file
 	file << toWrite;
 	file.close();
 
@@ -238,7 +254,7 @@ void Game::updateHighScore(){
 /*
 
 The game is scored as follows: when a line (or multiple lines) is cleared, you score points equal to
-(your current level, plus number of lines) squared. 
+(your current level, plus number of lines) squared.
 (For example, clearing a line in level 2 is worth 9 points.)
 
 In addition, when a block is completely removed from the screen (i.e., when all of its cells
@@ -291,5 +307,3 @@ void Game::printGameBoard() {
 	cout << "Next: " << endl;
 	b.printNextBlock();
 }
-
-

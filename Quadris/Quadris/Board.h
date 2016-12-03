@@ -6,6 +6,7 @@
 #include "Block.h"
 #include "Cell.h"
 #include "Display.h"
+#include "GraphicsDisplay.h"
 #include "BlockFactory.h"
 #include "subscriptions.h"
 #include "info.h"
@@ -21,12 +22,17 @@ public:
 	void currentBlockDown(int n);
 	void currentBlockRotateClockwise(int n);
 	void currentBlockRotateCounterClockwise(int n);
-	void currentBlockDrop();
+	std::pair<int, std::vector<int>> currentBlockDrop();
 
 	void clearBoard();
 	void restart();
 
+/*
 	Board(Display *d, std::string sequenceFile = "sequence.txt", int width=11, int height = 18);
+*/
+	Board(TextDisplay *d, GraphicDisplay *gd, int width=11, int height = 18,
+		std::string sequenceFile = "sequence.txt");
+
 
 	Block generateBlock(); // maybe make a smart pointer
 
@@ -38,15 +44,15 @@ public:
 	std::vector<int> blockLevelsDeleted();
 
 	void setLevel(int n);
-	
+
 	//Sets the current block to the one specified
-	//name can be either be  
+	//name can be either be
 	void setCurrentBlock(std::string name);
 
-	//Hint should be displayed on text by ??? 
+	//Hint should be displayed on text by ???
 	//and in Graphic Display by a block box
 	void showHint();
-	
+
 	void noRandomBlock(std::string file);
 	void restoreRandom();
 	void setSeed(int seed);
@@ -54,10 +60,11 @@ public:
 	std::vector<int> clearRows(std::vector<int>);
 	std::vector<int> clearRow(int row);
 	void printNextBlock();
-	
+
 
 private:
-	Display * display;
+	TextDisplay * display;
+	GraphicDisplay *gd;
 	BlockFactory blockFactory;
 	int currentLevel;
 
@@ -76,9 +83,10 @@ private:
 	bool canMoveDown() const;
 	void getNextBlock();
 	void updateScore() const;
-	
+
+	int getLevel(int row, int col, int width); // Gets level from block basically
+
 };
 
 
 #endif
-

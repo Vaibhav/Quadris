@@ -24,7 +24,8 @@ public:
 
 
 private:
-	Display display;
+	TextDisplay display;
+	GraphicDisplay gd;
 	Board b;
 	CommandInterpreter commandIn; 
 	

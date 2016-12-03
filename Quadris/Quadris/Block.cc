@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <memory>
 using namespace std;
 
 
@@ -36,19 +38,19 @@ pair<int, int> Block::findLowest() {
 }
 
 //This is for the block parser
-Block::Block(char dispChar, 
-	 	  std::string colour, 
+Block::Block(char dispChar,
+	 	  std::string colour,
 		  std::string name,
 		  std::vector < std::pair < int, int > > coords
 		  ): name(name), colour(colour), dispChar(dispChar), coords(coords) {
 
-	for (auto i:coords) { 
-		cells.push_back(Cell{this, dispChar, i.first+3, i.second});
+	for (auto i:coords) {
+		cells.emplace_back(Cell{this, dispChar, i.first+3, i.second});
 	} // Add 3 to le height for safety purposes
 
 	height = calcHeight(coords);
 	width = calcWidth(coords);
-	
+
 	lowerLeft = findLowest();
 
 	notifyObservers(SubscriptionType::blockChange);
@@ -78,7 +80,7 @@ void Block::rotateClockWise(int restraint) {
 		i.first = col;
 		i.second = height - row;
 	}
-	rotateUpdate();	
+	rotateUpdate();
 }
 
 void Block::clearBlockFromScreen(){
@@ -102,7 +104,8 @@ void Block::rotateCounterClockWise(int restraint) {
 void Block::moveLeft() {
 	if (lowerLeft.second <= 0) return;
 	prevCells = cells;
-	for (auto &i:cells) i.col -= 1;
+	int bugBreaker = cells.size();
+	for (int i = 0; i < bugBreaker; i++) cells[i].col -= 1;
 	lowerLeft.second -= 1;
 	notifyObservers(SubscriptionType::blockChange);
 }
@@ -110,7 +113,8 @@ void Block::moveLeft() {
 void Block::moveRight(int restraint) {
 	if (lowerLeft.second + width + 1 >= restraint) return;
 	prevCells = cells;
-	for (auto &i:cells) i.col += 1;
+	int bugBreaker = cells.size();
+	for (int i = 0; i < bugBreaker; i++) cells[i].col += 1;
 	lowerLeft.second += 1;
 	notifyObservers(SubscriptionType::blockChange);
 }
@@ -122,14 +126,15 @@ vector<Cell> Block::getCells() const {
 bool Block::moveDown(int restraint) {
 	prevCells = cells;
 	if (lowerLeft.first + 1 >= restraint) return false;
-	for (auto &i:cells) i.row += 1;
+	int bugBreaker = cells.size();
+	for (int i = 0; i < bugBreaker; i++) cells[i].row += 1;
 	lowerLeft.first += 1;
 	notifyObservers(SubscriptionType::blockChange);
 	return true;
 }
 
 Info Block::getInfo() const {
-	return Info{prevCells, cells}; // Array of cells so display knows what to update
+	return Info{prevCells, cells, -1, colour}; // Array of cells so display knows what to update
 }
 
 void Block::setLevel(int n){
@@ -160,17 +165,53 @@ ostream &operator<<(std::ostream &out, const Block&b) {
 }
 
 
-int Block::deleteCells(int theRow, int theCol){
+bool isInVec(vector<int> anycontainer, int testvalue){
+	bool contains = find(anycontainer.begin(), anycontainer.end(), testvalue) != anycontainer.end();
+	return !contains;
+}
+
+
+void Block::deleteCells(int theRow, int theCol){
+
+	vector<int> index;
+	vector<int> cols;
 
 	int size = cells.size();
-	for(int i =0; i < size; i++){
-		if (cells[i].row == theRow && cells[i].col == theCol) {
-			//remove from cells vector 
-			this->cells.erase(cells.begin()+i);
+
+	// get indexes of the cells to delete in cells vector
+	for(int i = 0; i < size; i++){
+
+		if (cells[i].row == theRow && cells[i].col == theCol && isInVec(cols, cells[i].col)) {
+				index.emplace_back(i);
+				cols.emplace_back(cells[i].col);
 		}
 	}
 
+	int size2 = index.size();
+	// Properly deleting cells from cells vector 
+	for (int j = 0; j < size2; j++) {
+		this->cells.erase(cells.begin()+index[j]);
+		for (int i = j+1; i < size2;  i++) {
+				index[i] -= 1;
+		}
+	}
+}
+
+
+int Block::updateCells(int rows, int cols){	
+	
+	prevCells = cells;
+	// delete all the cells in the row 
+	for (int i = 0; i < cols; i++) {
+		deleteCells(rows, i);
+	}
+
+	// notify changes made
+	notifyObservers(SubscriptionType::blockChange);
+	
+	// return level if block is destoryed 
 	if ( !(this->cells.empty()) ){
+		cout << "level: " << this->level << endl;
 		return this->level;
 	} else {
 		return -1;
@@ -185,4 +226,3 @@ int Block::getHeight() const {
 int Block::getWidth() const {
 	return width;
 }
-
