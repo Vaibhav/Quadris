@@ -252,9 +252,30 @@ vector<int> Board::clearRows(vector<int> rowsCompleted) {
 
 vector<int> Board::clearRow(int theRow) {
 
+	
+int size = cells.size();
+	for(int i =0; i < size; i++){
+		if (cells[i].row == theRow){
+			cout << "row iter: " << i << endl;
+			cout << "row: " << cells[i].row << " cols: " << cells[i].col << endl;	
+			cout << cells[i].blockPtr;
+			cout << cells[i].blockPtr->getName() << endl;
+	/*		vector<Cell> fart =  cells[i].blockPtr->getCells();
+			cout << "THis block contains: " << endl << "size" << cells[i].blockPtr->getCells().size();
+			for(int j = 0; j != fart.size(); ++j){
+				cout << "row: " << fart[j].row << " cols: " << fart[j].col  << endl;
+			}
+	*/
+		}
+	}
+	return vector<int>();
+
+/*
+
+
 	cout << "clearRow Called" << endl;
 	// vector of cells that need to be deleted
-	vector<Cell> toDelete;
+	//vector<Cell> toDelete;
 	int theLevel;
 	vector<int> levels;
 	vector<int> index;
@@ -265,7 +286,7 @@ vector<int> Board::clearRow(int theRow) {
 		if (cells[i].row == theRow && inVec(cols, cells[i].col)){
 			cout << "row iter: " << i << endl;
 			cout << "row: " << cells[i].row << " cols: " << cells[i].col << endl;
-			toDelete.emplace_back(cells[i]);
+			//toDelete.emplace_back(cells[i]);
 			index.emplace_back(i);
 			cols.emplace_back(cells[i].col);
 		}
@@ -279,8 +300,6 @@ vector<int> Board::clearRow(int theRow) {
 				index[i] -= 1;
 		}
 	}
-
-
 
 	cout << "made it out of first loop" << endl;
 	for(auto n: toDelete){
@@ -298,7 +317,7 @@ vector<int> Board::clearRow(int theRow) {
 	}
 
 	return levels;
-
+	*/
 }
 
 
