@@ -1,7 +1,7 @@
 #include "Cell.h"
 
 // copy assignment operator
-Cell& operator=( const Cell &other ) {
+Cell::Cell& operator=( const Cell &other ) {
 
 	if (this == &other) return *this;
 	this->row = other.row;
@@ -47,7 +47,7 @@ Cell& operator=( const Cell &other ) {
 
 	
 // copy constructor
-Cell ( const Cell &other ): row{other.row}, col{other.col}, displayCharacter{other.displayCharacter} {
+Cell::Cell ( const Cell &other ): row{other.row}, col{other.col}, displayCharacter{other.displayCharacter} {
 	this->blockPtr = other.blockPtr; 
 }
 

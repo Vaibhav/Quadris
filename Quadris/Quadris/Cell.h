@@ -9,7 +9,7 @@ class Cell {
 public:
 	Cell& operator=( const Cell & );  // copy assignment operator
 	Cell ( const Cell & );        // copy constructor
-	shared_ptr<Block> blockPtr;
+	std::shared_ptr<Block> blockPtr;
 	char displayCharacter;
 	int row;
 	int col; 
