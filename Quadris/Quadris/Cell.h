@@ -4,22 +4,23 @@
 
 class Block;
 
-
-class Cell { 
+/*
+class Cell {
 public:
-	Cell(std::shared_ptr <Block>, char, int, int);
-	Cell& operator=( const Cell & );  // copy assignment operator
-	Cell ( const Cell & );        // copy constructor
-	
-	std::shared_ptr<Block> blockPtr;
+	//Cell(std::shared_ptr <Block>, char, int, int);
+	Cell(Block *, char, int, int );
+//	Cell& operator=( const Cell & );  // copy assignment operator
+//	Cell ( const Cell & );        // copy constructor
+
+	//std::shared_ptr<Block> blockPtr;
+	Block * blockPtr;
 	char displayCharacter;
 	int row;
-	int col; 
+	int col;
 
 };
+*/
 
-
-/*
 
 struct Cell {
 	Block * blockPtr;
@@ -27,7 +28,5 @@ struct Cell {
 	int row;
 	int col;
 };
-
-*/
 
 #endif

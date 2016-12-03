@@ -45,7 +45,7 @@ Block::Block(char dispChar,
 
 	for (auto i:coords) {
 
-		cells.push_back(Cell::Cell{this, dispChar, i.first+3, i.second});
+		cells.push_back(Cell{this, dispChar, i.first+3, i.second});
 	} // Add 3 to le height for safety purposes
 
 	height = calcHeight(coords);
@@ -113,7 +113,7 @@ void Block::moveRight(int restraint) {
 	if (lowerLeft.second + width + 1 >= restraint) return;
 	prevCells = cells;
 	for (auto &i:cells) i.col += 1;
-	lowerLeft.second += 1;	
+	lowerLeft.second += 1;
 	notifyObservers(SubscriptionType::blockChange);
 }
 
@@ -225,4 +225,3 @@ int Block::getHeight() const {
 int Block::getWidth() const {
 	return width;
 }
-

@@ -10,7 +10,7 @@ using namespace std;
 
 
 
-Board::Board(TextDisplay* d, GraphicDisplay *gd, int width, int height, string sequenceFile): 
+Board::Board(TextDisplay* d, GraphicDisplay *gd, int width, int height, string sequenceFile):
 	display{d}, gd{gd}, blockFactory{BlockFactory()}, currentLevel{0},
 	width{width}, height{height} {
 
@@ -84,8 +84,8 @@ bool Board::canMoveDown() const {
 				return false;
 			}
 		}
-	} 
-	
+	}
+
 	// if cell doesn't exist returns true
 	return true;
 }
@@ -99,28 +99,28 @@ void Board::currentBlockDrop() {
 		else break;
 	}
 
-	// update cells vector 
+	// update cells vector
 	for (auto i:currentBlock.getCells()) {
 		cells.push_back(i);
 	}
 
-	// updates blocks vector 
+	// updates blocks vector
 	blocks.push_back(currentBlock);
 
 	// check if any row is completed
 	vector<int> rowsCompleted = checkIfRowsComplete();
 
 	if ( !(rowsCompleted.empty()) ){
-		
+
 		// clear the rows
 		vector<int> listOfLevels = clearRows(rowsCompleted);
 		// update score
 		// Game::updateScore();
 
 	}
-	
- 	
-	
+
+
+
 	// get new current block
 	currentBlock = nextBlock;
 	// create next block
@@ -313,7 +313,7 @@ bool Board::canMoveLeft() const {
 		for (auto n : cells) {
 			if (n.row == i.row && n.col == i.col - 1) return false;
 		}
-	} 
+	}
 	return true;
 }
 
@@ -323,7 +323,7 @@ bool Board::canMoveRight(int k) const {
 		for (auto n : cells) {
 			if (n.row == i.row && n.col == i.col + k) return false;
 		}
-	} 
+	}
 	return true;
 }
 
