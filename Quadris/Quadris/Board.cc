@@ -125,9 +125,6 @@ void Board::currentBlockDrop() {
 	currentBlock.attach(display);
 	currentBlock.attach(gd);
 	currentBlock.notifyObservers(SubscriptionType::blockChange);
-
-	// if cell doesn't exist returns true
-	return true;
 }
 
 void Board::showHint(){
