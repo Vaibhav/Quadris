@@ -25,6 +25,7 @@ public:
 
 
 private:
+	bool textMode; //Runs Text Only
 	TextDisplay display;
 	GraphicDisplay gd;
 	Board b;
@@ -36,7 +37,6 @@ private:
 
 	int maxLevel;
 	int currentLevel;
-	bool textMode; //Runs Text Only
 	int randSeed;
 	std::string scriptFile;
 	bool bonus;

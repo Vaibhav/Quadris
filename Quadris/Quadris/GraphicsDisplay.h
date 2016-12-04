@@ -17,6 +17,7 @@ public:
 	~GraphicDisplay();
 
 	void drawCell(int xcoord, int ycoord, std::string theColor);
+	void turnOff();
 
 private:
 	int sizeOfDisplay;

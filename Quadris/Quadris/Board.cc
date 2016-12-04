@@ -12,8 +12,9 @@ using namespace std;
 
 
 Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, 
-	int startLevel, int seed, int width, int height ):
-	display{d}, gd{gd}, blockFactory{BlockFactory()}, currentLevel{startLevel}
+	int startLevel, int seed, bool textMode, int width, int height ):
+	display{d}, gd{gd}, blockFactory{BlockFactory()}, 
+	currentLevel{startLevel}, textMode{textMode}
 	{
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
@@ -29,7 +30,7 @@ Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile,
 	//cout << nextBlock->getLevel() << endl;
 
 	currentBlock->attach(d);
-	currentBlock->attach(gd);
+	if (!textMode) currentBlock->attach(gd);
 	currentBlock->notifyObservers(SubscriptionType::blockChange);
 }
 
@@ -175,7 +176,7 @@ void Board::showHint(){ // Hackiest function we got
 	hintBlock = currentBlock;
 	currentBlock = tempBlock;	// Reset currentBlock
 	hintBlock->attach(display);
-	hintBlock->attach(gd);
+	if (!textMode) hintBlock->attach(gd);
 	hintBlock->notifyObservers(SubscriptionType::blockChange);
 }
 
@@ -224,7 +225,7 @@ void Board::setCurrentBlock(string blockName){
 	currentBlock->detach(display);
 	currentBlock = blockFactory.generateBlock(blockName, this->currentLevel);
 	currentBlock->attach(this->display);
-	currentBlock->attach(this->gd);
+	if (!textMode) currentBlock->attach(this->gd);
 	currentBlock->notifyObservers(SubscriptionType::blockChange);
 }
 
@@ -270,7 +271,7 @@ bool Board::generate() {
 	}
 
 	currentBlock->attach(display);
-	currentBlock->attach(gd);
+	if (!textMode) currentBlock->attach(gd);
 	currentBlock->notifyObservers(SubscriptionType::blockChange);
 	return true;
 }
@@ -466,6 +467,6 @@ void Board::addCentreBlock() {
 	cout << "CENTRE BLOCK CREATED" << endl;
 	blocks.push_back(centreBlock);
 	centreBlock->attach(display);
-	centreBlock->attach(gd);
+	if (!textMode) centreBlock->attach(gd);
 	centreBlock->notifyObservers(SubscriptionType::blockChange);
 }

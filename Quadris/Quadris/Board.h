@@ -30,7 +30,9 @@ public:
 
 	bool generate();
 
-	Board(TextDisplay *d, GraphicDisplay *gd, std::string sequenceFile = "sequence.txt", int curLevel = 0, int seed = 0, int width=11, int height = 18);
+	Board(TextDisplay *d, GraphicDisplay *gd, 
+		std::string sequenceFile = "sequence.txt", int curLevel = 0, 
+		int seed = 0, bool textMode=false, int width=11, int height = 18);
  
 
 	Info getInfo() const; // Board is a subject...
@@ -70,6 +72,7 @@ private:
 	GraphicDisplay *gd;
 	BlockFactory blockFactory;
 	int currentLevel;
+	bool textMode;
 
 	std::vector< Cell > cells;
 	std::vector< std::shared_ptr<Block> > blocks;

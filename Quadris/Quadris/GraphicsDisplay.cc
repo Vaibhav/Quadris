@@ -17,6 +17,10 @@ int GraphicDisplay::calcMarginWidth() {
 	return (windowSize - blockSize*col)/2;
 }
 
+void GraphicDisplay::turnOff() {
+	this->~GraphicDisplay();
+}
+
 GraphicDisplay::GraphicDisplay(int row, int col):
  sizeOfDisplay{windowSize}, marginHeight{ 100 }, topMargin {10},
   row{ row }, col{ col }, blockSize{ (windowSize - marginHeight) / row }, 

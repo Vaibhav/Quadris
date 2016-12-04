@@ -12,7 +12,7 @@
 using namespace std;
 
 Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string scoreFile, bool bonus):
-	b{ Board{&display, &gd, scriptFile, startLevel, seed, 11, 18} }, commandIn { CommandInterpreter{cin} } {
+	b{ Board{&display, &gd, scriptFile, startLevel, seed, text, 11, 18} }, commandIn { CommandInterpreter{cin} } {
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
 		this->b.setLevel(currentLevel);
@@ -27,6 +27,10 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 		this->gameOver = false;
 		b.setLevel(currentLevel);
 		b.setSeed(seed);
+
+		if (textMode) {
+			gd.turnOff();
+		}
 
 		if (this->bonus) {
 			readInHighScore();
@@ -337,6 +341,7 @@ void Game::printGameBoard() {
 	cout << "Next: " << endl;
 	b.printNextBlock();
 	if (gameOver) cout << "Game over!" << endl;
+	if (textMode) return;
 
 	// Clear top/bottom of Graphics Display
 	gd.xw.fillRectangle(0,0,110,40,Xwindow::White); // 120 is marginWidth
