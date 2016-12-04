@@ -17,6 +17,10 @@ public:
 
 	void setSeed(int n);
 	void setSequenceFile(std::string sequenceFile);
+	
+	void setBoardHeight(int n);
+	void setBoardWidth(int n);
+	
 	void noRandomBlock(std::string file);
 	void restoreRandom();
 
@@ -27,6 +31,9 @@ private:
 	int seed;
 	std::string noRandomBlockFile;
 	bool noRandom;
+
+	int boardHeight;
+	int boardWidth;
 
 	std::unique_ptr<BlockGenerator> createBlockGenerator(int level);
 	

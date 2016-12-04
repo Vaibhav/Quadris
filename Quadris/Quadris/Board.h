@@ -54,6 +54,9 @@ public:
 	void restoreRandom();
 	void setSeed(int seed);
 	void setSequence(std::string sequenceFile);
+	void setHeight(int n);
+	void setWidth(int n);
+
 	std::vector<int> clearRows(std::vector<int>);
 	std::vector<int> clearRow(int row);
 	void printNextBlock();
@@ -71,8 +74,8 @@ private:
 	std::shared_ptr<Block> nextBlock;
 	std::shared_ptr<Block> currentBlock;
 
-	const int width;
-	const int height;
+	int width;
+	int height;
 
 	bool canRotateCW() const;
 	bool canRotateCCW() const;

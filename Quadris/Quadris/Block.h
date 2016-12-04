@@ -35,21 +35,26 @@ public:
 	void switchCurrentBlock(std::string blockName);
 
 	void clearRow(int row);
-	Info getInfo() const;
-	std::string getName();
-	std::vector<Cell> getCells() const;
-	int getHeight() const;
-	int getWidth() const;
-	int getLevel() const;
 	std::pair<int, int> findLowest();
 	void clearBlockFromScreen();
 	int updateCells(int, int);
 	void deleteCells(int, int);
 	void moveCellsAboveDown(int row);
-
 	void nextBlockGraphicPls(GraphicDisplay *gd);
 
-private:
+	Info getInfo() const;
+	std::string getName();
+	std::vector<Cell> getCells() const;
+	std::vector<Cell> getPrevCells() const;
+	int getHeight() const;
+	int getWidth() const;
+	int getLevel() const;
+	std::string getColour() const;
+	char getDisplayCharacter() const;
+	std::vector < std::pair < int, int > > getCoords() const;
+	std::pair<int, int> getLowerLeft() const;
+
+protected:
 	int size;
 	std::string name;
 	int level;

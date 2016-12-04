@@ -73,6 +73,12 @@ void Block::rotateUpdate() {
 	cout << "csize update:" << cells.size() << endl;
 }
 
+void Block::clearBlockFromScreen(){
+	prevCells = cells;
+	cells.clear();
+	notifyObservers(SubscriptionType::blockChange);
+}
+
 void Block::rotateClockWise(int restraint) {
 	if (lowerLeft.second + height >= restraint) return;
 	prevCells = cells;
@@ -83,12 +89,6 @@ void Block::rotateClockWise(int restraint) {
 		i.second = height - row;
 	}
 	rotateUpdate();
-}
-
-void Block::clearBlockFromScreen(){
-	prevCells = cells;
-	cells.clear();
-	notifyObservers(SubscriptionType::blockChange);
 }
 
 void Block::rotateCounterClockWise(int restraint) {
@@ -121,9 +121,6 @@ void Block::moveRight(int restraint) {
 	notifyObservers(SubscriptionType::blockChange);
 }
 
-vector<Cell> Block::getCells() const {
-	return this->cells;
-}
 
 bool Block::moveDown(int restraint) {
 	prevCells = cells;
@@ -133,6 +130,10 @@ bool Block::moveDown(int restraint) {
 	lowerLeft.first += 1;
 	notifyObservers(SubscriptionType::blockChange);
 	return true;
+}
+
+vector<Cell> Block::getCells() const {
+	return this->cells;
 }
 
 Info Block::getInfo() const {
@@ -251,3 +252,21 @@ int Block::getWidth() const {
 int Block::getLevel() const{
 	return level;
 }
+
+
+vector<Cell> Block::getPrevCells() const{
+	return prevCells;
+}
+
+	std::string Block::getColour() const{
+		return this->colour;
+	}
+	char Block::getDisplayCharacter() const{
+		return this->dispChar;
+	}
+	std::vector < std::pair < int, int > > Block::getCoords() const{
+		return this->coords;
+	}
+	std::pair<int, int> Block::getLowerLeft() const{
+		return this->lowerLeft;
+	}

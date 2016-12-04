@@ -11,14 +11,17 @@ of one row (if possible)
 class HeavyBlockDecorator: public BlockDecorator {
 
 public:
-	HeavyBlockDecorator(std::shared_ptr<Block> component);
+	HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight);
 
-	//BlockDecorator(std::shared_ptr<Block> component) : component{ component } {}
-
-	//void rotateClockWise(int n) override;
-	//void rotateCounterClockWise(int n) override;
-//	bool moveDown(int n) override;
-//	void moveLeft() override;
+	void rotateClockWise(int n) override;
+	void rotateCounterClockWise(int n) override;
+	bool moveDown(int n) override;
+	void moveLeft() override;
 	void moveRight(int restraint) override;
+
+private:
+	bool heavyDown();
+	int boardHeight;
+	void updateProperties();
 
 };

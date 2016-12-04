@@ -11,19 +11,22 @@ using namespace std;
 
 
 
-Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, int startLevel, int seed, int width, int height ):
-	display{d}, gd{gd}, blockFactory{BlockFactory()}, currentLevel{startLevel},
-	width{width}, height{height} {
+Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, 
+	int startLevel, int seed, int width, int height ):
+	display{d}, gd{gd}, blockFactory{BlockFactory()}, currentLevel{startLevel}
+	{
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
 	setSequence(sequenceFile);
 	setSeed(seed);
+	setHeight(height);
+	setWidth(width);
 	currentBlock = generateBlock();
  	nextBlock = generateBlock();
 	// Idk wtf all the shit above is, but we need this:
 
-	cout << currentBlock->getLevel() << endl;
-	cout << nextBlock->getLevel() << endl;
+	//cout << currentBlock->getLevel() << endl;
+	//cout << nextBlock->getLevel() << endl;
 
 	currentBlock->attach(d);
 	currentBlock->attach(gd);
@@ -36,6 +39,16 @@ Info Board::getInfo() const {
 	return Info{cells, cells, 0}; // Hack for now, fix later
 }
 
+
+void Board::setHeight(int n){
+	blockFactory.setBoardHeight(n);
+	this->height = n;
+}
+
+void Board::setWidth(int n){
+	blockFactory.setBoardWidth(n);
+	this->width = n;
+}
 
 void Board::notify(Subject &whoNotified) {
 

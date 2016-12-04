@@ -1,42 +1,103 @@
 #include "HeavyBlockDecorator.h"
 #include "Block.h"
+#include <iostream>
 #include <memory>
 
-HeavyBlockDecorator::HeavyBlockDecorator(std::shared_ptr<Block> component): BlockDecorator{component}{
+using namespace std;
+
+HeavyBlockDecorator::HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight): 
+BlockDecorator{component}, boardHeight{boardHeight}{
+cout << endl << "HeavyBlockDecorator Created: " << component->getName() << endl;
+updateProperties();
 }
-/*
+
 void HeavyBlockDecorator::rotateClockWise(int restraint) {
+	cout << endl << "HEAVY BLOCK MOVE: " << component->getName() << endl;
+
+	component->moveDown(boardHeight);
+	updateProperties();
 	component->rotateClockWise(restraint);
-	Block::moveDown(1);
+	updateProperties();
+
 }
 	
 void HeavyBlockDecorator::rotateCounterClockWise(int restraint) {
+	cout << endl << "HEAVY BLOCK MOVE: " << component->getName() << endl;
+
+	component->moveDown(boardHeight);
+	updateProperties();
 	component->rotateCounterClockWise(restraint);
-	Block::moveDown(1);
+	updateProperties();
 }
 
+/*
+bool HeavyBlockDecorator::heavyDown(){
+bool val = component->moveDown(this->height);
+if(val == false) return false;
+prevCells = component->getPrevCells();
+cells = component->getCells();
+lowerLeft = component->getLowerLeft();
+notifyObservers(SubscriptionType::blockChange);
+return true;
+}
+*/
 
 bool HeavyBlockDecorator::moveDown(int restraint) {
-	//return component->moveDown(n+1);
-	return true;
+//if(heavyDown() == false) return false;
+//return heavyDown();
+bool val = component->moveDown(boardHeight);
+updateProperties();
+return val;
+
 }
 
 
 void HeavyBlockDecorator::moveLeft() {
+	cout << endl << "HEAVY BLOCK MOVE: " << component->getName() << endl;
 	component->moveLeft();
-	Block::moveDown(1);
+	updateProperties();
+	component->moveDown(boardHeight);
+	updateProperties();
 }
-*/
 
 void HeavyBlockDecorator::moveRight(int restraint) {
-	//component->moveRight(restraint);
-	Block::moveDown(1);
+	cout << endl << "HEAVY BLOCK MOVE: " << component->getName() << endl;
+	component->moveRight(restraint);
+	updateProperties();
+	component->moveDown(boardHeight);
+	updateProperties();
 }
 
+void HeavyBlockDecorator::updateProperties(){
+name = component->getName();
+colour = component->getColour();
+dispChar = component->getDisplayCharacter();
+coords = component->getCoords();
+this->prevCells = component->getPrevCells();
+this->cells = component->getCells();
+height = component->getHeight();
+width = component->getWidth();
+lowerLeft = this->getLowerLeft();
+notifyObservers(SubscriptionType::blockChange);
+}
+
+
+
 /*
-virtual void rotateClockWise(int restraint);
-	virtual void rotateCounterClockWise(int restraint);
-	virtual bool moveDown(int restraint);
-	virtual void moveLeft();
-	virtual void moveRight(int restraint);
+
+void Block::rotateCounterClockWise(int restraint) {
+	if (lowerLeft.second + height >= restraint) return;
+	prevCells = cells;
+	for (auto &i:coords) {
+		int row = i.first;
+		int col = i.second;
+		i.first = width - col;
+		i.second = row;
+	}
+	rotateUpdate();
+}
+
+
+	
+	
 	*/

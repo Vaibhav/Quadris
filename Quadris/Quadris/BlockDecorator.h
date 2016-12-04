@@ -2,6 +2,7 @@
 #define BLOCK_DECORATOR_H
 
 #include "Block.h"
+#include <memory>
 
 class BlockDecorator : public Block {
 public:

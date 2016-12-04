@@ -51,14 +51,14 @@ unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level){
        	vector<string> blocks =  
             vector<string>{"BLOCK-S", "BLOCK-Z", "BLOCK-T", "BLOCK-I", "BLOCK-O", "BLOCK-J", "BLOCK-L"};
             
-        shared_ptr<BlockGenerator> component {new BlockGeneratorBase{sequenceFile}};
-        return unique_ptr<BlockGenerator>{ new GeneratorHeavyBlockDecorator{component}};
-        /*return unique_ptr<BlockGenerator>{new GeneratorProbabilityDecorator{
-                                         component,
-                                         component->getAllBlockNames(),
-                                         seed
-                                         }};*/
-
+        shared_ptr<BlockGenerator> component1 {
+            new BlockGeneratorBase{sequenceFile}};
+        shared_ptr<BlockGenerator> component2 {
+            new GeneratorProbabilityDecorator{
+            component1, blocks, probabilities, seed}};
+        return unique_ptr<BlockGenerator>{
+             new GeneratorHeavyBlockDecorator
+            {component2, this->boardHeight}};
     }
     else if (level == 4)
     {
@@ -111,4 +111,12 @@ void BlockFactory::restoreRandom()
 {
     this->noRandom = false;
     this->noRandomBlockFile = "";
+}
+
+void BlockFactory::setBoardHeight(int n){
+    this->boardHeight = n;
+}
+
+void BlockFactory::setBoardWidth(int n){
+    this->boardWidth = n;
 }
