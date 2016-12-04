@@ -11,19 +11,23 @@ using namespace std;
 
 // NOTE: height and width start at zero (ie. I-block has height 0)
 int calcHeight(std::vector < std::pair < int, int > > coords) {
+	int lowest = coords[0].first;
 	int highest = 0;
 	for (auto i:coords) {
 		if (i.first > highest) highest = i.first;
+		if (i.first < lowest) lowest = i.first;
 	}
-	return highest;
+	return highest - lowest;
 }
 
 int calcWidth(std::vector < std::pair < int, int > > coords) {
+	int lowest = coords[0].second;
 	int highest = 0;
 	for (auto i:coords) {
 		if (i.second > highest) highest = i.second;
+		if (i.second < lowest) lowest = i.second;
 	}
-	return highest;
+	return highest - lowest;
 }
 
 pair<int, int> Block::findLowest() {

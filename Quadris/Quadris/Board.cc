@@ -175,10 +175,10 @@ void Board::showHint(){ // Hackiest function we got
 	if (biggestGap > currentBlock->getWidth()) {
 		int hbpos = currentBlock->getLowerLeft().second;
 		int horShift = gapStart + 1 - hbpos;
-		if (horShift <  0) currentBlockLeft(-horShift);
+		if (horShift <  0) currentBlockLeft(0-horShift);
 		else currentBlockRight(horShift);
 	}
-	currentBlockDown(99); // Place hint Block
+	currentBlockDown(height); // Place hint Block
 	hintBlock = currentBlock;
 	currentBlock = tempBlock;	// Reset currentBlock
 	attachAndNotify(hintBlock);
