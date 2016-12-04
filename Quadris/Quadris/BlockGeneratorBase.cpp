@@ -22,16 +22,16 @@ BlockGeneratorBase::BlockGeneratorBase(string file): sequenceFile{file}, BlockGe
 
 std::shared_ptr<Block> BlockGeneratorBase::generateBlock() {
 
-vector<Block> blocks = this->getParsedBlocks();
+vector<std::shared_ptr<Block>> blocks = this->getParsedBlocks();
 
 
 for(int i = 0; i != blocks.size(); ++i){
-	cout<< blocks[i].getName();
+	cout<< blocks[i]->getName();
 }
 
 int blockLen = blocks.size();
 
-	Block generatedBlock = BlockGenerator::generateBlock(this->sequence[this->currentIndex]);
+	std::shared_ptr<Block> generatedBlock = BlockGenerator::generateBlock(this->sequence[this->currentIndex]);
 	if(this->currentIndex + 1 == this->numblocksInSequence){
 			this->currentIndex = 0;
 		} else{

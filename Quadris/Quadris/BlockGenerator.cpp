@@ -7,14 +7,14 @@
 
 using namespace std;
 
-std::vector<Block> BlockGenerator::getParsedBlocks()
+std::vector<std::shared_ptr<Block>> BlockGenerator::getParsedBlocks()
 {	
 	return this->blockParser.parseBlocks();
 }
 
-std::vector<Block> BlockGenerator::getParsedBlocksBase()
+std::vector<std::shared_ptr<Block>> BlockGenerator::getParsedBlocksBase()
 {	
-	vector<Block> blocks = this->blockParser.parseBlocks();
+	vector<std::shared_ptr<Block>> blocks = this->blockParser.parseBlocks();
 	
 	if(!checkBaseBlocksExist(blocks)){
 		throw out_of_range("Base blocks did not exist to be parsed so cannot get base blocks");
@@ -23,10 +23,10 @@ std::vector<Block> BlockGenerator::getParsedBlocksBase()
 	int baseBlocksSize = baseBlocks.size();
 	int parsedBlocksSize = blocks.size();
 
-	vector<Block> base = vector<Block>{};
+	vector<std::shared_ptr<Block>> base = vector<std::shared_ptr<Block>>{};
 	for(int i = 0; i!= baseBlocksSize; ++i){
 		for(int j = 0; j!= parsedBlocksSize; ++j){
-			if(baseBlocks[i] == blocks[j].getName() ){
+			if(baseBlocks[i] == blocks[j]->getName() ){
 				base.emplace_back(blocks[j]);
 				break;
 			}
@@ -36,13 +36,14 @@ std::vector<Block> BlockGenerator::getParsedBlocksBase()
 }
 
 std::shared_ptr<Block> BlockGenerator::generateBlock(std::string name){
-vector<Block> blocks = this->getParsedBlocks();
+vector<std::shared_ptr<Block>> blocks = this->getParsedBlocks();
 int blockLen = blocks.size();
 
 for(int i = 0; i != blockLen; ++i){
-	if(blocks[i].getName() == name){		
+	if(blocks[i]->getName() == name){		
 		//cerr << blocks[i].getName();
-		return std::shared_ptr<Block>{blocks[i]};
+		///POINTERFIX
+		return blocks[i];
 	}
 }
 if(name == ""){
@@ -58,7 +59,7 @@ BlockGenerator::BlockGenerator()
 	vector<string>{"BLOCK-I", "BLOCK-Z", "BLOCK-T", "BLOCK-S", "BLOCK-O", "BLOCK-J", "BLOCK-L"};
     blockParser = BlockParser{};
     
-	vector<Block> parsedBlocks = getParsedBlocks();
+	vector<std::shared_ptr<Block>> parsedBlocks = getParsedBlocks();
     int size = parsedBlocks.size();
     
 	allBlocks = vector<string>{};
@@ -66,7 +67,7 @@ BlockGenerator::BlockGenerator()
 	
 	for (int i = 0; i != size; ++i)
     {
-	allBlocks.emplace_back(parsedBlocks[i].getName());
+	allBlocks.emplace_back(parsedBlocks[i]->getName());
     }
 }
 
@@ -78,10 +79,10 @@ std::vector<std::string> BlockGenerator::getAllBlockNames(){
 		return this->allBlocks;
 }
 
-bool BlockGenerator::checkBaseBlocksExist(std::vector<Block> blocks){
+bool BlockGenerator::checkBaseBlocksExist(std::vector<std::shared_ptr<Block>> blocks){
 int size = baseBlocks.size();
 for(int i = 0; i != size ; ++i ){
-	if(std::find(baseBlocks.begin(), baseBlocks.end(), blocks[i].getName()) == baseBlocks.end()){
+	if(std::find(baseBlocks.begin(), baseBlocks.end(), blocks[i]->getName()) == baseBlocks.end()){
 		return false;
 	}
 }
