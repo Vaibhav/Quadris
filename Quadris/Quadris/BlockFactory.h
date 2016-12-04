@@ -13,7 +13,7 @@ public:
 	BlockFactory();
 	// We need this to be virtual so that it calls the correct function
 	virtual std::shared_ptr<Block> generateBlock(int level = 0);
-	std::shared_ptr<Block> generateBlock(std::string blockName);
+	std::shared_ptr<Block> generateBlock(std::string blockName, int level = 0);
 
 	void setSeed(int n);
 	void setSequenceFile(std::string sequenceFile);

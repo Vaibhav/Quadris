@@ -20,7 +20,7 @@ BlockGeneratorBase::BlockGeneratorBase(string file): sequenceFile{file}, BlockGe
 };
 
 
-Block BlockGeneratorBase::generateBlock() {
+std::shared_ptr<Block> BlockGeneratorBase::generateBlock() {
 
 vector<Block> blocks = this->getParsedBlocks();
 
@@ -37,8 +37,7 @@ int blockLen = blocks.size();
 		} else{
 			++(this->currentIndex); 
 		}
-	return generatedBlock;
-
+	return std::shared_ptr<Block>{generatedBlock};
 }
 
 void BlockGeneratorBase::parseSequence(){

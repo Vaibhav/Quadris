@@ -11,9 +11,10 @@ GeneratorHeavyBlockDecorator::GeneratorHeavyBlockDecorator(shared_ptr<BlockGener
 
 
 
-Block GeneratorHeavyBlockDecorator::generateBlock() {
-    Block normalBlock = component->generateBlock();
-    Block * heavyBlock = new HeavyBlockDecorator(shared_ptr<Block>{&normalBlock});
+std::shared_ptr<Block> GeneratorHeavyBlockDecorator::generateBlock() {
+    std::shared_ptr<Block> normalBlock  = component->generateBlock();
+    std::shared_ptr<Block> heavyBlock= 
+        std::shared_ptr<Block>{new HeavyBlockDecorator(normalBlock)};
     //return *(heavyBlock);
-    return *heavyBlock;
+    return heavyBlock;
 }

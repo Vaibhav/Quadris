@@ -35,7 +35,7 @@ GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
     setProbability(blocks, probabilities);
 }
 
-Block GeneratorProbabilityDecorator::generateBlock()
+std::shared_ptr<Block> GeneratorProbabilityDecorator::generateBlock()
 {
     //Generate a number between 0 to 99 when randomNumberRange set to 100
     int num = (rand() % randomNumberRange);

@@ -23,7 +23,7 @@ GeneratorProbabilityDecorator(std::shared_ptr<BlockGenerator> component,
 
 
 
-Block generateBlock() override;
+std::shared_ptr<Block> generateBlock() override;
 
 private:
 std::vector<std::pair<std::string, double > > blockProbabilities;

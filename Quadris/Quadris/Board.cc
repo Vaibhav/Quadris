@@ -22,12 +22,12 @@ Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, int startL
  	nextBlock = generateBlock();
 	// Idk wtf all the shit above is, but we need this:
 
-	cout << currentBlock.getLevel() << endl;
-	cout << nextBlock.getLevel() << endl; 
+	cout << currentBlock->getLevel() << endl;
+	cout << nextBlock->getLevel() << endl; 
 
-	currentBlock.attach(d);
-	currentBlock.attach(gd);
-	currentBlock.notifyObservers(SubscriptionType::blockChange);
+	currentBlock->attach(d);
+	currentBlock->attach(gd);
+	currentBlock->notifyObservers(SubscriptionType::blockChange);
 }
 
 
@@ -98,7 +98,7 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 	}
 
 	// update cells vector
-	for (auto i:currentBlock.getCells()) {
+	for (auto i:currentBlock->getCells()) {
 		cells.push_back(i);
 	}
 
@@ -199,7 +199,7 @@ void Board::setSequence(std::string sequenceFile){
 }
 
 
-Block Board::generateBlock() { 
+std::shared_ptr<Block> Board::generateBlock() { 
 	return blockFactory.generateBlock(this->currentLevel);
 }
 
@@ -296,7 +296,7 @@ vector<int> Board::clearRow(int theRow) {
 
 // gets the level on the block if deleted, else it returns -1
 int Board::getLevel(int row, int col, int width) {
-	int blockSize = blocks->size();
+	int blockSize = blocks.size();
 
 	for (int i =0; i < blockSize; i++) {
 		for (unsigned int j = 0; j < blocks[i]->getCells().size(); j++) {
@@ -317,7 +317,7 @@ void Board::shiftBoardDown(vector<int> rows) {
 		for (auto &i:cells) {
 			if (i.row < r) i.row++;
 		}
-		int bs = blocks->size();
+		int bs = blocks.size();
 		for (int j=0; j < bs; j++) {
 			blocks[j]->moveCellsAboveDown(r);
 		} 

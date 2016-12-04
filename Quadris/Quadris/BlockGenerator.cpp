@@ -42,7 +42,7 @@ int blockLen = blocks.size();
 for(int i = 0; i != blockLen; ++i){
 	if(blocks[i].getName() == name){		
 		//cerr << blocks[i].getName();
-		return blocks[i];
+		return std::shared_ptr<Block>{blocks[i]};
 	}
 }
 if(name == ""){
