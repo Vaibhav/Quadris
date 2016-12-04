@@ -111,12 +111,15 @@ void Game::play() {
 				b.setCurrentBlock(commands[i].first);
 			} else if(commands[i].first == "DROP"){
 		//		cerr << "DROP" << commands[i].second[0];
+				int times = stoi(commands[i].second[0]);
 				std::pair<int, vector<int>> temp;
-				temp = b.currentBlockDrop();
-				if (temp.first != 0) {
-					updateScore(temp.first, temp.second);
+				for (int i=0; i<times && !gameOver; i++) {
+					temp = b.currentBlockDrop();
+					if (temp.first != 0) {
+						updateScore(temp.first, temp.second);
+					}
+					if(!b.generate()) gameOver = true;
 				}
-				if(!b.generate()) gameOver = true;
 			} else if(commands[i].first == "RESTART"){
 		//		cerr << "RESTART" << commands[i].second[0];
 				resetBoard();

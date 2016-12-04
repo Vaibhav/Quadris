@@ -145,7 +145,7 @@ void CommandInterpreter::initializeMap()
 
 
 	PairArg.first = "DROP";
-	PairArg.second = vector<string>{ "noArg" };
+	PairArg.second = moveOneUnitArg;//vector<string>{ "noArg" };
 	this->commandDictionary["drop"] = vector< pair<string, vector<string> > >{ PairArg };
 	PairArg.first = "RESTART";
 	PairArg.second = vector<string>{ "noArg" };
@@ -199,7 +199,7 @@ void CommandInterpreter::initializeMap()
 	////////////////////////////////////////////////////////////
 	///Multiplier Compatible Commands Initialization///////////
 	multiplierCompatibleCommands = vector<string>{
-		"L", "R", "D", "CCW", "CW", "LU", "LD"
+		"L", "R", "D", "CCW", "CW", "LU", "LD", "DROP"
 	};
 
 }
