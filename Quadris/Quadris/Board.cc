@@ -215,19 +215,17 @@ bool inVec(vector<int> anycontainer, int testvalue){
 vector<int> Board::checkIfRowsComplete() {
 
 	vector<int> v;
-	vector<int> cols;
 	int counter = 0;
-	//const int width;
 	int rows = this->height;
 
 	for (int i = 0; i < rows; i++) {
+		counter = 0;
 		for (auto n: this->cells){
-			if (n.row == i && inVec(cols, n.col)) {
-				cols.emplace_back(n.col);
+			if (n.row == i){
 				counter++;
 			}
 		}
-		if (counter == width){
+		if (counter >= width){
 			v.emplace_back(i);
 		}
 	}
