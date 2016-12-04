@@ -55,6 +55,7 @@ void Game::play() {
 			if (gameOver) {
 				if (commands[i].first == "RESTART") {
 					resetBoard();
+					gameOver = false;
 				} else {
 					cout << "Game is over" << endl;
 					break;
@@ -352,5 +353,7 @@ void Game::resetBoard() {
 	this->currentScore = 0;
 
 	b.restart();
+	//Board temp = b; // Deleted when goes out of scope
+	b = Board{&display, &gd, scriptFile, currentLevel, randSeed};
 	printGameBoard();
 }

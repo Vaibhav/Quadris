@@ -187,15 +187,14 @@ void Board::clearHint() {
 void Board::restart(){
 
 	vector<int> v;
-	int size = cells.size() - 1;
-	int size2 = cells.size() - 1;
-	this->cells.erase(cells.begin()+size);
-	this->blocks.erase(blocks.begin()+size2);
+	// Clear all rows
 	for(int i = 0; i < this->height; i++) {
 		v.emplace_back(i);
 	}
 	clearRows(v);
 
+	// Reset Blocks
+	currentBlock->clearBlockFromScreen();
 }
 
 
