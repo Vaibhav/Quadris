@@ -9,21 +9,21 @@
 using namespace std;
 
 
-/*
-Board::Board(Display* d, string sequenceFile, int width, int height): 
-	display{d}, blockFactory{BlockFactory()}, currentLevel{0},
-*/
 
-Board::Board(TextDisplay* d, GraphicDisplay *gd, int width, int height, string sequenceFile):
-	display{d}, gd{gd}, blockFactory{BlockFactory()}, currentLevel{0},
 
+Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, int startLevel, int seed, int width, int height ):
+	display{d}, gd{gd}, blockFactory{BlockFactory()}, currentLevel{startLevel},
 	width{width}, height{height} {
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
-	blockFactory.setSequenceFile(sequenceFile);
-	currentBlock = blockFactory.generateBlock(this->currentLevel);
- 	nextBlock = blockFactory.generateBlock(this->currentLevel);
+	setSequence(sequenceFile);
+	setSeed(seed);
+	currentBlock = generateBlock();
+ 	nextBlock = generateBlock();
 	// Idk wtf all the shit above is, but we need this:
+
+	cout << currentBlock.getLevel() << endl;
+	cout << nextBlock.getLevel() << endl; 
 
 	currentBlock.attach(d);
 	currentBlock.attach(gd);
@@ -199,7 +199,7 @@ void Board::setSequence(std::string sequenceFile){
 }
 
 
-Block Board::generateBlock() { // may be useless
+Block Board::generateBlock() { 
 	return blockFactory.generateBlock(this->currentLevel);
 }
 

@@ -10,8 +10,13 @@
 using namespace std;
 
 GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
-    std::shared_ptr<BlockGenerator> component,  std::vector<string> blocks, int randSeed, int randomNumberRange)
-    : BlockGeneratorDecorator{component}, randSeed{randSeed}, randomNumberRange{randomNumberRange}
+    std::shared_ptr<BlockGenerator> component,  
+    std::vector<string> blocks, 
+    int randSeed, 
+    int randomNumberRange)
+    : BlockGeneratorDecorator{component}, 
+      randSeed{randSeed}, 
+      randomNumberRange{randomNumberRange}
 {
      srand(randSeed);
      setEqualProbability(blocks);

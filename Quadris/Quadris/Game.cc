@@ -11,25 +11,15 @@
 
 using namespace std;
 
-
-/*
-Game::Game(int maxLevel,
-		   bool text,
-		   int seed,
-		   string scriptFile,
-		   int startLevel,
-		   string scoreFile):
-		 commandIn { CommandInterpreter{cin} }, b{ Board{&display, scriptFile, 11, 18}} {
-*/
-Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string filename, bool bonus):
-	b{ createBoard() }, commandIn { CommandInterpreter{cin} } {
+Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel, string scoreFile, bool bonus):
+	b{ Board{&display, &gd, scriptFile, startLevel, seed, 11, 18} }, commandIn { CommandInterpreter{cin} } {
 		this->maxLevel = maxLevel;
 		this->currentLevel = startLevel;
 		this->b.setLevel(currentLevel);
 		this->randSeed = seed;
 		this->textMode = text;
 		this->scriptFile = scriptFile;
-		this->filename = filename;
+		this->filename = scoreFile;
 		this->currentScore = 0;
 		this->highScore = 0;
 		this->bonus = bonus;
@@ -42,12 +32,6 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 			resetHighScore();
 		}
 	}
-
-
-Board Game::createBoard() {
-	return Board{&display, &gd};
-}
-
 
 void Game::play() {
 	while (true) {
@@ -283,6 +267,8 @@ level 3, you get 1 point.)
 */
 
 void Game::updateScore(int rowsCleared, vector<int> lvls) {
+
+	cout<< "The rows cleared: " << rowsCleared << endl;
 
 	int levelNow = this->currentLevel;
 	int curScore = this->currentScore;

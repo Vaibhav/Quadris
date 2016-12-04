@@ -25,11 +25,11 @@ public:
 	~Block();
 
 	//As a single turn in the game, the block moves n times
-	void rotateClockWise(int restraint);
-	void rotateCounterClockWise(int restraint);
-	bool moveDown(int restraint);
-	void moveLeft();
-	void moveRight(int restraint);
+	virtual void rotateClockWise(int restraint);
+	virtual void rotateCounterClockWise(int restraint);
+	virtual bool moveDown(int restraint);
+	virtual void moveLeft();
+	virtual void moveRight(int restraint);
 	void setLevel(int n);
 
 	void switchCurrentBlock(std::string blockName);
@@ -40,6 +40,7 @@ public:
 	std::vector<Cell> getCells() const;
 	int getHeight() const;
 	int getWidth() const;
+	int getLevel() const;
 	std::pair<int, int> findLowest();
 	void clearBlockFromScreen();
 	int updateCells(int, int);

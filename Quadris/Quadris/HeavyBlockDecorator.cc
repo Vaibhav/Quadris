@@ -1,28 +1,42 @@
 #include "HeavyBlockDecorator.h"
 #include "Block.h"
+#include <memory>
 
-void HeavyBlockDecorator::rotateClockWise(int n) {
-	Block::rotateClockWise(n);
+HeavyBlockDecorator::HeavyBlockDecorator(std::shared_ptr<Block> component): BlockDecorator{component}{
+}
+/*
+void HeavyBlockDecorator::rotateClockWise(int restraint) {
+	component->rotateClockWise(restraint);
 	Block::moveDown(1);
 }
 	
-void HeavyBlockDecorator::rotateCounterClockWise(int n) {
-	Block::rotateCounterClockWise(n);
+void HeavyBlockDecorator::rotateCounterClockWise(int restraint) {
+	component->rotateCounterClockWise(restraint);
 	Block::moveDown(1);
 }
 
 
-void HeavyBlockDecorator::moveDown(int n) {
-	Block::moveDown(n+1);
+bool HeavyBlockDecorator::moveDown(int restraint) {
+	//return component->moveDown(n+1);
+	return true;
 }
 
 
-void HeavyBlockDecorator::moveLeft(int n) {
-	Block::moveLeft(n);
+void HeavyBlockDecorator::moveLeft() {
+	component->moveLeft();
+	Block::moveDown(1);
+}
+*/
+
+void HeavyBlockDecorator::moveRight(int restraint) {
+	//component->moveRight(restraint);
 	Block::moveDown(1);
 }
 
-void HeavyBlockDecorator::moveRight(int n) {
-	Block::moveRight(n);
-	Block::moveDown(1);
-}
+/*
+virtual void rotateClockWise(int restraint);
+	virtual void rotateCounterClockWise(int restraint);
+	virtual bool moveDown(int restraint);
+	virtual void moveLeft();
+	virtual void moveRight(int restraint);
+	*/

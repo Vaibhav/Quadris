@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
     cout << text << endl;
     cout << seed << endl;
     cout << scriptFile << endl;
-    cout << startLevel << endl; //FIX CANT PARSE START LEVEL
+    cout << startLevel << endl;
 
   //Create Game
   Game g{MAXLEVEL, text, seed, scriptFile, startLevel, SCOREFILE, bonus};

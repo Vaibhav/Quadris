@@ -27,14 +27,10 @@ public:
 	void clearBoard();
 	void restart();
 
-/*
-	Board(Display *d, std::string sequenceFile = "sequence.txt", int width=11, int height = 18);
-*/
-	Board(TextDisplay *d, GraphicDisplay *gd, int width=11, int height = 18,
-		std::string sequenceFile = "sequence.txt");
 
+	Board(TextDisplay *d, GraphicDisplay *gd, std::string sequenceFile = "sequence.txt", int curLevel = 0, int seed = 0, int width=11, int height = 18);
 
-	Block generateBlock(); // maybe make a smart pointer
+	Block generateBlock(); 
 
 	Info getInfo() const; // Board is a subject...
 	void notify(Subject &whoNotified); // ... and an observer

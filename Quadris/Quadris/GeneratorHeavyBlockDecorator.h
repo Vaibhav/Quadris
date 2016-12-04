@@ -2,15 +2,18 @@
 #define GENERATOR_HEAVYBLOCK_DECORATOR
 
 #include "BlockGeneratorDecorator.h"
+#include <memory>
+#include <vector>
+#include <string>
 
-class GeneratorHeavyBlockDecorator : public BlockGeneratorDecorator {
-
+class GeneratorHeavyBlockDecorator : public BlockGeneratorDecorator { 
 public:
-	
-
-private:
-
-
+	GeneratorHeavyBlockDecorator(std::shared_ptr<BlockGenerator> component);
+    Block generateBlock() override;
 };
 
 #endif
+
+
+
+

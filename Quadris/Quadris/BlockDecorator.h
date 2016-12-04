@@ -8,10 +8,8 @@ public:
 
 	BlockDecorator(std::shared_ptr<Block> component) : component{ component } {}
 	
-private:
-
+protected:
 	std::shared_ptr<Block> component;
-
 };
 
 #endif

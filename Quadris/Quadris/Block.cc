@@ -247,3 +247,7 @@ int Block::getHeight() const {
 int Block::getWidth() const {
 	return width;
 }
+
+int Block::getLevel() const{
+	return level;
+}
