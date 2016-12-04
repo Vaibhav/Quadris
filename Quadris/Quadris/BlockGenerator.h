@@ -4,12 +4,13 @@
 #include "BlockParser.h"
 #include "Block.h"
 #include <vector>
+#include <memory>
 
 
 class BlockGenerator {
 public:
-	virtual Block generateBlock() = 0;	
-	Block generateBlock(std::string);
+	virtual std::shared_ptr<Block> generateBlock() = 0;	
+	std::shared_ptr<Block> generateBlock(std::string);
 	std::vector<std::string> getBaseBlockNames();
 	std::vector<std::string> getAllBlockNames();
 protected:

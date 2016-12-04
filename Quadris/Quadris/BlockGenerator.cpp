@@ -35,7 +35,7 @@ std::vector<Block> BlockGenerator::getParsedBlocksBase()
 	return base;
 }
 
-Block BlockGenerator::generateBlock(std::string name){
+std::shared_ptr<Block> BlockGenerator::generateBlock(std::string name){
 vector<Block> blocks = this->getParsedBlocks();
 int blockLen = blocks.size();
 
