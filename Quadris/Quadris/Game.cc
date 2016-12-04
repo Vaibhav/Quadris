@@ -97,7 +97,7 @@ void Game::play() {
 				}
 			} else if(commands[i].first == "RESTART"){
 		//		cerr << "RESTART" << commands[i].second[0];
-				b.restart();
+				b = resetBoard();
 			} else if(commands[i].first == "HINT"){
 		//		cerr << "HINT" << commands[i].second[0];
 				b.showHint();
@@ -328,4 +328,11 @@ void Game::printGameBoard() {
 	gd.xw.drawString(30, 30, "Hi Score: " + to_string(highScore));
 	gd.xw.drawString(30, 420, "Next: ");
 	b.printNextBlockGraphic(&gd);
+}
+
+Board Game::resetBoard() {
+	this->score = 0; 
+
+	b.restart();
+	printGameBoard();
 }

@@ -145,6 +145,16 @@ void Board::showHint(){
 
 void Board::restart(){
 
+	vector<int> v;
+	int size = cells.size();
+	int size2 = cells.size();
+	this->cells.erase(cells.begin()+size);
+	this->blocks.erase(blocks.begin()+size2);
+	for(int i = 0; i < this->height; i++) {
+		v.emplace_back(i);
+	}
+	clearRows(v);
+
 }
 
 
