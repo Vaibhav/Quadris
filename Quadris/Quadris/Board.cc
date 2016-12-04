@@ -181,7 +181,7 @@ void Board::currentBlockRotateClockwise(int n) {
 
 void Board::currentBlockRotateCounterClockwise(int n) {
 	for (int i=0; i< n; i++)  {
-		if (!canRotateCCW()) return;
+		if (!canRotateCW()) return;
 		currentBlock->rotateCounterClockWise(width);
 	}
 }
@@ -377,15 +377,20 @@ bool Board::canMoveRight(int k) const {
 
 bool Board::canRotateCW() const {
 	int h = currentBlock->getHeight();
-	bool flag = false;
-	for (int i=1; i <= h; i++) {
-		if (!canMoveRight(i)) flag = true;
+	int w = currentBlock->getWidth();
+	pair<int,int> lowerLeft = currentBlock->getLowerLeft();
+	for (int i=0; i <= w; i++) {
+		for (int j=0; j <= h; j++) {
+			for (auto k:cells) {
+				if (k.row == lowerLeft.first-i && 
+					k.col == lowerLeft.second+j) return false;
+			}
+		}
 	}
-	if (flag && h > currentBlock->getWidth()) return false;
 	return true;
 }
 
-bool Board::canRotateCCW() const {
+/*bool Board::canRotateCCW() const {
 	int h = currentBlock->getHeight();
 	bool flag = false;
 	for (int i=1; i <= h; i++) {
@@ -393,7 +398,7 @@ bool Board::canRotateCCW() const {
 	}
 	if (flag && h > currentBlock->getWidth()) return false;
 	return true;
-}
+}*/
 
 void Board::addCentreBlock() {
 	// Add block next available row
