@@ -29,6 +29,7 @@ public:
 	void restart();
 
 	bool generate();
+	void initialize(std::string sequenceFile, int seed);
 
 	Board(TextDisplay *d, GraphicDisplay *gd, 
 		std::string sequenceFile = "sequence.txt", int curLevel = 0, 
@@ -94,6 +95,7 @@ private:
 	int getLevel(int row, int col, int width); // Gets level from block basically
 	void shiftBoardDown(std::vector<int>s);
 	std::shared_ptr<Block> generateBlock();
+	void attachAndNotify(std::shared_ptr<Block> b);
 };
 
 

@@ -8,20 +8,17 @@
 #include <algorithm>
 using namespace std;
 
+void Board::attachAndNotify(shared_ptr<Block> b) {
+	b->attach(display);
+	if (!textMode) b->attach(gd);
+	b->notifyObservers(SubscriptionType::blockChange);
+}
 
-
-
-Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, 
-	int startLevel, int seed, bool textMode, int width, int height ):
-	display{d}, gd{gd}, blockFactory{BlockFactory()}, 
-	currentLevel{startLevel}, textMode{textMode}
-	{
+void Board::initialize(string sequenceFile, int seed) {
 	//Propertly initialize blockFactory;
 	//blockFactory.setLevel(currentLevel);
 	setSequence(sequenceFile);
 	setSeed(seed);
-	setHeight(height);
-	setWidth(width);
 	currentBlock = generateBlock();
  	nextBlock = generateBlock();
 	// Idk wtf all the shit above is, but we need this:
@@ -29,10 +26,19 @@ Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile,
 	//cout << currentBlock->getLevel() << endl;
 	//cout << nextBlock->getLevel() << endl;
 
-	currentBlock->attach(d);
-	if (!textMode) currentBlock->attach(gd);
-	currentBlock->notifyObservers(SubscriptionType::blockChange);
+	attachAndNotify(currentBlock);
 }
+
+
+Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, 
+	int startLevel, int seed, bool textMode, int width, int height ):
+	display{d}, gd{gd}, blockFactory{BlockFactory()}, 
+	currentLevel{startLevel}, textMode{textMode}
+	{ 
+		setHeight(height);
+		setWidth(width);
+		initialize(sequenceFile, seed) ;
+	}
 
 
 Info Board::getInfo() const {
@@ -175,9 +181,7 @@ void Board::showHint(){ // Hackiest function we got
 	currentBlockDown(99); // Place hint Block
 	hintBlock = currentBlock;
 	currentBlock = tempBlock;	// Reset currentBlock
-	hintBlock->attach(display);
-	if (!textMode) hintBlock->attach(gd);
-	hintBlock->notifyObservers(SubscriptionType::blockChange);
+	attachAndNotify(hintBlock);
 }
 
 void Board::clearHint() {
@@ -224,9 +228,7 @@ void Board::setCurrentBlock(string blockName){
 	currentBlock->clearBlockFromScreen();
 	currentBlock->detach(display);
 	currentBlock = blockFactory.generateBlock(blockName, this->currentLevel);
-	currentBlock->attach(this->display);
-	if (!textMode) currentBlock->attach(this->gd);
-	currentBlock->notifyObservers(SubscriptionType::blockChange);
+	attachAndNotify(currentBlock);
 }
 
 
@@ -270,9 +272,7 @@ bool Board::generate() {
 		} 
 	}
 
-	currentBlock->attach(display);
-	if (!textMode) currentBlock->attach(gd);
-	currentBlock->notifyObservers(SubscriptionType::blockChange);
+	attachAndNotify(currentBlock);
 	return true;
 }
 
@@ -466,7 +466,5 @@ void Board::addCentreBlock() {
 	std::shared_ptr<Block> centreBlock {new Block{'*', "Brown", "Centre", sqr}};
 	cout << "CENTRE BLOCK CREATED" << endl;
 	blocks.push_back(centreBlock);
-	centreBlock->attach(display);
-	if (!textMode) centreBlock->attach(gd);
-	centreBlock->notifyObservers(SubscriptionType::blockChange);
+	attachAndNotify(centreBlock);
 }

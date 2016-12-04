@@ -361,6 +361,7 @@ void Game::resetBoard() {
 
 	b.restart();
 	//Board temp = b; // Deleted when goes out of scope
-	b = Board{&display, &gd, scriptFile, currentLevel, randSeed};
+	b.initialize(scriptFile, randSeed); 
+	//= Board{&display, &gd, scriptFile, currentLevel, randSeed};
 	printGameBoard();
 }
