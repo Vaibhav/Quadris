@@ -105,10 +105,7 @@ bool Board::canMoveDown() const {
 pair<int, vector<int>> Board::currentBlockDrop() {
 
 	// keep moving block down until it can't move down
-	while(canMoveDown()) {
-		if (currentBlock->moveDown(height));
-		else break;
-	}
+	while(canMoveDown() && currentBlock->moveDown(height)) {}
 
 	// update cells vector
 	for (auto i:currentBlock->getCells()) {
@@ -126,8 +123,6 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 		int numOfRows = rowsCompleted.size();
 		// clear the rows
 		vector<int> listOfLevels = clearRows(rowsCompleted);
-		// update score
-
 
 		// move everything down
 		shiftBoardDown(rowsCompleted);
@@ -141,13 +136,6 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 	}
 
 
-	// get new current block
-	currentBlock = nextBlock;
-	// create next block
-	nextBlock = generateBlock();
-	currentBlock->attach(display);
-	currentBlock->attach(gd);
-	currentBlock->notifyObservers(SubscriptionType::blockChange);
 	return toReturn;
 }
 
@@ -264,6 +252,28 @@ void Board::setSequence(std::string sequenceFile){
 
 std::shared_ptr<Block> Board::generateBlock() {
 	return blockFactory.generateBlock(this->currentLevel);
+}
+
+// Called by Game, returns false if game over
+bool Board::generate() {
+	// get new current block
+	currentBlock = nextBlock;
+	// create next block
+	nextBlock = generateBlock();
+
+	for (auto i:cells) {
+		for (auto j:currentBlock->getCells()) {
+			if (i.row == j.row && i.col == j.col) {
+				// End the game
+				return false;
+			}
+		} 
+	}
+
+	currentBlock->attach(display);
+	currentBlock->attach(gd);
+	currentBlock->notifyObservers(SubscriptionType::blockChange);
+	return true;
 }
 
 

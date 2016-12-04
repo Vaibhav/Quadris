@@ -24,6 +24,7 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 		this->highScore = 0;
 		this->bonus = bonus;
 		this->DisplayHint = false;
+		this->gameOver = false;
 		b.setLevel(currentLevel);
 		b.setSeed(seed);
 
@@ -49,6 +50,15 @@ void Game::play() {
 			if (DisplayHint) {
 				b.clearHint(); // Remove hint from display
 				DisplayHint = false;
+			}
+
+			if (gameOver) {
+				if (commands[i].first == "RESTART") {
+					resetBoard();
+				} else {
+					cout << "Game is over" << endl;
+					break;
+				}
 			}
 
 			if (commands[i].first == "L") {
@@ -101,6 +111,7 @@ void Game::play() {
 				if (temp.first != 0) {
 					updateScore(temp.first, temp.second);
 				}
+				if(!b.generate()) gameOver = true;
 			} else if(commands[i].first == "RESTART"){
 		//		cerr << "RESTART" << commands[i].second[0];
 				resetBoard();

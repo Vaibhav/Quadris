@@ -28,10 +28,10 @@ public:
 	void clearBoard();
 	void restart();
 
+	bool generate();
 
 	Board(TextDisplay *d, GraphicDisplay *gd, std::string sequenceFile = "sequence.txt", int curLevel = 0, int seed = 0, int width=11, int height = 18);
-
-	std::shared_ptr<Block> generateBlock(); 
+ 
 
 	Info getInfo() const; // Board is a subject...
 	void notify(Subject &whoNotified); // ... and an observer
@@ -90,6 +90,7 @@ private:
 
 	int getLevel(int row, int col, int width); // Gets level from block basically
 	void shiftBoardDown(std::vector<int>s);
+	std::shared_ptr<Block> generateBlock();
 };
 
 

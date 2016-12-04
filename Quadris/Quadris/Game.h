@@ -41,6 +41,7 @@ private:
 	std::string scriptFile;
 	bool bonus;
 	bool DisplayHint;
+	bool gameOver;
 
 
 	void move(); //Uses commandIn to take in a command and then execute the correct Board Function
