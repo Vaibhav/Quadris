@@ -10,6 +10,7 @@
 #include "BlockFactory.h"
 #include "subscriptions.h"
 #include "info.h"
+#include <memory>
 #include <vector>
 
 class Block;
@@ -30,7 +31,7 @@ public:
 
 	Board(TextDisplay *d, GraphicDisplay *gd, std::string sequenceFile = "sequence.txt", int curLevel = 0, int seed = 0, int width=11, int height = 18);
 
-	Block generateBlock(); 
+	std::shared_ptr<Block> generateBlock(); 
 
 	Info getInfo() const; // Board is a subject...
 	void notify(Subject &whoNotified); // ... and an observer
@@ -66,9 +67,9 @@ private:
 	int currentLevel;
 
 	std::vector< Cell > cells;
-	std::vector< Block > blocks;
-	Block nextBlock;
-	Block currentBlock;
+	std::vector< std::shared_ptr<Block> > blocks;
+	std::shared_ptr<Block> nextBlock;
+	std::shared_ptr<Block> currentBlock;
 
 	const int width;
 	const int height;

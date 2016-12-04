@@ -22,12 +22,12 @@ Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, int startL
  	nextBlock = generateBlock();
 	// Idk wtf all the shit above is, but we need this:
 
-	cout << currentBlock.getLevel() << endl;
-	cout << nextBlock.getLevel() << endl;
+	cout << currentBlock->getLevel() << endl;
+	cout << nextBlock->getLevel() << endl;
 
-	currentBlock.attach(d);
-	currentBlock.attach(gd);
-	currentBlock.notifyObservers(SubscriptionType::blockChange);
+	currentBlock->attach(d);
+	currentBlock->attach(gd);
+	currentBlock->notifyObservers(SubscriptionType::blockChange);
 }
 
 
@@ -50,14 +50,14 @@ SubscriptionType Board::subType() const {
 void Board::currentBlockLeft(int n) {
 	for (int i=0; i< n; i++) {
 		if (!canMoveLeft()) return;
-		currentBlock.moveLeft();
+		currentBlock->moveLeft();
 	}
 }
 
 void Board::currentBlockRight(int n) {
 	for (int i=0; i< n; i++) {
 		if (!canMoveRight()) return;
-		currentBlock.moveRight(width);
+		currentBlock->moveRight(width);
 	}
 }
 
@@ -65,14 +65,14 @@ void Board::currentBlockRight(int n) {
 void Board::currentBlockDown(int n) {
 	for (int i=0; i< n; i++) {
 		if (!canMoveDown()) return;
-		currentBlock.moveDown(height);
+		currentBlock->moveDown(height);
 	}
 }
 
 
 bool Board::canMoveDown() const {
 	// Cells in the block
-	vector<Cell> blockCells = currentBlock.getCells();
+	vector<Cell> blockCells = currentBlock->getCells();
 
 	// check if there are any cells in the board that are 1 row below that cell
 	for (auto i: blockCells) {
@@ -93,12 +93,12 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 
 	// keep moving block down until it can't move down
 	while(canMoveDown()) {
-		if (currentBlock.moveDown(height));
+		if (currentBlock->moveDown(height));
 		else break;
 	}
 
 	// update cells vector
-	for (auto i:currentBlock.getCells()) {
+	for (auto i:currentBlock->getCells()) {
 		cells.push_back(i);
 	}
 
@@ -132,9 +132,9 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 	currentBlock = nextBlock;
 	// create next block
 	nextBlock = generateBlock();
-	currentBlock.attach(display);
-	currentBlock.attach(gd);
-	currentBlock.notifyObservers(SubscriptionType::blockChange);
+	currentBlock->attach(display);
+	currentBlock->attach(gd);
+	currentBlock->notifyObservers(SubscriptionType::blockChange);
 	return toReturn;
 }
 
@@ -146,8 +146,8 @@ void Board::showHint(){
 void Board::restart(){
 
 	vector<int> v;
-	int size = cells.size();
-	int size2 = cells.size();
+	int size = cells.size() - 1;
+	int size2 = cells.size() - 1;
 	this->cells.erase(cells.begin()+size);
 	this->blocks.erase(blocks.begin()+size2);
 	for(int i = 0; i < this->height; i++) {
@@ -161,7 +161,7 @@ void Board::restart(){
 void Board::currentBlockRotateClockwise(int n) {
 	for (int i=0; i< n; i++) {
 		if (!canRotateCW()) return;
-		currentBlock.rotateClockWise(width);
+		currentBlock->rotateClockWise(width);
 	}
 }
 
@@ -169,7 +169,7 @@ void Board::currentBlockRotateClockwise(int n) {
 void Board::currentBlockRotateCounterClockwise(int n) {
 	for (int i=0; i< n; i++)  {
 		if (!canRotateCCW()) return;
-		currentBlock.rotateCounterClockWise(width);
+		currentBlock->rotateCounterClockWise(width);
 	}
 }
 
@@ -178,14 +178,14 @@ void Board::setLevel(int n){
 	currentLevel = n;
 }
 
-//HIJACKED FUNCTIONALITY CHANGE BACK LATER
+
 void Board::setCurrentBlock(string blockName){
-	currentBlock.clearBlockFromScreen();
-	currentBlock.detach(display);
+	currentBlock->clearBlockFromScreen();
+	currentBlock->detach(display);
 	currentBlock = blockFactory.generateBlock(blockName);
-	currentBlock.attach(this->display);
-	currentBlock.attach(this->gd);
-	currentBlock.notifyObservers(SubscriptionType::blockChange);
+	currentBlock->attach(this->display);
+	currentBlock->attach(this->gd);
+	currentBlock->notifyObservers(SubscriptionType::blockChange);
 }
 
 
@@ -209,7 +209,7 @@ void Board::setSequence(std::string sequenceFile){
 }
 
 
-Block Board::generateBlock() {
+std::shared_ptr<Block> Board::generateBlock() {
 	return blockFactory.generateBlock(this->currentLevel);
 }
 
@@ -308,10 +308,10 @@ int Board::getLevel(int row, int col, int width) {
 	int blockSize = blocks.size();
 
 	for (int i =0; i < blockSize; i++) {
-		for (unsigned int j = 0; j < blocks[i].getCells().size(); j++) {
+		for (unsigned int j = 0; j < blocks[i]->getCells().size(); j++) {
 			// update the cell and if it deletes a block then it returns the level of the block
-			if (blocks[i].getCells()[j].row == row && blocks[i].getCells()[j].col == col) {
-				int x = blocks[i].updateCells(row, width);
+			if (blocks[i]->getCells()[j].row == row && blocks[i]->getCells()[j].col == col) {
+				int x = blocks[i]->updateCells(row, width);
 				return x;
 			}
 
@@ -327,22 +327,23 @@ void Board::shiftBoardDown(vector<int> rows) {
 		}
 		int bs = blocks.size();
 		for (int j=0; j < bs; j++) {
-			blocks[j].moveCellsAboveDown(r);
+			blocks[j]->moveCellsAboveDown(r);
 		}
+
 	}
 }
 
 
 void Board::printNextBlock() {
-	cout << nextBlock;
+	cout << *nextBlock;
 }
 
 void Board::printNextBlockGraphic(GraphicDisplay *gd) {
-	nextBlock.nextBlockGraphicPls(gd);
+	nextBlock->nextBlockGraphicPls(gd);
 }
 
 bool Board::canMoveLeft() const {
-	vector<Cell> blockCells = currentBlock.getCells();
+	vector<Cell> blockCells = currentBlock->getCells();
 	for (auto i: blockCells) {
 		for (auto n : cells) {
 			if (n.row == i.row && n.col == i.col - 1) return false;
@@ -352,7 +353,7 @@ bool Board::canMoveLeft() const {
 }
 
 bool Board::canMoveRight(int k) const {
-	vector<Cell> blockCells = currentBlock.getCells();
+	vector<Cell> blockCells = currentBlock->getCells();
 	for (auto i: blockCells) {
 		for (auto n : cells) {
 			if (n.row == i.row && n.col == i.col + k) return false;
@@ -362,21 +363,21 @@ bool Board::canMoveRight(int k) const {
 }
 
 bool Board::canRotateCW() const {
-	int h = currentBlock.getHeight();
+	int h = currentBlock->getHeight();
 	bool flag = false;
 	for (int i=1; i <= h; i++) {
 		if (!canMoveRight(i)) flag = true;
 	}
-	if (flag && h > currentBlock.getWidth()) return false;
+	if (flag && h > currentBlock->getWidth()) return false;
 	return true;
 }
 
 bool Board::canRotateCCW() const {
-	int h = currentBlock.getHeight();
+	int h = currentBlock->getHeight();
 	bool flag = false;
 	for (int i=1; i <= h; i++) {
 		if (!canMoveRight(i)) flag = true;
 	}
-	if (flag && h > currentBlock.getWidth()) return false;
+	if (flag && h > currentBlock->getWidth()) return false;
 	return true;
 }

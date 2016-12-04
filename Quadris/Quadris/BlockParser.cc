@@ -12,7 +12,7 @@ BlockParser::BlockParser(string fileName): fileName{ fileName } {}
 
 BlockParser::~BlockParser() {}
 
-Block BlockParser::createBlock(string file){
+std::shared_ptr<Block> BlockParser::createBlock(string file){
 
 	// file stream
 	ifstream input{file};
@@ -67,13 +67,13 @@ Block BlockParser::createBlock(string file){
     color = line;
 
     // make a block and return it 
-	Block newBlock{dispChar, color, name, v};
-	return newBlock;
+	//Block newBlock{dispChar, color, name, v};
+	return std::shared_ptr<Block>{new Block{dispChar, color, name, v}};
 
 }
 
 
-std::vector<Block> BlockParser::parseBlocks() {
+std::vector<std::shared_ptr<Block>> BlockParser::parseBlocks() {
 	// open the file which contains the blocks 
 	ifstream inputFileStream{this->fileName};
 	string temp; 
@@ -82,7 +82,7 @@ std::vector<Block> BlockParser::parseBlocks() {
 	// contain the file names which define the block
 	vector<string> listOfFiles;
 	// stores the block after the creation 
-	vector<Block> blocks;
+	vector<std::shared_ptr<Block>> blocks;
 
 	// reads file which contains the blocks the user has defined
 	// splits at space
@@ -96,7 +96,7 @@ std::vector<Block> BlockParser::parseBlocks() {
 	int lofsize = listOfFiles.size();
 	for (int i = 0; i < lofsize-1; i++) {
 		blocks.emplace_back(createBlock(listOfFiles[i]));
-		vector<Cell> cells = blocks[i].getCells();
+		vector<Cell> cells = blocks[i]->getCells();
 	} 
 
 	return blocks;

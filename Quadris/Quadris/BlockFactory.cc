@@ -67,7 +67,7 @@ unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level){
    return unique_ptr<BlockGenerator>{new BlockGeneratorBase{sequenceFile}};
 }
 
-Block BlockFactory::generateBlock(int level)
+std::shared_ptr<Block> BlockFactory::generateBlock(int level)
 {
     //if prevLevel was == -1, then it Block factory has just been created
     if(prevLevel == -1 || prevLevel != level){
@@ -78,15 +78,17 @@ Block BlockFactory::generateBlock(int level)
         this->generator = createBlockGenerator(level);
         prevLevel = level;
     }
-    Block generatedBlock = generator->generateBlock();
-    generatedBlock.setLevel(level);
+    std::shared_ptr<Block> generatedBlock = generator->generateBlock();
+    generatedBlock->setLevel(level);
     return generatedBlock;
 }
 
-Block BlockFactory::generateBlock(string blockName)
+std::shared_ptr<Block> BlockFactory::generateBlock(string blockName, int level)
 {
 	unique_ptr<BlockGenerator> p{new BlockGeneratorBase{sequenceFile}};
-	return p->generateBlock(blockName);    
+	std::shared_ptr<Block> generatedBlock = generator->generateBlock();
+    generatedBlock->setLevel(level);
+    return generatedBlock;    
 }
 
 void BlockFactory::setSeed(int n)

@@ -20,7 +20,7 @@ public:
                               int randSeed,
                               int randomNumberRange = 100);
 
-    Block generateBlock() override;
+std::shared_ptr<Block> generateBlock() override;
 
 private:
     std::vector<std::pair<std::string, double > > blockProbabilities;

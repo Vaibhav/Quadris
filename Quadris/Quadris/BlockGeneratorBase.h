@@ -4,27 +4,22 @@
 #include "BlockGenerator.h"
 #include <vector>
 #include <string>
+#include <memory>
 
 //Will implement Level 0 funtionality
 class BlockGeneratorBase : public BlockGenerator { 
 public:
 	
 	BlockGeneratorBase(std::string);
-	Block generateBlock() override;
+	std::shared_ptr<Block> generateBlock() override;
 private:
 	std::string sequenceFile;
 	std::vector<std::string> sequence;
 	void parseSequence();
 	int numblocksInSequence;
 	int currentIndex;
-	bool checkIfBlocksInSequenceExist(std::vector<Block>);
+	bool checkIfBlocksInSequenceExist(std::vector<std::shared_ptr<Block>>);
 };
-
-
-
-
-
-
 
 
 #endif
