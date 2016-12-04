@@ -10,12 +10,12 @@
 using namespace std;
 
 GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
-    std::shared_ptr<BlockGenerator> component,  
-    std::vector<string> blocks, 
-    int randSeed, 
+    std::shared_ptr<BlockGenerator> component,
+    std::vector<string> blocks,
+    int randSeed,
     int randomNumberRange)
-    : BlockGeneratorDecorator{component}, 
-      randSeed{randSeed}, 
+    : BlockGeneratorDecorator{component},
+      randSeed{randSeed},
       randomNumberRange{randomNumberRange}
 {
      srand(randSeed);
@@ -24,13 +24,14 @@ GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
 
 GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
                                std::shared_ptr<BlockGenerator> component,
-							   std::vector<string> blocks, 
-                               std::vector<double> probabilities, 
+							   std::vector<string> blocks,
+                               std::vector<double> probabilities,
                                int randSeed, int randomNumberRange)
-                            :  BlockGeneratorDecorator{component}, 
-                               randSeed{randSeed}, 
+                            :  BlockGeneratorDecorator{component},
+                               randSeed{randSeed},
                                randomNumberRange{randomNumberRange}
 {
+    std::cout << "seed in GeneratorProbabilityDecorator:  " << randSeed << endl;  
     srand(randSeed);
     setProbability(blocks, probabilities);
 }

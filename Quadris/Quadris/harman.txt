@@ -1,0 +1,19 @@
+5right
+1drop
+5right
+1drop
+1right
+1drop
+1count
+1drop
+sequence matt.txt
+5right
+1drop
+5right
+1drop
+1right
+1drop
+5right
+1count
+1drop
+

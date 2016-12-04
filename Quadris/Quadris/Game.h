@@ -49,7 +49,7 @@ private:
 
 	void updateScore(int rowsCleared, std::vector<int> lvls);
 	Board createBoard();
-	Board resetBoard();
+	void resetBoard();
 
 	void increaseLevel(int n);
 	void decreaseLevel(int n);

@@ -10,18 +10,18 @@
 using namespace std;
 
 
-std::vector < std::pair < std::string, std::vector<std::string> > > 
+std::vector < std::pair < std::string, std::vector<std::string> > >
 CommandInterpreter::sequenceCommand(std::string file){
 	std::vector < std::pair < std::string, std::vector<std::string> > > commands;
 	ifstream fin{file};
-	
+
 	if(!fin.is_open()){
 		throw out_of_range("The file could not be opened");
 	}
-	
+
 	while(fin){
 		std::vector < std::pair < std::string, std::vector<std::string> > > temp = nextInput(fin, 'f');
-		
+
 		//cerr << temp.empty();
 		if(!temp.empty()){
 		copy(temp.begin(), temp.end(), back_inserter(commands));
@@ -36,7 +36,7 @@ std::vector < std::pair < std::string, std::vector<std::string> > > CommandInter
 	return nextInput(this->in, 'i');
 }
 
-std::vector<std::pair<std::string, std::vector<std::string>>> 
+std::vector<std::pair<std::string, std::vector<std::string>>>
 CommandInterpreter::nextInput(istream& in, char inputType)
 {
 	string input = "";
@@ -44,9 +44,9 @@ CommandInterpreter::nextInput(istream& in, char inputType)
 	stringstream ss{ input };
 	string command;
 	ss >> command;
-	
+
 	if(command == "" && inputType == 'f'){
-		
+
 		int x;
 		in >> x;
 
@@ -67,7 +67,7 @@ CommandInterpreter::nextInput(istream& in, char inputType)
 		vector<string> arguments;
 
 		//cout << isCommandMultiplierCompatible(command);
-		if( isCommandMultiplierCompatible(programCommands[0].first) 
+		if( isCommandMultiplierCompatible(programCommands[0].first)
 			&& multiplierPrefix != "") {
 			arguments.emplace_back(multiplierPrefix);
 		}
@@ -84,8 +84,8 @@ CommandInterpreter::nextInput(istream& in, char inputType)
 		//Update one command with arguments
 		programCommands[0].second = arguments;
 		//cout<< programCommands[0].second[0];
-		 }	
-		
+		 }
+
 	//Special Single Commands
 	if(programCommands.size() == 1 &&
 	   programCommands[0].first == "SEQUENCE"){
@@ -99,8 +99,8 @@ CommandInterpreter::CommandInterpreter(istream &in) : in{ in } {
 }
 
 bool CommandInterpreter::isCommandMultiplierCompatible(std::string commandName){
-	return find(multiplierCompatibleCommands.begin(), 
-				multiplierCompatibleCommands.end(), 
+	return find(multiplierCompatibleCommands.begin(),
+				multiplierCompatibleCommands.end(),
 			    commandName) != multiplierCompatibleCommands.end();
 }
 
@@ -127,8 +127,8 @@ void CommandInterpreter::initializeMap()
 	this->commandDictionary["levelup"] = vector< pair<string, vector<string> > >{ PairArg };
 	PairArg.first = "LD";
 	this->commandDictionary["leveldown"] = vector< pair<string, vector<string> > >{ PairArg };
-	
-	//Adding a macro command, probably want a macro command 
+
+	//Adding a macro command, probably want a macro command
 	//builder helper function to make this easier
 	pair<string, vector<string>> FirstCommand;
 	FirstCommand.first = "L";
@@ -162,8 +162,8 @@ void CommandInterpreter::initializeMap()
 	PairArg.first = "SEQUENCE";
 	PairArg.second = vector<string>{ "sequence" };
 	this->commandDictionary["sequence"] = vector< pair<string, vector<string> > >{ PairArg };
-	
-	//TODO: This should be done dynamically depending on the blocks 
+
+	//TODO: This should be done dynamically depending on the blocks
 	//available to the program
 	PairArg.second = vector<string>{"noArg"};
 	PairArg.first = "BLOCK-I";
@@ -181,15 +181,30 @@ void CommandInterpreter::initializeMap()
 	PairArg.first = "BLOCK-T";
 	this->commandDictionary["T"] = vector< pair<string, vector<string> > >{ PairArg };
 
+	//Adding a macro command, probably want a macro command
+	//builder helper function to make this easier
+	pair<string, vector<string>> FirstCommand2;
+	FirstCommand.first = "DROP";
+	FirstCommand.second = vector<string>{ "1" };
+	pair<string, vector<string>> SecondCommand2;
+	SecondCommand.first = "R";
+	SecondCommand.second = vector<string>{ "5" };
+	pair<string, vector<string>> ThirdCommand2;
+	ThirdCommand.first = "DROP";
+	ThirdCommand.second = vector<string>{ "1" };
+	vector< pair<string, vector<string>>> Commands2{ FirstCommand2, SecondCommand2, ThirdCommand2 };
+	//The command is called bigv
+	this->commandDictionary["bigv"] = Commands2;
+
 	////////////////////////////////////////////////////////////
 	///Multiplier Compatible Commands Initialization///////////
-	multiplierCompatibleCommands = vector<string>{ 
+	multiplierCompatibleCommands = vector<string>{
 		"L", "R", "D", "CCW", "CW", "LU", "LD"
 	};
 
 }
 
-std::vector < std::pair < std::string, std::vector<std::string> > > 
+std::vector < std::pair < std::string, std::vector<std::string> > >
 CommandInterpreter::findProgramCommands(string userInput)
 {
 	string key;
@@ -215,8 +230,8 @@ CommandInterpreter::findProgramCommands(string userInput)
 }
 
 string CommandInterpreter::parseMultiplier(string input, string& multiplier) {
-	
-	
+
+
 	multiplier = "";
 	int prefixCounter = 0;
 	while (input[prefixCounter] >= '0' &&
@@ -238,8 +253,3 @@ bool CommandInterpreter::partialMatch(std::string partial, std::string full)
 	}
 	return true;
 }
-
-
-
-
-

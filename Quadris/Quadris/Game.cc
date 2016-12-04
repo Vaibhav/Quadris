@@ -97,7 +97,7 @@ void Game::play() {
 				}
 			} else if(commands[i].first == "RESTART"){
 		//		cerr << "RESTART" << commands[i].second[0];
-				b = resetBoard();
+				resetBoard();
 			} else if(commands[i].first == "HINT"){
 		//		cerr << "HINT" << commands[i].second[0];
 				b.showHint();
@@ -330,8 +330,8 @@ void Game::printGameBoard() {
 	b.printNextBlockGraphic(&gd);
 }
 
-Board Game::resetBoard() {
-	this->score = 0; 
+void Game::resetBoard() {
+	this->currentScore = 0;
 
 	b.restart();
 	printGameBoard();

@@ -1,0 +1,9 @@
+5right
+1drop
+5right
+1drop
+1right
+1drop
+1count
+1drop
+4right
