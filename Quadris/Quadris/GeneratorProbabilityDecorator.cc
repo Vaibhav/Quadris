@@ -37,7 +37,6 @@ GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
 
 Block GeneratorProbabilityDecorator::generateBlock()
 {
-    srand(randSeed);
     //Generate a number between 0 to 99 when randomNumberRange set to 100
     int num = (rand() % randomNumberRange);
     cerr << num << endl;
