@@ -109,7 +109,7 @@ void Game::play() {
 				}
 				b.restoreRandom();
 			} else if(commands[i].first == "NORANDOM"){
-		//		cerr << "NORANDOM" << commands[i].second[0];
+				cerr << "NORANDOM" << commands[i].second[0];
 				b.noRandomBlock(commands[i].second[0]);
 			} else {
 				cout << "programCode is not used" << endl;

@@ -12,11 +12,6 @@ BlockGeneratorBase::BlockGeneratorBase(string file): sequenceFile{file}, BlockGe
 	parseSequence();
 	this->currentIndex = 0;
 	this->numblocksInSequence = this->sequence.size();
-
-//	for(int i  = 0; i != sequence.size(); ++i){
-//		cout << sequence[i];
-//	}
-
 };
 
 
@@ -24,7 +19,7 @@ std::shared_ptr<Block> BlockGeneratorBase::generateBlock() {
 
 vector<std::shared_ptr<Block>> blocks = this->getParsedBlocks();
 
-
+cout << "Base GEnerator executed";
 for(int i = 0; i != blocks.size(); ++i){
 	cout<< blocks[i]->getName();
 }
