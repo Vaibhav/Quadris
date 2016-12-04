@@ -86,7 +86,7 @@ std::shared_ptr<Block> BlockFactory::generateBlock(int level)
 std::shared_ptr<Block> BlockFactory::generateBlock(string blockName, int level)
 {
 	unique_ptr<BlockGenerator> p{new BlockGeneratorBase{sequenceFile}};
-	std::shared_ptr<Block> generatedBlock = generator->generateBlock();
+	std::shared_ptr<Block> generatedBlock = generator->generateBlock(blockName);
     generatedBlock->setLevel(level);
     return generatedBlock;    
 }

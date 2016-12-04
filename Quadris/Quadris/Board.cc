@@ -182,7 +182,7 @@ void Board::setLevel(int n){
 void Board::setCurrentBlock(string blockName){
 	currentBlock->clearBlockFromScreen();
 	currentBlock->detach(display);
-	currentBlock = blockFactory.generateBlock(blockName);
+	currentBlock = blockFactory.generateBlock(blockName, this->currentLevel);
 	currentBlock->attach(this->display);
 	currentBlock->attach(this->gd);
 	currentBlock->notifyObservers(SubscriptionType::blockChange);
