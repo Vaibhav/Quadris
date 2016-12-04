@@ -5,6 +5,8 @@
 #include "Subject.h"
 #include "Cell.h"
 #include "info.h"
+#include "window.h"
+#include "GraphicsDisplay.h"
 #include <string>
 #include <vector>
 
@@ -43,6 +45,8 @@ public:
 	int updateCells(int, int);
 	void deleteCells(int, int);
 	void moveCellsAboveDown(int row);
+
+	void nextBlockGraphicPls(GraphicDisplay *gd);
 
 private:
 	int size;

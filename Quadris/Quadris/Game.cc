@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "CommandInterpreter.h"
 #include "subscriptions.h"
+#include "window.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -331,9 +332,14 @@ void Game::printGameBoard() {
 	cout << "Next: " << endl;
 	b.printNextBlock();
 
+	// Clear top/bottom of Graphics Display
+	gd.xw.fillRectangle(0,0,110,40,Xwindow::White); // 120 is marginWidth
+	gd.xw.fillRectangle(120,420,250,100,Xwindow::White);
+
 	// Write to Graphics Display
-	gd.xw.drawString(30, 10, "Level: ");// + level);
-	gd.xw.drawString(30, 20, "Score: ");
-	gd.xw.drawString(30, 30, "Hi Score: ");
-	gd.xw.drawString(30, 470, "Next: ");
+	gd.xw.drawString(30, 10, "Level: " + to_string(currentLevel));
+	gd.xw.drawString(30, 20, "Score: " + to_string(currentScore));
+	gd.xw.drawString(30, 30, "Hi Score: " + to_string(highScore));
+	gd.xw.drawString(30, 420, "Next: ");
+	b.printNextBlockGraphic(&gd);
 }

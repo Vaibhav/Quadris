@@ -16,6 +16,8 @@ public:
 	void notify(Subject &whoNotified);
 	~GraphicDisplay();
 
+	void drawCell(int xcoord, int ycoord, std::string theColor);
+
 private:
 	int sizeOfDisplay;
 	int marginHeight;

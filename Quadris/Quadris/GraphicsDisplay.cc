@@ -18,9 +18,11 @@ int GraphicDisplay::calcMarginWidth() {
 }
 
 GraphicDisplay::GraphicDisplay(int row, int col):
- sizeOfDisplay{windowSize}, marginHeight{ 100 }, topMargin {60},
+ sizeOfDisplay{windowSize}, marginHeight{ 100 }, topMargin {5},
   row{ row }, col{ col }, blockSize{ (windowSize - marginHeight) / row }, 
     marginWidth{ calcMarginWidth() } {
+    	cout << "Margin Width: " << marginWidth << endl;
+
     int a = marginWidth-5;	// magic numbers
     int b = blockSize*row + 2;	// DO NOT TOUCH
     int black = Xwindow::Black;
@@ -63,27 +65,30 @@ void GraphicDisplay::notify(Subject &whoNotified) {
 	for (auto i:cells) {
 		int xcoord = marginWidth + width * i.col;
 		int ycoord = topMargin + height * i.row;
+		drawCell(xcoord, ycoord, theColor);
+	}
+}
 
-		if(theColor == "Red") {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::Red);
-		} else if (theColor == "Green") {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::Green);
-		} else if (theColor == "Blue") {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::Blue);
-		} else if (theColor == "Cyan") {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::Cyan);
-		} else if (theColor == "Yellow") {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::Yellow);
-		} else if (theColor == "Orange") {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::Orange);
-		} else if (theColor == "Magenta") {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::Magenta);
-		} else if (theColor == "Brown") {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::Brown);
-		} else if (theColor == "Black") {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::Black);
-		} else {
-			this->xw.fillRectangle( xcoord , ycoord , width, height, Xwindow::White);
-		}
+void GraphicDisplay::drawCell(int xcoord, int ycoord, string theColor) {
+	if(theColor == "Red") {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::Red);
+	} else if (theColor == "Green") {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::Green);
+	} else if (theColor == "Blue") {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::Blue);
+	} else if (theColor == "Cyan") {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::Cyan);
+	} else if (theColor == "Yellow") {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::Yellow);
+	} else if (theColor == "Orange") {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::Orange);
+	} else if (theColor == "Magenta") {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::Magenta);
+	} else if (theColor == "Brown") {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::Brown);
+	} else if (theColor == "Black") {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::Black);
+	} else {
+		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::White);
 	}
 }

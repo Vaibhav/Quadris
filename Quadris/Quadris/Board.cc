@@ -10,7 +10,7 @@ using namespace std;
 
 
 /*
-Board::Board(Display* d, string sequenceFile, int width, int height):
+Board::Board(Display* d, string sequenceFile, int width, int height): 
 	display{d}, blockFactory{BlockFactory()}, currentLevel{0},
 */
 
@@ -127,7 +127,7 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 		toReturn.second = vector<int>();
 	}
 
-	cout << "num of rows cleared: " << toReturn.first << endl;
+
 	// get new current block
 	currentBlock = nextBlock;
 	// create next block
@@ -241,11 +241,9 @@ vector<int> Board::clearRows(vector<int> rowsCompleted) {
 
 	for (auto i: rowsCompleted) {
 		 lvls = clearRow(i);
-		 cout << "vector returned from clearRow is empty" << endl;
+
 		 if ( !(lvls.empty()) ) {
-			cout << "vector returned from clearRow is not empty" << endl;
 		 	for (auto n: lvls) {
-				cout << "this is rturned to Game " << n << endl;
 		 		listOfLevels.emplace_back(n);
 		 	}
 		 }
@@ -273,20 +271,23 @@ vector<int> Board::clearRow(int theRow) {
 		}
 	}
 
-	for(auto n: toDelete){
-		int cellRow = n.row;
-		int cellCol = n.col;
-		theLevel = getLevel(cellRow, cellCol, this->width);
-		if (theLevel != -1) levels.emplace_back(theLevel);
-	}
-
-
 	int size2 = index.size();
+
 	for (int j = 0; j < size2; j++) {
 		this->cells.erase(cells.begin()+index[j]);
 		for (int i = j+1; i < size2;  i++) {
 				index[i] -= 1;
 		}
+	}
+
+
+	for(auto n: toDelete){
+
+		int cellRow = n.row;
+		int cellCol = n.col;
+		theLevel = getLevel(cellRow, cellCol, this->width);
+		cout << "level returned: " << theLevel << endl;
+		if (theLevel != -1) levels.emplace_back(theLevel);
 	}
 
 	return levels;
@@ -303,7 +304,7 @@ int Board::getLevel(int row, int col, int width) {
 			if (blocks[i].getCells()[j].row == row && blocks[i].getCells()[j].col == col) {
 				int x = blocks[i].updateCells(row, width);
 				cout << "get Level update cells return: "  << x << endl;
-				return x;
+				//return blocks[i].level;
 			}
 
 		}
@@ -319,14 +320,17 @@ void Board::shiftBoardDown(vector<int> rows) {
 		int bs = blocks.size();
 		for (int j=0; j < bs; j++) {
 			blocks[j].moveCellsAboveDown(r);
-		}
+		} 
 	}
-
 }
 
 
 void Board::printNextBlock() {
 	cout << nextBlock;
+}
+
+void Board::printNextBlockGraphic(GraphicDisplay *gd) {
+	nextBlock.nextBlockGraphicPls(gd);
 }
 
 bool Board::canMoveLeft() const {

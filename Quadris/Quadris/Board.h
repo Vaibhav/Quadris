@@ -60,6 +60,7 @@ public:
 	std::vector<int> clearRows(std::vector<int>);
 	std::vector<int> clearRow(int row);
 	void printNextBlock();
+	void printNextBlockGraphic(GraphicDisplay *gd);
 
 
 private:

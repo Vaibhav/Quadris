@@ -152,6 +152,7 @@ Block::~Block() {}
 ostream &operator<<(std::ostream &out, const Block&b) {
 	bool printed = false;
 	for (int i = 0; i <= b.height; i++) {
+		printed = false;
 		for (int j = 0; j <= b.width; j++) {
 			for (auto k:b.coords) {
 				if (k.first == i && k.second == j) {
@@ -164,6 +165,19 @@ ostream &operator<<(std::ostream &out, const Block&b) {
 		endl(out);
 	}
 	return out;
+}
+
+void Block::nextBlockGraphicPls(GraphicDisplay *gd) {
+	for (int i = 0; i <= height; i++) {
+		for (int j = 0; j <= width; j++) {
+			for (auto k:coords) {
+				if (k.first == i && k.second == j) {
+					// 22 is blockSize
+					gd->drawCell(120+j*22, 420+i*22, colour);
+				}
+			}
+		}
+	}
 }
 
 
