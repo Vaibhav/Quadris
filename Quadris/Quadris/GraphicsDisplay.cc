@@ -18,20 +18,20 @@ int GraphicDisplay::calcMarginWidth() {
 }
 
 GraphicDisplay::GraphicDisplay(int row, int col):
- sizeOfDisplay{windowSize}, marginHeight{ 100 }, topMargin {5},
+ sizeOfDisplay{windowSize}, marginHeight{ 100 }, topMargin {10},
   row{ row }, col{ col }, blockSize{ (windowSize - marginHeight) / row }, 
     marginWidth{ calcMarginWidth() } {
 
     int a = marginWidth-5;	// magic numbers
-    int b = blockSize*row + 2;	// DO NOT TOUCH
+    int b = blockSize*row + 7;	// DO NOT TOUCH
     int black = Xwindow::Black;
 
     // left/right edges
-    xw.fillRectangle(a, topMargin, 3, b, black);
-    xw.fillRectangle(windowSize-marginWidth +2, topMargin, 3, b, black);
+    xw.fillRectangle(a, topMargin-5, 3, b, black);
+    xw.fillRectangle(windowSize-marginWidth +2, topMargin-5, 3, b, black);
     
     // top/bottom edges
-    xw.fillRectangle(a, topMargin, blockSize*col+10, 3, black);
+    xw.fillRectangle(a, topMargin-5, blockSize*col+10, 3, black);
     xw.fillRectangle(a, windowSize - marginHeight + topMargin -2, 
     	blockSize*col+10, 3, black);
 }		
