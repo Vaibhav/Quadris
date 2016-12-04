@@ -23,6 +23,7 @@ Game::Game(int maxLevel, bool text, int seed, string scriptFile, int startLevel,
 		this->currentScore = 0;
 		this->highScore = 0;
 		this->bonus = bonus;
+		this->DisplayHint = false;
 		b.setLevel(currentLevel);
 		b.setSeed(seed);
 
@@ -45,6 +46,11 @@ void Game::play() {
 		int numOfCommands = commands.size();
 		//Supports Macrocommands, multiple commands which each can have multiple arguments
 		for (int i = 0; i != numOfCommands; ++i) {
+			if (DisplayHint) {
+				b.clearHint(); // Remove hint from display
+				DisplayHint = false;
+			}
+
 			if (commands[i].first == "L") {
 				//First argument is multiplier, which is by default 1
 			//	cerr << "L" << stoi(commands[i].second[0]);
@@ -101,6 +107,7 @@ void Game::play() {
 			} else if(commands[i].first == "HINT"){
 		//		cerr << "HINT" << commands[i].second[0];
 				b.showHint();
+				DisplayHint = true;
 			} else if(commands[i].first == "RANDOM"){
 		//		cerr << "RANDOM";
 				int s = commands[i].second.size();

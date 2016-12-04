@@ -151,8 +151,48 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 	return toReturn;
 }
 
-void Board::showHint(){
+void Board::showHint(){ // Hackiest function we got
+	vector<pair<int,int>> sqrs;
+	shared_ptr <Block> tempBlock = currentBlock;
+	for (auto i:currentBlock->getCells()) {
+		sqrs.emplace_back(i.row, i.col);
+	}
+	currentBlock = make_shared<Block> (Block{'?', "Black", "Hint", sqrs});
+	int highestRow;
+	vector<int> topCols;
+	for (auto i:cells) {
+		if (i.row < highestRow) highestRow = i.row;
+	}
+	for (auto i:cells) {
+		if (i.row == highestRow) topCols.push_back(i.col);
+	}
+	sort(topCols.begin(), topCols.end());
+	topCols.push_back(width); // Add extra "column" at the end
+	int tcSize = topCols.size();
+	int biggestGap = 0;
+	int gapStart = 0;
+	for (int j=0; j < tcSize-1; j++) {
+		if (topCols[j+1] - topCols[j] > biggestGap) {
+			biggestGap = topCols[j+1] - topCols[j];
+			gapStart = topCols[j];
+		}
+	}
+	if (biggestGap > currentBlock->getWidth()) {
+		int hbpos = currentBlock->getLowerLeft().second;
+		int horShift = gapStart + 1 - hbpos;
+		if (horShift <  0) currentBlockLeft(-horShift);
+		else currentBlockRight(horShift);
+	}
+	currentBlockDown(99); // Place hint Block
+	hintBlock = currentBlock;
+	currentBlock = tempBlock;	// Reset currentBlock
+	hintBlock->attach(display);
+	hintBlock->attach(gd);
+	hintBlock->notifyObservers(SubscriptionType::blockChange);
+}
 
+void Board::clearHint() {
+	hintBlock->clearBlockFromScreen();
 }
 
 

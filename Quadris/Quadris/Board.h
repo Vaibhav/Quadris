@@ -62,6 +62,7 @@ public:
 	void printNextBlock();
 	void printNextBlockGraphic(GraphicDisplay *gd);
 	void addCentreBlock();
+	void clearHint();
 
 
 private:
@@ -74,6 +75,7 @@ private:
 	std::vector< std::shared_ptr<Block> > blocks;
 	std::shared_ptr<Block> nextBlock;
 	std::shared_ptr<Block> currentBlock;
+	std::shared_ptr<Block> hintBlock;
 
 	int width;
 	int height;

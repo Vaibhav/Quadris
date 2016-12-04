@@ -40,6 +40,7 @@ private:
 	int randSeed;
 	std::string scriptFile;
 	bool bonus;
+	bool DisplayHint;
 
 
 	void move(); //Uses commandIn to take in a command and then execute the correct Board Function
