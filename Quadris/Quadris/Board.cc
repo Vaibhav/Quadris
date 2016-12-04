@@ -150,7 +150,7 @@ void Board::showHint(){ // Hackiest function we got
 	vector<pair<int,int>> sqrs;
 	shared_ptr <Block> tempBlock = currentBlock;
 	for (auto i:currentBlock->getCells()) {
-		sqrs.emplace_back(i.row, i.col);
+		sqrs.emplace_back(i.row-3, i.col);
 	}
 	currentBlock = make_shared<Block> (Block{'?', "Black", "Hint", sqrs});
 	int highestRow;
