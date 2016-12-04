@@ -61,6 +61,7 @@ public:
 	std::vector<int> clearRow(int row);
 	void printNextBlock();
 	void printNextBlockGraphic(GraphicDisplay *gd);
+	void addCentreBlock();
 
 
 private:

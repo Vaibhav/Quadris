@@ -77,6 +77,23 @@ unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level)
     }
     else if (level == 4 && noRandom == false)
     {
+        vector<double> probabilities = 
+            vector<double> {2.0/9.0, 2.0/9.0, 1.0/9.0, 1.0/9.0, 1.0/9.0, 1.0/9.0, 1.0/9.0 };
+        vector<string> blocks =  
+            vector<string>{"BLOCK-S", "BLOCK-Z", "BLOCK-T", "BLOCK-I", "BLOCK-O", "BLOCK-J", "BLOCK-L"};
+            
+        shared_ptr<BlockGenerator> component {new BlockGeneratorBase{sequenceFile}};
+        shared_ptr<BlockGenerator> temp { new GeneratorHeavyBlockDecorator{component, this->boardHeight}};
+        component = temp; // IDK how to use shared_ptr
+        shared_ptr<BlockGenerator> temp2 {new GeneratorProbabilityDecorator{
+                                         component,
+                                         //component->getAllBlockNames(),
+                                         blocks,
+                                         probabilities,
+                                         seed
+                                         }};
+        component = temp2;
+        return unique_ptr<BlockGenerator> { new GeneratorCentreBlockDecorator{component}};
     }
 }
 

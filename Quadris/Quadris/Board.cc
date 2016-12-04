@@ -394,3 +394,24 @@ bool Board::canRotateCCW() const {
 	if (flag && h > currentBlock->getWidth()) return false;
 	return true;
 }
+
+void Board::addCentreBlock() {
+	// Add block next available row
+	int col = width / 2;
+	int highestRow = height-1;
+	for(auto i:cells) {
+		if (i.row < highestRow && i.col == col) {
+			highestRow = i.row;
+		}
+	}
+	// Make sure we're not at the top
+	if (highestRow <= 0) return;
+	cells.push_back(Cell{'*', highestRow-1, col});
+	vector<pair<int, int>> sqr{{highestRow-1, col}};
+	std::shared_ptr<Block> centreBlock {new Block{'*', "Brown", "Centre", sqr}};
+	cout << "CENTRE BLOCK CREATED" << endl;
+	blocks.push_back(centreBlock);
+	centreBlock->attach(display);
+	centreBlock->attach(gd);
+	centreBlock->notifyObservers(SubscriptionType::blockChange);
+}

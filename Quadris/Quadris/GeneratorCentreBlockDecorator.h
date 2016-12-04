@@ -4,9 +4,12 @@
 #include "BlockGeneratorDecorator.h"
 #include "Observer.h"
 
-class GeneratorCentreBlockDecorator : public BlockGeneratorDecorator, Observer {
-
-
+class GeneratorCentreBlockDecorator : public BlockGeneratorDecorator{//, Observer {
+	int numDropped;
+	bool rowCleared;
+public:
+	GeneratorCentreBlockDecorator(std::shared_ptr<BlockGenerator> component);
+	std::shared_ptr<Block> generateBlock() override;
 
 
 

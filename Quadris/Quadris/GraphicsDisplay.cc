@@ -21,7 +21,6 @@ GraphicDisplay::GraphicDisplay(int row, int col):
  sizeOfDisplay{windowSize}, marginHeight{ 100 }, topMargin {5},
   row{ row }, col{ col }, blockSize{ (windowSize - marginHeight) / row }, 
     marginWidth{ calcMarginWidth() } {
-    	cout << "Margin Width: " << marginWidth << endl;
 
     int a = marginWidth-5;	// magic numbers
     int b = blockSize*row + 2;	// DO NOT TOUCH

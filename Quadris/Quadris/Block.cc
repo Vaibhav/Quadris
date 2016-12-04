@@ -45,7 +45,7 @@ Block::Block(char dispChar,
 		  ): name(name), colour(colour), dispChar(dispChar), coords(coords) {
 
 	for (auto i:coords) {
-		cells.emplace_back(Cell{this, dispChar, i.first+3, i.second});
+		cells.emplace_back(Cell{dispChar, i.first+3, i.second});
 
 	} // Add 3 to le height for safety purposes
 
