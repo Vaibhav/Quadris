@@ -93,25 +93,6 @@ void Board::currentBlockDown(int n) {
 }
 
 
-bool Board::canMoveDown() const {
-	// Cells in the block
-	vector<Cell> blockCells = currentBlock->getCells();
-
-	// check if there are any cells in the board that are 1 row below that cell
-	for (auto i: blockCells) {
-
-		for (auto n : cells) {
-		// check if cell below cell in block exists
-			if (n.row == i.row + 1 && n.col == i.col){
-				return false;
-			}
-		}
-	}
-
-	// if cell doesn't exist returns true
-	return true;
-}
-
 pair<int, vector<int>> Board::currentBlockDrop() {
 
 	// keep moving block down until it can't move down
@@ -421,6 +402,58 @@ void Board::printNextBlockGraphic(GraphicDisplay *gd) {
 	nextBlock->nextBlockGraphicPls(gd);
 }
 
+
+/*bool Board::canRotateCCW() const {
+	int h = currentBlock->getHeight();
+	bool flag = false;
+	for (int i=1; i <= h; i++) {
+		if (!canMoveRight(i)) flag = true;
+	}
+	if (flag && h > currentBlock->getWidth()) return false;
+	return true;
+}*/
+
+void Board::addCentreBlock() {
+	// Add block next available row
+	int col = width / 2;
+	int highestRow = height-1;
+	for(auto i:cells) {
+		if (i.row < highestRow && i.col == col) {
+			highestRow = i.row;
+		}
+	}
+	// Make sure we're not at the top
+	if (highestRow <= 0) return;
+	cells.push_back(Cell{'*', highestRow-1, col});
+	vector<pair<int, int>> sqr{{highestRow-1, col}};
+	std::shared_ptr<Block> centreBlock {new Block{'*', "Brown", "Centre", sqr}};
+	cout << "CENTRE BLOCK CREATED" << endl;
+	blocks.push_back(centreBlock);
+	attachAndNotify(centreBlock);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 bool Board::canMoveLeft() const {
 	vector<Cell> blockCells = currentBlock->getCells();
 	for (auto i: blockCells) {
@@ -456,31 +489,21 @@ bool Board::canRotateCW() const {
 	return true;
 }
 
-/*bool Board::canRotateCCW() const {
-	int h = currentBlock->getHeight();
-	bool flag = false;
-	for (int i=1; i <= h; i++) {
-		if (!canMoveRight(i)) flag = true;
-	}
-	if (flag && h > currentBlock->getWidth()) return false;
-	return true;
-}*/
+bool Board::canMoveDown() const {
+	// Cells in the block
+	vector<Cell> blockCells = currentBlock->getCells();
 
-void Board::addCentreBlock() {
-	// Add block next available row
-	int col = width / 2;
-	int highestRow = height-1;
-	for(auto i:cells) {
-		if (i.row < highestRow && i.col == col) {
-			highestRow = i.row;
+	// check if there are any cells in the board that are 1 row below that cell
+	for (auto i: blockCells) {
+
+		for (auto n : cells) {
+		// check if cell below cell in block exists
+			if (n.row == i.row + 1 && n.col == i.col){
+				return false;
+			}
 		}
 	}
-	// Make sure we're not at the top
-	if (highestRow <= 0) return;
-	cells.push_back(Cell{'*', highestRow-1, col});
-	vector<pair<int, int>> sqr{{highestRow-1, col}};
-	std::shared_ptr<Block> centreBlock {new Block{'*', "Brown", "Centre", sqr}};
-	cout << "CENTRE BLOCK CREATED" << endl;
-	blocks.push_back(centreBlock);
-	attachAndNotify(centreBlock);
+
+	// if cell doesn't exist returns true
+	return true;
 }
