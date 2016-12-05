@@ -67,11 +67,25 @@ bool HeavyBlockDecorator::moveDown(int restraint)
 	component->moveDown(restraint);
 	updateProperties();
     }
-    
-    bool val;
-	val = component->moveDown(boardHeight);
-	updateProperties();
 
+
+
+
+
+    bool val;
+
+if(board->canMoveDown(component)){
+    val = true;
+    if(component->moveDown(boardHeight)){
+        updateProperties();
+        val = true;
+    } else{
+        val = false;
+    }
+} else {
+    val = false;
+}
+    
     setNumberOfMovesInTurn(0);
     return val;
 }
