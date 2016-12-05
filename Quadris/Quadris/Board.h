@@ -41,9 +41,6 @@ public:
 	void notify(Subject &whoNotified); // ... and an observer
 	SubscriptionType subType() const;
 
-	std::vector<int> checkIfRowsComplete();
-	std::vector<int> blockLevelsDeleted();
-
 	void setLevel(int n);
 
 	//Sets the current block to the one specified
@@ -61,11 +58,10 @@ public:
 	void setHeight(int n);
 	void setWidth(int n);
 
-	std::vector<int> clearRows(std::vector<int>);
-	std::vector<int> clearRow(int row);
 	void printNextBlock();
 	void printNextBlockGraphic(GraphicDisplay *gd);
 	void addCentreBlock();
+	bool wasRowCleared();
 	void clearHint();
 
 	void fart() const;
@@ -93,6 +89,8 @@ private:
 	int width;
 	int height;
 
+	bool rowCleared; // for centre block
+
 	bool canRotateCW() const;
 	bool canRotateCCW() const;
 	bool canMoveLeft() const;
@@ -105,6 +103,13 @@ private:
 	void shiftBoardDown(std::vector<int>s);
 	std::shared_ptr<Block> generateBlock();
 	void attachAndNotify(std::shared_ptr<Block> b);
+
+	std::vector<int> checkIfRowsComplete() const;
+	std::vector<int> blockLevelsDeleted() const;
+
+	std::vector<int> clearRows(std::vector<int>);
+	std::vector<int> clearRow(int row);
+
 };
 
 

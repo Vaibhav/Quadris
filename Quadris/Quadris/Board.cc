@@ -21,10 +21,7 @@ void Board::initialize(string sequenceFile, int seed) {
 	setSeed(seed);
 	currentBlock = generateBlock();
  	nextBlock = generateBlock();
-	// Idk wtf all the shit above is, but we need this:
-
-	//cout << currentBlock->getLevel() << endl;
-	//cout << nextBlock->getLevel() << endl;
+ 	rowCleared = false;
 
 	attachAndNotify(currentBlock);
 }
@@ -113,6 +110,7 @@ bool Board::canMoveDown() const {
 }
 
 pair<int, vector<int>> Board::currentBlockDrop() {
+	rowCleared = false;
 
 	// keep moving block down until it can't move down
 	while(canMoveDown() && currentBlock->moveDown(height)) {}
@@ -130,6 +128,7 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 	pair<int, vector<int>> toReturn;
 
 	if ( !(rowsCompleted.empty()) ){
+		rowCleared = true;
 		int numOfRows = rowsCompleted.size();
 		// clear the rows
 		vector<int> listOfLevels = clearRows(rowsCompleted);
@@ -301,7 +300,7 @@ bool inVec(vector<int> anycontainer, int testvalue){
 
 
 // returns which rows are completed
-vector<int> Board::checkIfRowsComplete() {
+vector<int> Board::checkIfRowsComplete() const {
 
 	vector<int> v;
 	int counter = 0;
@@ -469,7 +468,7 @@ bool Board::canRotateCW() const {
 void Board::addCentreBlock() {
 	// Add block next available row
 	int col = width / 2;
-	int highestRow = height-1;
+	int highestRow = height;
 	for(auto i:cells) {
 		if (i.row < highestRow && i.col == col) {
 			highestRow = i.row;
@@ -478,9 +477,12 @@ void Board::addCentreBlock() {
 	// Make sure we're not at the top
 	if (highestRow <= 0) return;
 	cells.push_back(Cell{'*', highestRow-1, col});
-	vector<pair<int, int>> sqr{{highestRow-1, col}};
+	vector<pair<int, int>> sqr{{highestRow-1-3, col}};
 	std::shared_ptr<Block> centreBlock {new Block{'*', "Brown", "Centre", sqr}};
-	cout << "CENTRE BLOCK CREATED" << endl;
 	blocks.push_back(centreBlock);
 	attachAndNotify(centreBlock);
+}
+
+bool Board::wasRowCleared() {
+	return rowCleared;
 }
