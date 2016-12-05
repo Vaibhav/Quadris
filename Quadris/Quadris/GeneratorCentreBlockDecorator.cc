@@ -15,8 +15,9 @@ GeneratorCentreBlockDecorator::GeneratorCentreBlockDecorator(
 
 shared_ptr<Block> GeneratorCentreBlockDecorator::generateBlock() {
     shared_ptr<Block> normalBlock = component->generateBlock();
-    if (b->wasRowCleared()) numDropped = 0;
-    if (numDropped && numDropped % 5 == 0) {
+    if (b->wasRowCleared()) numDropped = 1;
+    cout << numDropped << endl;
+    if (numDropped > 1 && numDropped % 5 == 1) {
     		b->addCentreBlock();
 	}
 	numDropped++;
