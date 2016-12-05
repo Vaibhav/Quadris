@@ -14,9 +14,9 @@ class HeavyBlockDecorator: public BlockDecorator {
 public:
 	HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight, Board * board);
 
-	void rotateClockWise(int n) override;
-	void rotateCounterClockWise(int n) override;
-	bool moveDown(int n) override;
+	void rotateClockWise(int restraint) override;
+	void rotateCounterClockWise(int restraint) override;
+	bool moveDown(int restraint) override;
 	void moveLeft() override;
 	void moveRight(int restraint) override;
 

@@ -29,10 +29,6 @@ void Board::initialize(string sequenceFile, int seed) {
 	attachAndNotify(currentBlock);
 }
 
-void Board::fart() const{
-	cout << "FART" << endl;
-}
-
 Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, 
 	int startLevel, int seed, bool textMode, int width, int height ):
 	display{d}, gd{gd}, blockFactory{BlockFactory{this}}, 
@@ -71,6 +67,7 @@ SubscriptionType Board::subType() const {
 
 
 void Board::currentBlockLeft(int n) {
+	currentBlock->setNumberOfMovesInTurn(n);
 	for (int i=0; i< n; i++) {
 		if (!canMoveLeft()) return;
 		currentBlock->moveLeft();
@@ -78,6 +75,7 @@ void Board::currentBlockLeft(int n) {
 }
 
 void Board::currentBlockRight(int n) {
+	currentBlock->setNumberOfMovesInTurn(n);
 	for (int i=0; i< n; i++) {
 		if (!canMoveRight()) return;
 		currentBlock->moveRight(width);
@@ -86,10 +84,15 @@ void Board::currentBlockRight(int n) {
 
 
 void Board::currentBlockDown(int n) {
+	currentBlock->setNumberOfMovesInTurn(n);
 	for (int i=0; i< n; i++) {
 		if (!canMoveDown()) return;
 		currentBlock->moveDown(height);
 	}
+}
+
+bool Board::canMoveDown() const {
+	return canMoveDown(currentBlock);
 }
 
 
@@ -201,6 +204,7 @@ void Board::restart(){
 
 
 void Board::currentBlockRotateClockwise(int n) {
+	currentBlock->setNumberOfMovesInTurn(n);
 	for (int i=0; i< n; i++) {
 		if (!canRotateCW()) return;
 		currentBlock->rotateClockWise(width);
@@ -209,6 +213,7 @@ void Board::currentBlockRotateClockwise(int n) {
 
 
 void Board::currentBlockRotateCounterClockwise(int n) {
+	currentBlock->setNumberOfMovesInTurn(n);
 	for (int i=0; i< n; i++)  {
 		if (!canRotateCW()) return;
 		currentBlock->rotateCounterClockWise(width);
@@ -402,16 +407,17 @@ void Board::printNextBlockGraphic(GraphicDisplay *gd) {
 	nextBlock->nextBlockGraphicPls(gd);
 }
 
+bool Board::canMoveLeft() const {
+	return canMoveLeft(currentBlock);
+}
 
-/*bool Board::canRotateCCW() const {
-	int h = currentBlock->getHeight();
-	bool flag = false;
-	for (int i=1; i <= h; i++) {
-		if (!canMoveRight(i)) flag = true;
-	}
-	if (flag && h > currentBlock->getWidth()) return false;
-	return true;
-}*/
+bool Board::canMoveRight(int k) const {
+	return canMoveRight(currentBlock, k);
+}
+
+bool Board::canRotateCW() const {
+	return canRotateCW(currentBlock);
+}
 
 void Board::addCentreBlock() {
 	// Add block next available row
@@ -433,77 +439,72 @@ void Board::addCentreBlock() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-bool Board::canMoveLeft() const {
-	vector<Cell> blockCells = currentBlock->getCells();
-	for (auto i: blockCells) {
-		for (auto n : cells) {
-			if (n.row == i.row && n.col == i.col - 1) return false;
-		}
+bool Board::canRotateCW(std::shared_ptr<Block> block) const
+{
+    int h = block->getHeight();
+    int w = block->getWidth();
+    pair<int, int> lowerLeft = block->getLowerLeft();
+    for (int i = 0; i <= w; i++)
+    {
+	for (int j = 0; j <= h; j++)
+	{
+	    for (auto k : cells)
+	    {
+		if (k.row == lowerLeft.first - i &&
+		    k.col == lowerLeft.second + j)
+		    return false;
+	    }
 	}
-	return true;
+    }
+    return true;
 }
 
-bool Board::canMoveRight(int k) const {
-	vector<Cell> blockCells = currentBlock->getCells();
-	for (auto i: blockCells) {
-		for (auto n : cells) {
-			if (n.row == i.row && n.col == i.col + k) return false;
-		}
+bool Board::canMoveLeft(std::shared_ptr<Block> block) const
+{
+    vector<Cell> blockCells = block->getCells();
+    for (auto i : blockCells)
+    {
+	for (auto n : cells)
+	{
+	    if (n.row == i.row && n.col == i.col - 1)
+		return false;
 	}
-	return true;
+    }
+    return true;
+}
+bool Board::canMoveRight(std::shared_ptr<Block> block, int k) const
+{
+    vector<Cell> blockCells = block->getCells();
+    for (auto i : blockCells)
+    {
+	for (auto n : cells)
+	{
+	    if (n.row == i.row && n.col == i.col + k)
+		return false;
+	}
+    }
+    return true;
+}
+bool Board::canMoveDown(std::shared_ptr<Block> block) const
+{
+    // Cells in the block
+    vector<Cell> blockCells = block->getCells();
+
+    // check if there are any cells in the board that are 1 row below that cell
+    for (auto i : blockCells)
+    {
+
+	for (auto n : cells)
+	{
+	    // check if cell below cell in block exists
+	    if (n.row == i.row + 1 && n.col == i.col)
+	    {
+		return false;
+	    }
+	}
+    }
+
+    // if cell doesn't exist returns true
+    return true;
 }
 
-bool Board::canRotateCW() const {
-	int h = currentBlock->getHeight();
-	int w = currentBlock->getWidth();
-	pair<int,int> lowerLeft = currentBlock->getLowerLeft();
-	for (int i=0; i <= w; i++) {
-		for (int j=0; j <= h; j++) {
-			for (auto k:cells) {
-				if (k.row == lowerLeft.first-i && 
-					k.col == lowerLeft.second+j) return false;
-			}
-		}
-	}
-	return true;
-}
-
-bool Board::canMoveDown() const {
-	// Cells in the block
-	vector<Cell> blockCells = currentBlock->getCells();
-
-	// check if there are any cells in the board that are 1 row below that cell
-	for (auto i: blockCells) {
-
-		for (auto n : cells) {
-		// check if cell below cell in block exists
-			if (n.row == i.row + 1 && n.col == i.col){
-				return false;
-			}
-		}
-	}
-
-	// if cell doesn't exist returns true
-	return true;
-}

@@ -257,6 +257,13 @@ int Block::getLevel() const{
 	return level;
 }
 
+int Block::getNumberOfMovesInTurn() const{
+	return this->numberOfMovesInTurn;
+} 
+	
+void Block::setNumberOfMovesInTurn(int moves) {
+	this->numberOfMovesInTurn = moves;
+}
 
 vector<Cell> Block::getPrevCells() const{
 	return prevCells;

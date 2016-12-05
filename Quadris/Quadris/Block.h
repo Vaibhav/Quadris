@@ -54,12 +54,16 @@ public:
 	std::vector < std::pair < int, int > > getCoords() const;
 	std::pair<int, int> getLowerLeft() const;
 
+	int getNumberOfMovesInTurn() const; 
+	void setNumberOfMovesInTurn(int moves);
+
 protected:
 	int size;
 	std::string name;
 	int level;
 	int width;
 	int height;
+	int numberOfMovesInTurn;
 	std::string colour;
 	char dispChar;
 	std::vector<Cell> prevCells;
