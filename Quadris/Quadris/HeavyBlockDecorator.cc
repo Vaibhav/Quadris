@@ -66,7 +66,7 @@ void HeavyBlockDecorator::rotateClockWise(int restraint)
 	updateProperties();
     }
 
-    if (board->canMoveDown(component))
+    if (moves && board->canMoveDown(component))
     {
 	component->moveDown(boardHeight);
 	updateProperties();
@@ -88,7 +88,7 @@ void HeavyBlockDecorator::rotateCounterClockWise(int restraint)
 	updateProperties();
     }
 
-    if (board->canMoveDown(component))
+    if (moves && board->canMoveDown(component))
     {
 	component->moveDown(boardHeight);
 	updateProperties();
@@ -110,7 +110,7 @@ bool HeavyBlockDecorator::moveDown(int restraint)
 	updateProperties();
     }
     bool val;
-    if (board->canMoveDown(component))
+    if (moves && board->canMoveDown(component))
     {
 	val = component->moveDown(boardHeight);
 	updateProperties();
@@ -137,7 +137,7 @@ void HeavyBlockDecorator::moveLeft()
 	updateProperties();
     }
 
-    if (board->canMoveDown(component))
+    if (moves && board->canMoveDown(component))
     {
 	component->moveDown(boardHeight);
 	updateProperties();
@@ -158,7 +158,7 @@ void HeavyBlockDecorator::moveRight(int restraint) {
 	updateProperties();
     }
 
-    if (board->canMoveDown(component))
+    if (moves && board->canMoveDown(component))
     {
 	component->moveDown(boardHeight);
 	updateProperties();
