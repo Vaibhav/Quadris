@@ -211,8 +211,6 @@ CommandInterpreter::findProgramCommands(string userInput)
 	int counter = 0;
 	for (std::map<string, std::vector < std::pair < std::string, std::vector<std::string> > > >::const_iterator
 		it = commandDictionary.begin(); it != commandDictionary.end(); ++it) {
-		//	errorStream << userInput;
-		//	errorStream << it->first;
 		if (partialMatch(userInput, it->first)) {
 			++counter;
 			key = it->first;

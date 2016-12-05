@@ -14,6 +14,7 @@
 #include <vector>
 
 class Block;
+//class BlockFactory;
 //class Info;
 
 class Board : public Observer, public Subject {
@@ -67,6 +68,14 @@ public:
 	void addCentreBlock();
 	void clearHint();
 
+	void fart() const;
+/*
+	bool canRotateCW(std::shared_ptr<Block> block) const;
+	bool canRotateCCW(std::shared_ptr<Block> block) const;
+	bool canMoveLeft(std::shared_ptr<Block> block) const;
+	bool canMoveRight(std::shared_ptr<Block> block, int k=1) const;
+	bool canMoveDown(std::shared_ptr<Block> block) const;
+*/
 
 private:
 	TextDisplay * display;

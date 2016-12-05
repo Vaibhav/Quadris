@@ -5,18 +5,18 @@
 
 using namespace std;
 
-HeavyBlockDecorator::HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight): 
-BlockDecorator{component}, boardHeight{boardHeight}{
+HeavyBlockDecorator::HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight, Board * board): 
+BlockDecorator{component}, boardHeight{boardHeight}, board{board} {
 //cout << endl << "HeavyBlockDecorator Created: " << component->getName() << endl;
 updateProperties();
 }
 
 void HeavyBlockDecorator::rotateClockWise(int restraint) {
+	board->fart();
 	component->rotateClockWise(restraint);
 	updateProperties();
 	component->moveDown(boardHeight);
 	updateProperties();
-
 }
 	
 void HeavyBlockDecorator::rotateCounterClockWise(int restraint) {

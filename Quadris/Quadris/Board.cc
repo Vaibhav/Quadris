@@ -29,10 +29,13 @@ void Board::initialize(string sequenceFile, int seed) {
 	attachAndNotify(currentBlock);
 }
 
+void Board::fart() const{
+	cout << "FART" << endl;
+}
 
 Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, 
 	int startLevel, int seed, bool textMode, int width, int height ):
-	display{d}, gd{gd}, blockFactory{BlockFactory()}, 
+	display{d}, gd{gd}, blockFactory{BlockFactory{this}}, 
 	currentLevel{startLevel}, textMode{textMode}
 	{ 
 		setHeight(height);
@@ -195,6 +198,7 @@ void Board::showHint(){ // Hackiest function we got
 	attachAndNotify(hintBlock);
 	currentBlock->notifyObservers(SubscriptionType::blockChange);
 }
+
 
 void Board::clearHint() {
 	hintBlock->clearBlockFromScreen();

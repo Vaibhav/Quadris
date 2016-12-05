@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include "Board.h"
 #include "BlockDecorator.h"
 
 /*
@@ -11,7 +12,7 @@ of one row (if possible)
 class HeavyBlockDecorator: public BlockDecorator {
 
 public:
-	HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight);
+	HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight, Board * board);
 
 	void rotateClockWise(int n) override;
 	void rotateCounterClockWise(int n) override;
@@ -22,6 +23,7 @@ public:
 private:
 	bool heavyDown();
 	int boardHeight;
+	Board * board;
 	void updateProperties();
 
 };

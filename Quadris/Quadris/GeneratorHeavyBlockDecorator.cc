@@ -8,14 +8,14 @@ using namespace std;
 
 GeneratorHeavyBlockDecorator::GeneratorHeavyBlockDecorator(
     shared_ptr<BlockGenerator> component,
-    int height) 
-: BlockGeneratorDecorator{component}, height{height}{}
+    int height, Board * board) 
+: BlockGeneratorDecorator{component}, height{height}, board{board}{}
 
 
 
 std::shared_ptr<Block> GeneratorHeavyBlockDecorator::generateBlock() {
     std::shared_ptr<Block> normalBlock  = component->generateBlock();
     std::shared_ptr<Block> heavyBlock = 
-        std::shared_ptr<Block>{new HeavyBlockDecorator(normalBlock, height)};
+        std::shared_ptr<Block>{new HeavyBlockDecorator(normalBlock, height, board)};
     return heavyBlock;
 }
