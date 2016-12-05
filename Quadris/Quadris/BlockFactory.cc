@@ -66,18 +66,12 @@ unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level)
     }
     else if (level == 3 && noRandom == true)
     {
-        cout <<"Executed No Random";
         shared_ptr<BlockGenerator> component{
             new BlockGeneratorBase{noRandomBlockFile}};
-
         return unique_ptr<BlockGenerator>{
             new GeneratorHeavyBlockDecorator
             {component, this->boardHeight, board}};
-    }
-    else if (level == 4 && noRandom == true)
-    {
-    }
-    else if (level == 4 && noRandom == false)
+    } else if (level == 4 && noRandom == false)
     {
         vector<double> probabilities =
             vector<double>
@@ -95,6 +89,15 @@ unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level)
             new GeneratorHeavyBlockDecorator{component2, this->boardHeight, board}};    
         return unique_ptr<BlockGenerator>{
             new GeneratorCentreBlockDecorator{component3, board}
+        };
+    } else if (level == 4 && noRandom == true)
+    {
+        shared_ptr<BlockGenerator> component1{
+            new BlockGeneratorBase{noRandomBlockFile}};
+        shared_ptr<BlockGenerator> component2{
+            new GeneratorHeavyBlockDecorator{component2, this->boardHeight, board}};    
+        return unique_ptr<BlockGenerator>{
+            new GeneratorCentreBlockDecorator{component2, board}
         };
     }
     return unique_ptr<BlockGenerator> {new BlockGeneratorBase{sequenceFile}};
