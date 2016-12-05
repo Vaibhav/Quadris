@@ -19,12 +19,6 @@ std::shared_ptr<Block> BlockGeneratorBase::generateBlock() {
 
 vector<std::shared_ptr<Block>> blocks = this->getParsedBlocks();
 
-//cout << "Base GEnerator executed";
-/*int bsize = blocks.size();
-for(int i = 0; i != bsize; ++i){
-	cout<< blocks[i]->getName();
-}*/
-
 	std::shared_ptr<Block> generatedBlock = BlockGenerator::generateBlock(this->sequence[this->currentIndex]);
 	if(this->currentIndex + 1 == this->numblocksInSequence){
 			this->currentIndex = 0;

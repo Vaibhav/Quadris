@@ -21,7 +21,6 @@ BlockFactory::BlockFactory(Board * board) : prevLevel(-1)
 
 unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level)
 {
-    cerr << "called Create BlockGenerator" << endl;
     if (level == 0)
     {
         return unique_ptr<BlockGenerator>{new BlockGeneratorBase{sequenceFile}};
@@ -44,7 +43,7 @@ unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level)
         shared_ptr<BlockGenerator> component{new BlockGeneratorBase{sequenceFile}};
         return unique_ptr<BlockGenerator>{new GeneratorProbabilityDecorator{
             component,
-            component->getAllBlockNames(),
+            component->getBaseBlockNames(),
             seed}};
     }
     else if (level == 3 && noRandom == false)
@@ -135,7 +134,6 @@ void BlockFactory::setSequenceFile(std::string sequenceFile)
 
 void BlockFactory::noRandomBlock(std::string file)
 {
-    cout << "Hit no Random block with file: " << file << endl;
     this->noRandom = true;
     this->noRandomBlockFile = file;
     prevLevel = -1;
@@ -143,7 +141,6 @@ void BlockFactory::noRandomBlock(std::string file)
 
 void BlockFactory::restoreRandom()
 {
-    cout << "Hit Randomize " << endl;
     this->noRandom = false;
     this->noRandomBlockFile = "";
     prevLevel = -1;

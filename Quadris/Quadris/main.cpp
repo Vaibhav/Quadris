@@ -17,8 +17,6 @@ bool commandLineParser(int argc,
 {
   for (int i = 1; i < argc; ++i)
   {
-
-    cout << argv[i];
     if (argv[i] == static_cast<string>("-text"))
     {
       text = true;
@@ -53,13 +51,11 @@ bool commandLineParser(int argc,
     }
     else if (argv[i] == static_cast<string>("-startlevel"))
     {
-   //   cout << argv[i] << endl;
       if ((i + 1 < argc))
       {
         stringstream s{argv[i + 1]};
         if (s >> startLevel)
         {
-      //    cout << startLevel << endl;
           ++i;
           continue;
         }
@@ -88,11 +84,7 @@ int main(int argc, char *argv[])
   bool bonus = false;
 
   if(commandLineParser(argc, argv, text, seed, scriptFile, startLevel, bonus)){
-    cout << text << endl;
-    cout << seed << endl;
-    cout << scriptFile << endl;
-    cout << startLevel << endl;
-
+    
   //Create Game
   Game g{MAXLEVEL, text, seed, scriptFile, startLevel, SCOREFILE, bonus};
 

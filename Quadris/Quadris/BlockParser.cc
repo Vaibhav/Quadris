@@ -28,15 +28,12 @@ std::shared_ptr<Block> BlockParser::createBlock(string file){
 	vector< pair <int, int>> v; 
 
 	// gets the number of coords to read in 
-//	cout << input.badbit;
 	getline(input, line);
 	int numOfCoords;
 	stringstream ss { line };
-//	cout << line << endl;
 	// stores first line as numOfCoords 
 	// ensures numOfCoords is int 
 	if (!(ss >> numOfCoords)) {
-		//cout << name << endl;
 		throw out_of_range("Improper input file. Check if size is an integer.");
 	}
 	

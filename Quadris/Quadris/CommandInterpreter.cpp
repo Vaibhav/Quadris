@@ -66,7 +66,6 @@ CommandInterpreter::nextInput(istream& in, char inputType)
 
 		vector<string> arguments;
 
-		//cout << isCommandMultiplierCompatible(command);
 		if( isCommandMultiplierCompatible(programCommands[0].first)
 			&& multiplierPrefix != "") {
 			arguments.emplace_back(multiplierPrefix);
@@ -76,14 +75,12 @@ CommandInterpreter::nextInput(istream& in, char inputType)
 		while (true) {
 			if (!(ss >> arg)) break;
 			arguments.emplace_back(arg);
-		//	cout << arg;
 		}
 
 		//ARGUMENTS ARE NOT APPLICABLE WITH MACRO COMMANDS
 		if(programCommands.size() == 1){
 		//Update one command with arguments
 		programCommands[0].second = arguments;
-		//cout<< programCommands[0].second[0];
 		 }
 
 	//Special Single Commands

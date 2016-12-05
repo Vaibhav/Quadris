@@ -65,7 +65,6 @@ Block::Block() {} // default ctor
 
 void Block::rotateUpdate() {
 	int csize = cells.size();
-	cout << "csize: " << csize << endl;
 	for (int i=0; i < csize; i++) { // cannot use auto here
 		cells[i].row = lowerLeft.first -width + coords[i].first;
 		cells[i].col = lowerLeft.second + coords[i].second;
@@ -74,7 +73,6 @@ void Block::rotateUpdate() {
 	height = calcHeight(coords);
 	width = calcWidth(coords);
 	notifyObservers(SubscriptionType::blockChange);
-	cout << "csize update:" << cells.size() << endl;
 }
 
 void Block::clearBlockFromScreen(){

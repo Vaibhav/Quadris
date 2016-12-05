@@ -31,7 +31,6 @@ GeneratorProbabilityDecorator::GeneratorProbabilityDecorator(
                                randSeed{randSeed},
                                randomNumberRange{randomNumberRange}
 {
-    std::cout << "seed in GeneratorProbabilityDecorator:  " << randSeed << endl;  
     srand(randSeed);
     setProbability(blocks, probabilities);
 }
@@ -40,7 +39,6 @@ std::shared_ptr<Block> GeneratorProbabilityDecorator::generateBlock()
 {
     //Generate a number between 0 to 99 when randomNumberRange set to 100
     int num = (rand() % randomNumberRange);
-    //cerr << num << endl;
     double totProb = 0;
     int size = blockProbabilities.size();
     for (int i = 0; i != size; ++i)
@@ -48,8 +46,6 @@ std::shared_ptr<Block> GeneratorProbabilityDecorator::generateBlock()
 	totProb += blockProbabilities[i].second;
 	if (num < (totProb * randomNumberRange))
 	{
-	    //cerr << blockProbabilities[i].first << endl;
-        //cerr << totProb << endl;
         return this->component->generateBlock(blockProbabilities[i].first);
 	}
     }
