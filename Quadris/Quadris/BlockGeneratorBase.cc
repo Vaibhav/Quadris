@@ -40,3 +40,4 @@ void BlockGeneratorBase::parseSequence(){
 	}
 	fin.close();
 }
+

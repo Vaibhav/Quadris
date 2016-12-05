@@ -153,3 +153,4 @@ void BlockFactory::setBoardHeight(int n){
 void BlockFactory::setBoardWidth(int n){
     this->boardWidth = n;
 }
+

@@ -4,4 +4,5 @@
 // blockChange notifies when a block's cells change (ie. rotated, etc)
 
 enum class SubscriptionType { deadBlock, blockChange };
+
 #endif

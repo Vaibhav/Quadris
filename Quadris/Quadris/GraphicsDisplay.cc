@@ -95,3 +95,4 @@ void GraphicDisplay::drawCell(int xcoord, int ycoord, string theColor) {
 		this->xw.fillRectangle( xcoord , ycoord , blockSize, blockSize, Xwindow::White);
 	}
 }
+

@@ -148,3 +148,4 @@ void HeavyBlockDecorator::updateProperties()
     lowerLeft = this->getLowerLeft();
     notifyObservers(SubscriptionType::blockChange);
 }
+

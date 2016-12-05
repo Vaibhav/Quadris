@@ -68,19 +68,20 @@ BlockGenerator::BlockGenerator()
 }
 
 std::vector<std::string> BlockGenerator::getBaseBlockNames(){
-		return this->baseBlocks;
+	return this->baseBlocks;
 }
 
 std::vector<std::string> BlockGenerator::getAllBlockNames(){
-		return this->allBlocks;
+	return this->allBlocks;
 }
 
 bool BlockGenerator::checkBaseBlocksExist(std::vector<std::shared_ptr<Block>> blocks){
-int size = baseBlocks.size();
-for(int i = 0; i != size ; ++i ){
+    int size = baseBlocks.size();
+    for(int i = 0; i != size ; ++i ){
 	if(std::find(baseBlocks.begin(), baseBlocks.end(), blocks[i]->getName()) == baseBlocks.end()){
-		return false;
+	    return false;
 	}
 }
 	return true;
 }
+

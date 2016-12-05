@@ -267,15 +267,19 @@ vector<Cell> Block::getPrevCells() const{
 	return prevCells;
 }
 
-	std::string Block::getColour() const{
-		return this->colour;
-	}
-	char Block::getDisplayCharacter() const{
-		return this->dispChar;
-	}
-	std::vector < std::pair < int, int > > Block::getCoords() const{
-		return this->coords;
-	}
-	std::pair<int, int> Block::getLowerLeft() const{
-		return this->lowerLeft;
-	}
+std::string Block::getColour() const{
+	return this->colour;
+}
+
+char Block::getDisplayCharacter() const{
+	return this->dispChar;
+}
+
+std::vector < std::pair < int, int > > Block::getCoords() const{
+	return this->coords;
+}
+
+std::pair<int, int> Block::getLowerLeft() const{
+	return this->lowerLeft;
+}
+

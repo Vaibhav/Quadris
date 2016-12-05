@@ -80,3 +80,4 @@ void GeneratorProbabilityDecorator::setEqualProbability(std::vector<std::string>
     vector<double> probabilities = vector<double>(size, probability);
     setProbability(blocks, probabilities);
 }
+

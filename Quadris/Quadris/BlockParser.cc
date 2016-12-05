@@ -101,11 +101,10 @@ std::vector<std::shared_ptr<Block>> BlockParser::parseBlocks() {
 
 // Example blocks.txt file
 
-/* 
-I J L O S Z T
+//I J L O S Z T
 
 
-//Example I.txt 
+/*Example I.txt 
 
 4
 0 0
@@ -115,3 +114,4 @@ I J L O S Z T
 I
 cyan
 */
+

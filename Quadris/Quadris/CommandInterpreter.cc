@@ -248,3 +248,4 @@ bool CommandInterpreter::partialMatch(std::string partial, std::string full)
 	}
 	return true;
 }
+

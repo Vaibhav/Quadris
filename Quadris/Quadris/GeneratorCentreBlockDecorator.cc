@@ -22,3 +22,4 @@ shared_ptr<Block> GeneratorCentreBlockDecorator::generateBlock() {
 	numDropped++;
     return normalBlock;
 }
+
