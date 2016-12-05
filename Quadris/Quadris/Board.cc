@@ -26,10 +26,15 @@ void Board::initialize(string sequenceFile, int seed) {
 	attachAndNotify(currentBlock);
 }
 
+BlockFactory Board::createFactory() {
+	shared_ptr<Board> curthis{this};
+	return BlockFactory{curthis};
+}	
+
 Board::Board(TextDisplay* d, GraphicDisplay *gd, string sequenceFile, 
 	int startLevel, int seed, bool textMode, int width, int height ):
-	display{d}, gd{gd}, blockFactory{BlockFactory{this}}, 
-	currentLevel{startLevel}, textMode{textMode}
+	display{d}, gd{gd}, blockFactory{ createFactory() }, 
+	 currentLevel{startLevel}, textMode{textMode}
 	{ 
 		setHeight(height);
 		setWidth(width);

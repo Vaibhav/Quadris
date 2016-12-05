@@ -12,7 +12,7 @@ of one row (if possible)
 class HeavyBlockDecorator: public BlockDecorator {
 
 public:
-	HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight, Board * board);
+	HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight, std::shared_ptr<Board> board);
 
 	void rotateClockWise(int restraint) override;
 	void rotateCounterClockWise(int restraint) override;
@@ -23,7 +23,7 @@ public:
 private:
 	bool heavyDown();
 	int boardHeight;
-	Board * board;
+	std::shared_ptr<Board> board;
 	void updateProperties();
 
 };

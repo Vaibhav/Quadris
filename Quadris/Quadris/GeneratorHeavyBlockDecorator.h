@@ -9,12 +9,12 @@
 
 class GeneratorHeavyBlockDecorator : public BlockGeneratorDecorator { 
 public:
-	GeneratorHeavyBlockDecorator(std::shared_ptr<BlockGenerator> component, int height, Board * board);
+	GeneratorHeavyBlockDecorator(std::shared_ptr<BlockGenerator> component, int height, std::shared_ptr<Board> board);
     std::shared_ptr<Block> generateBlock() override;
     std::shared_ptr<Block> generateBlock(std::string);
 private:
     int height;
-    Board * board;
+    std::shared_ptr<Board> board;
 };
 
 #endif

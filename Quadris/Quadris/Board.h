@@ -96,6 +96,8 @@ private:
 	void getNextBlock();
 	void updateScore() const;
 
+	BlockFactory createFactory();
+
 	int getLevel(int row, int col, int width); // Gets level from block basically
 	void shiftBoardDown(std::vector<int>s);
 	std::shared_ptr<Block> generateBlock();

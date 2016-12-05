@@ -13,7 +13,7 @@ class Board;
 class BlockFactory {
 
 public:
-	BlockFactory(Board * board);
+	BlockFactory(std::shared_ptr<Board> board);
 	// We need this to be virtual so that it calls the correct function
 	virtual std::shared_ptr<Block> generateBlock(int level);
 	std::shared_ptr<Block> generateBlock(std::string blockName, int level);
@@ -34,7 +34,7 @@ private:
 	int seed;
 	std::string noRandomBlockFile;
 	bool noRandom;
-	Board * board;
+	std::shared_ptr<Board> board;
 	int boardHeight;
 	int boardWidth;
 

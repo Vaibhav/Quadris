@@ -8,7 +8,7 @@ using namespace std;
 
 GeneratorHeavyBlockDecorator::GeneratorHeavyBlockDecorator(
     shared_ptr<BlockGenerator> component,
-    int height, Board * board) 
+    int height, shared_ptr<Board> board) 
 : BlockGeneratorDecorator{component}, height{height}, board{board}{}
 
 

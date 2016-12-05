@@ -5,7 +5,7 @@
 
 using namespace std;
 
-HeavyBlockDecorator::HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight, Board *board) : BlockDecorator{component}, boardHeight{boardHeight}, board{board}
+HeavyBlockDecorator::HeavyBlockDecorator(std::shared_ptr<Block> component, int boardHeight, shared_ptr<Board> board) : BlockDecorator{component}, boardHeight{boardHeight}, board{board}
 {
     updateProperties();
 }

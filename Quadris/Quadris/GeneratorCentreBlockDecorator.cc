@@ -8,7 +8,7 @@
 using namespace std;
 
 GeneratorCentreBlockDecorator::GeneratorCentreBlockDecorator(
-	shared_ptr<BlockGenerator> component, Board*b):
+	shared_ptr<BlockGenerator> component, shared_ptr <Board> b):
  BlockGeneratorDecorator{component}, numDropped{0}, b{b} {}
 
 

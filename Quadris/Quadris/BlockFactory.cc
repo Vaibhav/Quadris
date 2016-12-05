@@ -12,7 +12,7 @@
 
 using namespace std;
 
-BlockFactory::BlockFactory(Board * board) : prevLevel(-1)
+BlockFactory::BlockFactory(shared_ptr<Board> board) : prevLevel(-1)
 {
     noRandom = false;
     this->board = board;
