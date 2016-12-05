@@ -94,7 +94,7 @@ unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level)
         shared_ptr<BlockGenerator> component1{
             new BlockGeneratorBase{noRandomBlockFile}};
         shared_ptr<BlockGenerator> component2{
-            new GeneratorHeavyBlockDecorator{component2, this->boardHeight, board}};    
+            new GeneratorHeavyBlockDecorator{component1, this->boardHeight, board}};    
         return unique_ptr<BlockGenerator>{
             new GeneratorCentreBlockDecorator{component2, board}
         };
