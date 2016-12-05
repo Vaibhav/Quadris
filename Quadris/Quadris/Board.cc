@@ -146,23 +146,14 @@ pair<int, vector<int>> Board::currentBlockDrop() {
 	return toReturn;
 }
 
-void Board::showHint(){ // Hackiest function we got
-	vector<pair<int,int>> sqrs;
-	shared_ptr <Block> tempBlock = currentBlock;
-	for (auto i:currentBlock->getCells()) {
-		sqrs.emplace_back(i.row-3, i.col);
-	}
-	currentBlock = make_shared<Block> (Block{'?', "Black", "Hint", sqrs});
-	int highestRow;
+int findLargest(vector<Cell> cells, int rho, int threshold, int width) {
 	vector<int> topCols;
 	for (auto i:cells) {
-		if (i.row < highestRow) highestRow = i.row;
+		if (i.row == rho) topCols.push_back(i.col);
 	}
-	for (auto i:cells) {
-		if (i.row == highestRow) topCols.push_back(i.col);
-	}
-	sort(topCols.begin(), topCols.end());
 	topCols.push_back(width); // Add extra "column" at the end
+	topCols.push_back(-1); // And beginning
+	sort(topCols.begin(), topCols.end());
 	int tcSize = topCols.size();
 	int biggestGap = 0;
 	int gapStart = 0;
@@ -172,12 +163,32 @@ void Board::showHint(){ // Hackiest function we got
 			gapStart = topCols[j];
 		}
 	}
-	if (biggestGap > currentBlock->getWidth()) {
-		int hbpos = currentBlock->getLowerLeft().second;
-		int horShift = gapStart + 1 - hbpos;
-		if (horShift <  0) currentBlockLeft(0-horShift);
-		else currentBlockRight(horShift);
+	if (biggestGap > threshold) return gapStart + 1;
+	else return -1;
+}
+
+void Board::showHint(){ // Hackiest function we got
+	vector<pair<int,int>> sqrs;
+	shared_ptr <Block> tempBlock = currentBlock;
+	for (auto i:currentBlock->getCells()) {
+		sqrs.emplace_back(i.row-3, i.col);
 	}
+	currentBlock = make_shared<Block> (Block{'?', "Black", "Hint", sqrs});
+	int highestRow = cells[0].row;
+	for (auto i:cells) {
+		if (i.row < highestRow) highestRow = i.row;
+	}
+	int hbpos = currentBlock->getLowerLeft().second;
+	int gapStart = findLargest(cells, highestRow, 
+		currentBlock->getWidth(), width);
+	int horShift = 0;
+	for (int i=highestRow; gapStart >= 0 && i<height;i++) {
+		horShift = gapStart - hbpos;
+		gapStart = findLargest(cells, i+1, 
+			currentBlock->getWidth(), width);
+	}
+	if (horShift <  0) currentBlockLeft(0-horShift);
+	else currentBlockRight(horShift);
 	currentBlockDown(height); // Place hint Block
 	hintBlock = currentBlock;
 	currentBlock = tempBlock;	// Reset currentBlock
