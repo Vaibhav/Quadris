@@ -7,9 +7,8 @@
 //forward decl
 class Board;
 
-class GeneratorCentreBlockDecorator : public BlockGeneratorDecorator{//, Observer {
+class GeneratorCentreBlockDecorator : public BlockGeneratorDecorator{
 	int numDropped;
-	bool rowCleared;
 	Board *b;
 public:
 	GeneratorCentreBlockDecorator(std::shared_ptr<BlockGenerator> component, Board*b);

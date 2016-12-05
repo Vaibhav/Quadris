@@ -111,7 +111,6 @@ void Game::play() {
 				b.showHint();
 				DisplayHint = true;
 			} else if(commands[i].first == "RANDOM"){
-				int s = commands[i].second.size();
 				b.restoreRandom();
 			} else if(commands[i].first == "NORANDOM"){
 				b.noRandomBlock(commands[i].second[0]);
