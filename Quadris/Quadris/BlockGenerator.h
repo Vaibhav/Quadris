@@ -13,6 +13,7 @@ public:
 	virtual std::shared_ptr<Block> generateBlock(std::string);
 	std::vector<std::string> getBaseBlockNames();
 	std::vector<std::string> getAllBlockNames();
+	virtual ~BlockGenerator()=default;
 protected:
 	std::vector< std::shared_ptr<Block> > getParsedBlocks();
 	std::vector< std::shared_ptr<Block> > getParsedBlocksBase();
