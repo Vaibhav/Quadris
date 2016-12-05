@@ -64,19 +64,13 @@ bool HeavyBlockDecorator::moveDown(int restraint)
     {
 	if (!(board->canMoveDown(component)))
 	    break;
-	component->rotateClockWise(restraint);
+	component->moveDown(restraint);
 	updateProperties();
     }
+    
     bool val;
-    if (moves && board->canMoveDown(component))
-    {
 	val = component->moveDown(boardHeight);
 	updateProperties();
-    }
-    else
-    {
-	val = false;
-    }
 
     setNumberOfMovesInTurn(0);
     return val;

@@ -95,9 +95,11 @@ bool Board::canMoveDown() const {
 
 pair<int, vector<int>> Board::currentBlockDrop() {
 	rowCleared = false;
-
+	//currentBlock->setNumberOfMovesInTurn(1);
 	// keep moving block down until it can't move down
-	while(canMoveDown() && currentBlock->moveDown(height)) {}
+	while(canMoveDown() && currentBlock->moveDown(height)) {
+			currentBlock->setNumberOfMovesInTurn(1);
+	}
 
 	// update cells vector
 	for (auto i:currentBlock->getCells()) {
