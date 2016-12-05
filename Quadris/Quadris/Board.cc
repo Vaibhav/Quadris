@@ -162,7 +162,7 @@ void Board::showHint(){ // Hackiest function we got
 		sqrs.emplace_back(i.row-3, i.col);
 	}
 	currentBlock = make_shared<Block> (Block{'?', "Black", "Hint", sqrs});
-	int highestRow = cells[0].row;
+	int highestRow = height;
 	for (auto i:cells) {
 		if (i.row < highestRow) highestRow = i.row;
 	}
@@ -187,6 +187,7 @@ void Board::showHint(){ // Hackiest function we got
 
 void Board::clearHint() {
 	hintBlock->clearBlockFromScreen();
+	currentBlock->notifyObservers(SubscriptionType::blockChange);
 }
 
 
