@@ -97,6 +97,7 @@ unique_ptr<BlockGenerator> BlockFactory::createBlockGenerator(int level)
             new GeneratorCentreBlockDecorator{component3, board}
         };
     }
+    return unique_ptr<BlockGenerator> {new BlockGeneratorBase{sequenceFile}};
 }
 
 std::shared_ptr<Block> BlockFactory::generateBlock(int level)
