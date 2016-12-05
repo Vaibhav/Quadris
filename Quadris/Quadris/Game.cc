@@ -167,16 +167,7 @@ void Game::decreaseLevel(int n){
 	b.setLevel(currentLevel);
 }
 
-/*
-void Game::move() {
-	string cmd = "left"; //hardcoded
-	if (cmd == "left") {
-		b.currentBlockLeft(1);
-	} else if (cmd == "right") {
-		b.currentBlockRight(1);
-	}
-}
-*/
+
 void Game::notify(Subject &whoNotified) {
 
 }

@@ -11,48 +11,6 @@ BlockDecorator{component}, boardHeight{boardHeight}, board{board} {
 updateProperties();
 }
 
-/*
-void Board::currentBlockLeft(int n) {
-	for (int i=0; i< n; i++) {
-		if (!canMoveLeft()) return;
-		currentBlock->moveLeft();
-	}
-}
-
-void Board::currentBlockRight(int n) {
-	for (int i=0; i< n; i++) {
-		if (!canMoveRight()) return;
-		currentBlock->moveRight(width);
-	}
-}
-
-
-void Board::currentBlockDown(int n) {
-	for (int i=0; i< n; i++) {
-		if (!canMoveDown()) return;
-		currentBlock->moveDown(height);
-	}
-}
-
-void Board::currentBlockRotateClockwise(int n) {
-	currentBlock->setNumberOfMovesInTurn(n);
-	for (int i=0; i< n; i++) {
-		if (!canRotateCW()) return;
-		currentBlock->rotateClockWise(width);
-	}
-}
-
-
-void Board::currentBlockRotateCounterClockwise(int n) {
-	currentBlock->setNumberOfMovesInTurn(n);
-	for (int i=0; i< n; i++)  {
-		if (!canRotateCW()) return;
-		currentBlock->rotateCounterClockWise(width);
-	}
-}
-
-*/
-
 void HeavyBlockDecorator::rotateClockWise(int restraint)
 {
 
