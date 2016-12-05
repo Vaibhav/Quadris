@@ -193,6 +193,7 @@ void Board::showHint(){ // Hackiest function we got
 	hintBlock = currentBlock;
 	currentBlock = tempBlock;	// Reset currentBlock
 	attachAndNotify(hintBlock);
+	currentBlock->notifyObservers(SubscriptionType::blockChange);
 }
 
 void Board::clearHint() {
