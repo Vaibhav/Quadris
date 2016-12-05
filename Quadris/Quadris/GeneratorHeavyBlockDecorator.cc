@@ -19,3 +19,10 @@ std::shared_ptr<Block> GeneratorHeavyBlockDecorator::generateBlock() {
         std::shared_ptr<Block>{new HeavyBlockDecorator(normalBlock, height, board)};
     return heavyBlock;
 }
+
+ std::shared_ptr<Block> GeneratorHeavyBlockDecorator::generateBlock(std::string blockName){
+    std::shared_ptr<Block> normalBlock  = component->generateBlock(blockName);
+    std::shared_ptr<Block> heavyBlock = 
+        std::shared_ptr<Block>{new HeavyBlockDecorator(normalBlock, height, board)};
+    return heavyBlock;
+ }

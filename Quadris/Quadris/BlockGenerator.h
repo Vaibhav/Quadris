@@ -10,7 +10,7 @@
 class BlockGenerator {
 public:
 	virtual std::shared_ptr<Block> generateBlock() = 0;	
-	std::shared_ptr<Block> generateBlock(std::string);
+	virtual std::shared_ptr<Block> generateBlock(std::string);
 	std::vector<std::string> getBaseBlockNames();
 	std::vector<std::string> getAllBlockNames();
 protected:
