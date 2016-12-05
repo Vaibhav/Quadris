@@ -106,6 +106,7 @@ std::shared_ptr<Block> BlockFactory::generateBlock(int level)
 {
     //if prevLevel was == -1, then it Block factory has just been created
     if(prevLevel == -1 || prevLevel != level){
+        (this->generator).reset();
         this->generator = createBlockGenerator(level);
         prevLevel = level;
     }

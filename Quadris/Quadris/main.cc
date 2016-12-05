@@ -90,6 +90,9 @@ int main(int argc, char *argv[])
 
   //Play Game
   g.play();
+  
+  return 0;
+
   }
 }
 
